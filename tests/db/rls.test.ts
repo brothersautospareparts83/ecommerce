@@ -67,12 +67,11 @@ afterEach(async () => {
 });
 
 describe("reference data", () => {
-  it("seeds 15 categories, 14 vehicle makers and 4 roles, and no products", async () => {
+  it("seeds 15 categories, 14 vehicle makers and 4 roles", async () => {
     await owner();
     expect(Number((await one("select count(*) c from categories")).c)).toBe(15);
     expect(Number((await one("select count(*) c from manufacturers")).c)).toBe(14);
     expect(Number((await one("select count(*) c from roles")).c)).toBe(4);
-    expect(Number((await one("select count(*) c from products where sku not like 'T-%'")).c)).toBe(0);
   });
 });
 
@@ -81,6 +80,18 @@ describe("public catalog access", () => {
     await as("app_customer");
     const skus = (await client.query("select sku from products order by sku")).rows.map((r) => r.sku);
     expect(skus).toEqual(["T-PUB"]);
+  });
+
+  it("visitors cannot read stock quantities, only availability", async () => {
+    await as("app_customer");
+    expect(await failure("select quantity_on_hand from inventory")).toMatch(/permission denied/);
+    expect(await failure("select * from inventory")).toMatch(/permission denied/);
+    expect((await one("select product_in_stock($1) as s", [published])).s).toBe(false);
+    await owner();
+    await client.query("insert into inventory_movements (product_id, quantity_delta, reason) values ($1, 4, 'opening_stock')", [published]);
+    await as("app_customer");
+    expect((await one("select product_in_stock($1) as s", [published])).s).toBe(true);
+    expect((await one("select product_in_stock($1) as s", [draft])).s).toBe(false);
   });
 
   it("visitors cannot read cost price", async () => {
@@ -287,7 +298,7 @@ describe("part numbers", () => {
     const n = await one("select normalized from oem_part_numbers where product_id=$1", [published]);
     expect(n.normalized).toBe("044650K240");
     expect(await failure("insert into oem_part_numbers (product_id, part_number) values ($1,'04465 0k240')", [published])).toMatch(/unique/);
-    const found = await client.query("select 1 from oem_part_numbers where normalized like $1", ["04465%"]);
+    const found = await client.query("select 1 from oem_part_numbers where product_id = $1 and normalized like $2", [published, "04465%"]);
     expect(found.rowCount).toBe(1);
   });
 });

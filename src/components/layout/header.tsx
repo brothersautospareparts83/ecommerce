@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
 import { Logo } from "./logo";
@@ -40,7 +41,9 @@ export function Header() {
           <SearchForm id="search-mobile" />
         </div>
       </header>
-      <NavBar />
+      <Suspense fallback={null}>
+        <NavBar />
+      </Suspense>
     </>
   );
 }

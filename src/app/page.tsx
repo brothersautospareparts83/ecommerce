@@ -5,9 +5,11 @@ import { LinkButton } from "@/components/ui/button";
 import { Section } from "@/components/home/section";
 import { PartsFinder } from "@/components/home/parts-finder";
 import { AiExpertCard } from "@/components/home/ai-card";
-import { ProductTabs } from "@/components/home/product-tabs";
+import { Suspense } from "react";
+import { LatestProducts } from "@/components/home/product-tabs";
+import { publicProducts } from "@/lib/catalog/public";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
-import { categories, products, vehicleBrands } from "@/lib/demo-data";
+import { categories, vehicleBrands } from "@/lib/categories";
 import { site } from "@/lib/site";
 
 const featuredSlugs = ["engine-components", "brake-systems", "suspension-steering", "oil-filters", "electrical-components"];
@@ -33,13 +35,12 @@ const types = [
   { name: "Aftermarket", text: "Independently produced replacements, often at a lower price." },
 ];
 
-export default function HomePage() {
-  const tabs = [
-    { id: "popular", label: "Popular", products: products.slice(0, 4) },
-    { id: "best", label: "Best Sellers", products: products.slice(4, 8) },
-    { id: "new", label: "New Arrivals", products: products.slice(8, 12) },
-  ];
+async function LatestSection() {
+  const { items } = await publicProducts({ sort: "newest", pageSize: 4 });
+  return <LatestProducts products={items} />;
+}
 
+export default function HomePage() {
   return (
     <>
       {/* Hero */}
@@ -136,19 +137,9 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section
-        eyebrow="Products"
-        title="Popular, Best Sellers & New Arrivals"
-        intro="Layout preview using clearly marked DEMO records. Real listings, prices and sales rankings appear once your catalog is imported."
-        className="pt-0 sm:pt-0"
-      >
-        <ProductTabs tabs={tabs} />
-        <div className="mt-8">
-          <LinkButton href="/shop" variant="secondary">
-            View all products <ArrowRight className="h-4 w-4" />
-          </LinkButton>
-        </div>
-      </Section>
+      <Suspense fallback={null}>
+        <LatestSection />
+      </Suspense>
 
       <div className="bg-surface-2">
         <Section eyebrow="Know what you buy" title="Genuine and Aftermarket Parts" intro="Each product is clearly classified so you always know exactly what you are getting.">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { categories } from "@/lib/demo-data";
+import { categories } from "@/lib/categories";
 
 type Item = { href: string; label: string; match?: string; children?: { href: string; label: string }[] };
 

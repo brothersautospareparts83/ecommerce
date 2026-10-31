@@ -44,3 +44,8 @@ next-env.d.ts
 
 .neon
 neon.ts.disabled
+
+# Business data (contains buying prices and stock): never commit
+imports/
+*.xlsx
+*.xls

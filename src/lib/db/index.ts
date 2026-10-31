@@ -1,4 +1,5 @@
 import "server-only";
+import { connection } from "next/server";
 import { Pool, type PoolClient } from "@neondatabase/serverless";
 
 /**
@@ -28,6 +29,8 @@ function getPool(): Pool {
 }
 
 export async function withDb<T>(session: DbSession, fn: (client: PoolClient) => Promise<T>): Promise<T> {
+  // Database reads are per-request: never run them while prerendering at build time.
+  await connection();
   const client = await getPool().connect();
   try {
     await client.query("begin");

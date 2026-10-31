@@ -7,12 +7,15 @@ import { roleLabel } from "@/lib/format";
 // Built so far are links; the rest are placeholders labelled with the phase that delivers them.
 const built = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/products", label: "Products" },
+  { href: "/admin/inventory", label: "Inventory" },
+  { href: "/admin/catalog", label: "Categories & brands" },
   { href: "/admin/users", label: "Users & roles", adminOnly: true },
   { href: "/admin/audit-logs", label: "Audit logs", adminOnly: true },
 ];
 const planned = [
-  ["Products", 4], ["Bulk import", 5], ["Image verification", 6], ["Categories & brands", 4], ["Vehicle catalog", 7],
-  ["OEM cross-reference", 7], ["Compatibility", 7], ["Orders", 9], ["Customers", 11], ["Inventory", 4],
+  ["Bulk import screen", 5], ["Image verification", 6], ["Vehicle catalog", 7],
+  ["OEM cross-reference", 7], ["Compatibility", 7], ["Orders", 9], ["Customers", 11],
   ["Quotations", 11], ["AI analytics", 12], ["Reports", 12], ["Settings", 14], ["Integrations", 14],
 ] as const;
 

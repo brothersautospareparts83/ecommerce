@@ -1,90 +1,154 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ShieldAlert } from "lucide-react";
+import { Suspense } from "react";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
-import { ClassificationBadge, ImagePlaceholder, StockStatus } from "@/components/product/product-card";
-import { getCategory, getProduct, products } from "@/lib/demo-data";
+import { ClassificationBadge, ProductCard, ProductImage, StockStatus } from "@/components/product/product-card";
+import { conditionLabel, publicProduct, publicProducts } from "@/lib/catalog/public";
 import { formatTZS } from "@/lib/utils";
-
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
-  return { title: product?.name ?? "Product" };
+  const p = await publicProduct(slug);
+  if (!p) return { title: "Product not found" };
+  return {
+    title: p.name,
+    description: `${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""} at Brothers Auto Spare Parts, Kariakoo. ${formatTZS(p.priceTzs)}.`,
+    openGraph: p.imageUrl ? { images: [p.imageUrl] } : undefined,
+  };
 }
 
-export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
+async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">) {
   const { slug } = await params;
-  const product = getProduct(slug);
-  if (!product) notFound();
-  const category = getCategory(product.categorySlug);
+  const p = await publicProduct(slug);
+  if (!p) notFound();
+  const related = p.categorySlug ? (await publicProducts({ category: p.categorySlug, sort: "newest", pageSize: 5 })).items.filter((r) => r.id !== p.id).slice(0, 4) : [];
 
   const specs: [string, string][] = [
-    ["SKU", product.sku],
-    ["OEM part number", "Not provided"],
-    ["Brand", product.brand],
-    ["Category", category?.name ?? "-"],
-    ["Condition", product.condition],
-    ["Classification", product.classification],
+    ["SKU", p.sku],
+    ...(p.partNumber ? [["Part number", p.partNumber] as [string, string]] : []),
+    ...(p.brandName ? [["Brand", p.brandName] as [string, string]] : []),
+    ...(p.categoryName ? [["Category", p.categoryName] as [string, string]] : []),
+    ["Condition", conditionLabel[p.condition]],
+    ...(p.weightKg != null ? [["Weight", `${p.weightKg} kg`] as [string, string]] : []),
   ];
+  const altNumbers = p.partNumbers.filter((n) => !n.isPrimary && n.number !== p.partNumber);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.name,
+    sku: p.sku,
+    ...(p.partNumber ? { mpn: p.partNumber } : {}),
+    ...(p.imageUrl ? { image: p.imageUrl } : {}),
+    ...(p.brandName ? { brand: { "@type": "Brand", name: p.brandName } } : {}),
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "TZS",
+      price: p.priceTzs,
+      itemCondition: p.condition === "new" ? "https://schema.org/NewCondition" : p.condition === "used" ? "https://schema.org/UsedCondition" : "https://schema.org/RefurbishedCondition",
+      availability: p.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    },
+  };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted">
         <Link href="/shop" className="hover:text-fg">Shop</Link> /{" "}
-        {category && (<><Link href={`/categories/${category.slug}`} className="hover:text-fg">{category.name}</Link> / </>)}
-        <span className="text-fg">{product.name}</span>
+        {p.categorySlug && (<><Link href={`/categories/${p.categorySlug}`} className="hover:text-fg">{p.categoryName}</Link> / </>)}
+        <span className="text-fg">{p.name}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-2">
-        <div className="self-start overflow-hidden rounded-2xl border border-border">
-          <div className="aspect-[4/3] sm:aspect-square">
-            <ImagePlaceholder />
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="space-y-3 self-start">
+          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-border sm:aspect-square">
+            <ProductImage src={p.images[0]?.url ?? p.imageUrl} alt={p.name} />
           </div>
+          {p.images.length > 1 && (
+            <ul className="grid grid-cols-4 gap-2">
+              {p.images.slice(0, 8).map((img) => (
+                <li key={img.id} className="aspect-square overflow-hidden rounded-lg border border-border">
+                  <ProductImage src={img.url} alt={`${p.name} photo`} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div>
-          <p className="mb-3 inline-block rounded bg-hero px-2 py-0.5 text-[10px] font-bold tracking-widest text-hero-fg">
-            DEMO RECORD
-          </p>
-          <div className="mb-3"><ClassificationBadge value={product.classification} /></div>
-          <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{product.name}</h1>
-          <p className="mt-4 font-display text-3xl font-extrabold">{formatTZS(product.price)}</p>
-          <div className="mt-2"><StockStatus stock={product.stock} min={product.minStock} /></div>
+          <div className="mb-3"><ClassificationBadge value={p.classification} /></div>
+          <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{p.name}</h1>
+          <p className="mt-4 font-display text-3xl font-extrabold">{formatTZS(p.priceTzs)}</p>
+          <div className="mt-2"><StockStatus inStock={p.inStock} /></div>
 
-          <p className="mt-6 text-muted">{product.description}</p>
+          {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}
 
-          <div className="mt-6 flex items-start gap-3 rounded-lg border border-border bg-surface-2 p-4 text-sm">
-            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
-            <p className="text-muted">
-              <span className="font-semibold text-fg">Compatibility not yet verified.</span> Fitment is shown only from
-              verified catalog records. Contact us to confirm this part for your vehicle.
-            </p>
-          </div>
+          {p.compatibility.length > 0 ? (
+            <div className="mt-6 rounded-lg border border-border bg-surface-2 p-4 text-sm">
+              <p className="mb-2 flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-accent-text" /> Verified to fit</p>
+              <ul className="space-y-1 text-muted">
+                {p.compatibility.map((c, i) => (
+                  <li key={i}>
+                    {c.make} {c.model} {c.generation}
+                    {c.yearFrom ? ` (${c.yearFrom}${c.yearTo ? `–${c.yearTo}` : "+"})` : ""}
+                    {c.engine ? `, engine ${c.engine}` : ""}{c.position ? `, ${c.position}` : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="mt-6 flex items-start gap-3 rounded-lg border border-border bg-surface-2 p-4 text-sm">
+              <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
+              <p className="text-muted">
+                <span className="font-semibold text-fg">Check fitment before you buy.</span> We only list a vehicle as compatible once it is verified.
+                Send us your vehicle details or chassis number and we will confirm.
+              </p>
+            </div>
+          )}
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" disabled title="Cart arrives in a later phase">Add to Cart</Button>
-            <WhatsAppButton
-              label="Ask on WhatsApp"
-              message={`Hello, I am interested in: ${product.name} (SKU ${product.sku}).`}
-            />
+            <Button size="lg" disabled title="Online checkout opens in a later update">Add to Cart</Button>
+            <WhatsAppButton label="Order on WhatsApp" message={`Hello, I would like to order: ${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""}, SKU ${p.sku}.`} />
           </div>
 
           <dl className="mt-8 divide-y divide-border rounded-xl border border-border bg-surface">
             {specs.map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 px-4 py-3 text-sm">
                 <dt className="text-muted">{k}</dt>
-                <dd className="font-semibold">{v}</dd>
+                <dd className="text-right font-semibold">{v}</dd>
               </div>
             ))}
+            {altNumbers.length > 0 && (
+              <div className="flex justify-between gap-4 px-4 py-3 text-sm">
+                <dt className="text-muted">Other part numbers</dt>
+                <dd className="text-right font-semibold">{altNumbers.map((n) => n.number).join(", ")}</dd>
+              </div>
+            )}
           </dl>
         </div>
       </div>
+
+      {related.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-4 font-display text-xl font-extrabold">More in {p.categoryName}</h2>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {related.map((r) => (<ProductCard key={r.id} product={r} />))}
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
+
+export default function ProductPage(props: PageProps<"/products/[slug]">) {
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
+      <Suspense fallback={<div className="h-64 animate-pulse rounded-xl bg-surface-2" />}>
+        <Product params={props.params} />
+      </Suspense>
     </div>
   );
 }

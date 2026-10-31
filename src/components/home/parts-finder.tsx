@@ -14,9 +14,6 @@ const modes = [
   { id: "vehicle", label: "Vehicle", icon: CarFront, placeholder: "Make, model and year, e.g. Toyota Harrier 2015" },
 ] as const;
 
-// Quick shop searches (plain keyword links, not ranking claims).
-const quick = ["Toyota Vitz", "Toyota Harrier", "Brake Pads", "Oil Filter"];
-
 export function PartsFinder() {
   const [mode, setMode] = useState<(typeof modes)[number]["id"]>("name");
   const [q, setQ] = useState("");
@@ -64,13 +61,9 @@ export function PartsFinder() {
           <Search className="h-4 w-4" /> Search
         </Button>
       </form>
-      <p className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-        <span className="font-semibold">Try:</span>
-        {quick.map((t) => (
-          <Link key={t} href={`/shop?q=${encodeURIComponent(t)}`} className="rounded-full border border-border px-3 py-1 font-medium hover:border-accent hover:text-fg">
-            {t}
-          </Link>
-        ))}
+      <p className="mt-3 text-xs text-muted">
+        Search by name (English or Kiswahili), part number or SKU.{" "}
+        <Link href="/shop" className="font-semibold text-accent-text hover:underline">Browse all parts</Link>
       </p>
     </div>
   );

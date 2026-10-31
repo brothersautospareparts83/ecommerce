@@ -1,43 +1,23 @@
-"use client";
-
-import { useState } from "react";
+import { LinkButton } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
-import type { Product } from "@/lib/demo-data";
-import { cn } from "@/lib/utils";
+import type { ProductSummary } from "@/lib/catalog/queries";
 
-export interface ProductTab {
-  id: string;
-  label: string;
-  products: Product[];
-}
-
-export function ProductTabs({ tabs }: { tabs: ProductTab[] }) {
-  const [active, setActive] = useState(tabs[0].id);
-  const current = tabs.find((t) => t.id === active)!;
+/** Latest published products. Hidden entirely until there is something real to show. */
+export function LatestProducts({ products }: { products: ProductSummary[] }) {
+  if (products.length === 0) return null;
   return (
-    <div>
-      <div role="tablist" className="mb-6 flex flex-wrap gap-2">
-        {tabs.map((t) => (
-          <button
-            key={t.id}
-            role="tab"
-            type="button"
-            aria-selected={active === t.id}
-            onClick={() => setActive(t.id)}
-            className={cn(
-              "rounded-full border px-4 py-2 text-sm font-semibold transition-colors cursor-pointer",
-              active === t.id ? "border-accent bg-accent text-accent-fg" : "border-border text-muted hover:text-fg",
-            )}
-          >
-            {t.label}
-          </button>
-        ))}
+    <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-accent-text">New in the shop</p>
+          <h2 className="font-display text-2xl font-extrabold sm:text-3xl">Latest products</h2>
+        </div>
+        <LinkButton href="/shop" variant="secondary" size="sm">View all <ArrowRight className="h-4 w-4" /></LinkButton>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {current.products.map((p) => (
-          <ProductCard key={p.slug} product={p} />
-        ))}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+        {products.map((p) => (<ProductCard key={p.id} product={p} />))}
       </div>
-    </div>
+    </section>
   );
 }
