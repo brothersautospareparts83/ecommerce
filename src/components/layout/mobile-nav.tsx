@@ -53,7 +53,7 @@ export function MobileNav() {
                   {l.label}
                 </Link>
               ))}
-              <Link href="/login" onClick={close} className="flex items-center gap-2 rounded-lg px-3 py-3 font-medium hover:bg-surface-2">
+              <Link href="/account" onClick={close} className="flex items-center gap-2 rounded-lg px-3 py-3 font-medium hover:bg-surface-2">
                 <User className="h-5 w-5" /> Account
               </Link>
             </nav>

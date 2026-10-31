@@ -1,7 +1,7 @@
 # PROJECT_STATUS
 
 **Last updated:** 2026-10-31
-**Current phase:** Phase 2 complete (Neon database; the owner chose Neon instead of Supabase) → next: Phase 3 (Authentication and admin)
+**Current phase:** Phase 3 complete (auth + admin shell) → next: Phase 4 (Product catalog and inventory)
 
 ## Environment
 Node v24.18.0, npm 11.16.0, git 2.55.0, Python 3.14.6, Windows 11. **Not installed:** pnpm, Supabase CLI, Vercel CLI, Docker (no local Supabase; use a hosted Supabase dev project).
@@ -22,8 +22,10 @@ Project folder: `C:\Users\user\OneDrive\Documents\Brothers Auto` (synced by OneD
 - Phase 2 (Neon): 7 SQL migrations create all 36 required tables plus support tables, enums, indexes, triggers, RLS policies, column privileges and reference seed data (see DATABASE_SCHEMA.md). Applied to the owner's Neon database (`neondb`, Postgres 18, us-east-2; the database already contained the managed `neon_auth` schema). `src/lib/db/index.ts` provides `withDb` (role-scoped transactions over the Neon serverless driver). `/api/health/db` proves the running app reads the DB as `app_customer`.
 - Database connection strings are in `.env.local` (git-ignored) as `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED`. The password was pasted in chat, so **rotate it in the Neon console when convenient** and update `.env.local`.
 
+- Phase 3 (Neon Auth): sign-up, sign-in, sign-out, forgot/reset password pages; `/api/auth` proxy; `src/proxy.ts` route protection; `ensure_profile()` provisions a customer profile on first login (migration 0008); customer dashboard (`/account`, orders, profile with +255 validation); admin shell (`/admin` live dashboard figures, `/admin/users` role management, `/admin/audit-logs`, `/admin/login`); audit logging of role changes; `scripts/set-role.mjs` to bootstrap the owner. See SECURITY.md.
+
 ## Pending
-- Phases 3–14 (see PROJECT_PLAN.md).
+- Phases 4–14 (see PROJECT_PLAN.md).
 - shadcn/ui CLI not run; Button is a hand-written shadcn-style component (cva + tailwind-merge). Add shadcn components as needed (Phase 3/4).
 - Kiswahili language switch (planned with i18n setup; Phase 1 UI is English only).
 - Accessibility audit and Playwright tests (Phase 13); no automated tests exist yet.
@@ -46,11 +48,24 @@ Supabase URL/anon/service-role keys; AI provider key; WhatsApp business number; 
 4. Logo/brand assets, if any.
 5. Preferred AI provider; payment providers with merchant accounts.
 
+## Phase 3 notes and open items
+- **Nobody is admin yet.** Register on the site, then ask to run `scripts/set-role.mjs <email> owner`.
+- Email verification is off and password-reset email delivery is untested (shared Neon SMTP; no inbox available to the build). Enable verification + custom SMTP before launch.
+- Admin pages other than Dashboard / Users / Audit logs are labelled placeholders in the sidebar.
+- The `changeRole` server action was not exercised through the browser (database rules for it are tested).
+- Neon Auth trusted domains: localhost allowed; add the production domain before launch.
+- Dev note: `neon login` still fails here; Auth base URL was found by probing the endpoint (`NEON_AUTH_BASE_URL` in `.env.local`).
+
 ## Phase 2 notes and open items
 - `neon login` (browser OAuth) failed with a CSRF cookie error in this environment, so `neon deploy` was **not** run. `neon init` was run and created `neon.ts` (auth: true) linked to project `sparkling-credit-27790994`; that project could not be verified and may not be the database actually in use. `neon.ts` is not committed. Decide whether to keep Neon CLI-managed config.
 - A separate Neon project `brothers-auto-spare-parts` (damp-lab-13541393) was created earlier by mistake of scope; it is empty and unused. Delete it in the Neon console if not wanted.
 - Neon Auth is provisioned in the database (`neon_auth` schema); wiring sign-up/login is Phase 3.
 - File storage provider for product images is undecided (Phase 6).
+
+## Test results (Phase 3)
+- `npm test`: 47/47 pass (28 RLS/constraint tests, 5 profile-provisioning tests, phone normalization).
+- `node --env-file=.env.local scripts/e2e-auth.mjs` against the running production build and real Neon Auth: 26/26 checks pass (redirects, sign-up, session restore, role provisioning, customer kept out of admin with no data leaked, staff vs admin access, wrong password rejected, sign-in, sign-out). Test users are deleted afterwards.
+- Manual browser check: register, wrong-password message, sign-in to `/account`, profile save (invalid phone rejected, valid saved as +255…), sign-out, protected redirect.
 
 ## Test results (Phase 2)
 - `npm test`: 28/28 database tests pass against Neon (RLS, column privileges, stock rules, photo-publish rules, order/payment constraints, audit immutability).
@@ -62,5 +77,5 @@ Supabase URL/anon/service-role keys; AI provider key; WhatsApp business number; 
 - Not yet checked: every page visually in both themes, tablet width, keyboard-only navigation.
 
 ## Next actions
-1. Phase 3: wire Neon Auth (Managed Better Auth), link `profiles.auth_user_id`, protected routes, admin and customer dashboards, audit logging.
+1. Promote the owner account (set-role script), then Phase 4: product CRUD, categories/brands, SKU and OEM numbers, stock movements UI, search/filter/sort.
 2. Owner confirms WhatsApp number and photography plan.

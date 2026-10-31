@@ -9,8 +9,6 @@ const pages: Record<string, { title: string; description: string }> = {
   about: { title: "About Brothers Auto Spare Parts", description: "Our story, based in Kariakoo, Dar es Salaam. Content to be supplied by the business owner." },
   faq: { title: "Frequently Asked Questions", description: "Answers about ordering, delivery and parts, to be written with the owner." },
   cart: { title: "Shopping Cart", description: "Your cart and secure checkout are coming soon." },
-  login: { title: "Customer Login", description: "Customer accounts arrive with the authentication phase." },
-  register: { title: "Create an Account", description: "Customer registration arrives with the authentication phase." },
   privacy: { title: "Privacy Policy", description: "Legal text must be provided or approved by the business owner before publishing." },
   terms: { title: "Terms and Conditions", description: "Legal text must be provided or approved by the business owner before publishing." },
 };

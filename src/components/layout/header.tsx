@@ -26,7 +26,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 lg:flex">
-            <Link href="/login" aria-label="Account" className={iconBtn}>
+            <Link href="/account" aria-label="Account" className={iconBtn}>
               <User className="h-5 w-5" />
             </Link>
             <ThemeToggle className={iconBtn} />

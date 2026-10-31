@@ -32,5 +32,8 @@ Identity is passed with `set_config('app.user_id' | 'app.user_role', ..., true)`
 ## Seeded reference data (no products, prices or stock)
 4 roles; 15 categories; 14 vehicle makers; 3 Swahili search synonyms; integration status rows (all external providers `awaiting_credentials`).
 
+## Auth integration
+`ensure_profile(auth_user_id, email, name)` (migration 0008, SECURITY DEFINER) creates or links the customer profile on first login. It only ever creates role `customer`; it links an admin-pre-created profile by email only when that profile has no auth user yet.
+
 ## Tests
-`npm test` runs 28 tests in `tests/db/rls.test.ts` against the real database; each test runs in a rolled-back transaction.
+`npm test` runs 33 database tests in `tests/db/` against the real database; each test runs in a rolled-back transaction.
