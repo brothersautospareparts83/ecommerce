@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ImageOff } from "lucide-react";
-import { cn, formatTZS } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { classificationLabel, type Classification, type ProductSummary } from "@/lib/catalog/queries";
 
 export function ImagePlaceholder({ className, label = "No photo yet" }: { className?: string; label?: string }) {
@@ -57,7 +57,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
         <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
         <p className="text-xs text-muted">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
         <div className="mt-auto flex items-end justify-between pt-2">
-          <span className="font-display text-base font-extrabold">{formatTZS(product.priceTzs)}</span>
+          <span className="font-display text-base font-extrabold">{formatPrice(product.priceTzs)}</span>
           <StockStatus inStock={product.inStock} />
         </div>
       </div>

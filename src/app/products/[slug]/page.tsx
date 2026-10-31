@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { ClassificationBadge, ProductCard, ProductImage, StockStatus } from "@/components/product/product-card";
 import { conditionLabel, publicProduct, publicProducts } from "@/lib/catalog/public";
-import { formatTZS } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   if (!p) return { title: "Product not found" };
   return {
     title: p.name,
-    description: `${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""} at Brothers Auto Spare Parts, Kariakoo. ${formatTZS(p.priceTzs)}.`,
+    description: `${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""} at Brothers Auto Spare Parts, Kariakoo. ${p.priceTzs > 0 ? `${formatPrice(p.priceTzs)}.` : ""}`,
     openGraph: p.imageUrl ? { images: [p.imageUrl] } : undefined,
   };
 }
@@ -44,13 +44,13 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
     ...(p.partNumber ? { mpn: p.partNumber } : {}),
     ...(p.imageUrl ? { image: p.imageUrl } : {}),
     ...(p.brandName ? { brand: { "@type": "Brand", name: p.brandName } } : {}),
-    offers: {
+    ...(p.priceTzs > 0 ? { offers: {
       "@type": "Offer",
       priceCurrency: "TZS",
       price: p.priceTzs,
       itemCondition: p.condition === "new" ? "https://schema.org/NewCondition" : p.condition === "used" ? "https://schema.org/UsedCondition" : "https://schema.org/RefurbishedCondition",
       availability: p.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-    },
+    } } : {}),
   };
 
   return (
@@ -81,7 +81,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
         <div>
           <div className="mb-3"><ClassificationBadge value={p.classification} /></div>
           <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{p.name}</h1>
-          <p className="mt-4 font-display text-3xl font-extrabold">{formatTZS(p.priceTzs)}</p>
+          <p className="mt-4 font-display text-3xl font-extrabold">{formatPrice(p.priceTzs)}</p>
           <div className="mt-2"><StockStatus inStock={p.inStock} /></div>
 
           {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}

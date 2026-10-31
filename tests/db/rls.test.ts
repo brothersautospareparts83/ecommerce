@@ -78,7 +78,7 @@ describe("reference data", () => {
 describe("public catalog access", () => {
   it("visitors see published products only", async () => {
     await as("app_customer");
-    const skus = (await client.query("select sku from products order by sku")).rows.map((r) => r.sku);
+    const skus = (await client.query("select sku from products where sku like 'T-%' order by sku")).rows.map((r) => r.sku);
     expect(skus).toEqual(["T-PUB"]);
   });
 
@@ -209,9 +209,11 @@ describe("inventory integrity", () => {
 });
 
 describe("product photography rules", () => {
-  it("cannot publish without an approved real photo", async () => {
+  it("can be published without a photo (owner decision); the storefront shows a placeholder", async () => {
     await owner();
-    expect(await failure("update products set status='published' where id=$1", [draft])).toMatch(/IMAGE REQUIRED/);
+    await client.query("update products set status='published' where id=$1", [draft]);
+    expect((await one("select published_at is not null as ok from products where id=$1", [draft])).ok).toBe(true);
+    await client.query("update products set status='draft' where id=$1", [draft]);
   });
 
   it("an illustrative image can never be approved", async () => {

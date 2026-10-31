@@ -54,10 +54,9 @@ const SYNONYMS: Record<string, RegExp[]> = {
   description: [/^description\.?$/i, /^item/i, /^product/i, /^maelezo/i, /^jina/i],
   part: [/^part\s*(no|id|number)\.?$/i, /^part$/i, /^oem/i],
   qty: [/^bal\.?$/i, /^qty\.?$/i, /^quantity$/i, /^idadi$/i],
-  // "PRICE RMB" is treated as a BUYING price: on the owner's file its values match the buying prices of
-  // the same parts on the other sheet and are far below their selling prices (see PROJECT_STATUS.md).
-  buy: [/^b\/?price$/i, /^buying/i, /^cost/i, /^bei\s*ya\s*kununua/i, /^price\s*rmb$/i],
-  sell: [/^s\/?price$/i, /^selling/i, /^price$/i, /^bei$/i],
+  // Owner decision: the store 3 "PRICE RMB" column is the SELLING price.
+  buy: [/^b\/?price$/i, /^buying/i, /^cost/i, /^bei\s*ya\s*kununua/i],
+  sell: [/^s\/?price$/i, /^price\s*rmb$/i, /^selling/i, /^price$/i, /^bei$/i],
   category: [/^category$/i, /^aina$/i],
   compat: [/^vehicle\s*compat/i, /^compat/i, /^gari$/i],
   store: [/^store\s*name$/i, /^store$/i],
@@ -121,11 +120,6 @@ export async function readWorkbook(path: string): Promise<{ sheets: SheetInfo[];
     if (!header || !header.description) {
       info.assumptions.push("No recognisable header row (needs DESCRIPTION and PART columns): sheet skipped.");
       continue;
-    }
-    if (header.buy && /rmb/i.test(labels[header.buy])) {
-      info.assumptions.push(
-        `The price column is headed "${labels[header.buy]}". Its values match the BUYING prices of the same parts on the other sheet, so it is read as the buying price (admin-only). Owner must confirm.`,
-      );
     }
     if (!header.sell) info.assumptions.push("No selling-price column: parts found only on this sheet have NO selling price until the owner sets one.");
     if (!header.category) info.assumptions.push("No category column: products are uncategorised for this sheet.");
