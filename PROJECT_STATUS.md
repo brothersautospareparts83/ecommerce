@@ -1,7 +1,7 @@
 # PROJECT_STATUS
 
 **Last updated:** 2026-10-31
-**Current phase:** Phase 1 complete (with caveats below) → next: Phase 2 (Supabase and database)
+**Current phase:** Phase 2 complete (Neon database; the owner chose Neon instead of Supabase) → next: Phase 3 (Authentication and admin)
 
 ## Environment
 Node v24.18.0, npm 11.16.0, git 2.55.0, Python 3.14.6, Windows 11. **Not installed:** pnpm, Supabase CLI, Vercel CLI, Docker (no local Supabase; use a hosted Supabase dev project).
@@ -19,8 +19,11 @@ Project folder: `C:\Users\user\OneDrive\Documents\Brothers Auto` (synced by OneD
 - Brand update (owner-supplied logo and flyer): palette switched to black/orange/silver; logo in header, footer, hero and favicon; flyer shown in the contact section; owner contact details from the flyer in `src/lib/site.ts` (phones 0627 858827 and 0741 939 264, @brothersautospareparts83 on Instagram/TikTok, Kariakoo). Real `/contact` page. WhatsApp number defaults to 0627 858827 (**owner to confirm which number is WhatsApp**). Instagram/TikTok URLs are inferred from the handle; confirm.
 - GitHub: code pushed to https://github.com/brothersautospareparts83/ecommerce (see Next actions for status).
 
+- Phase 2 (Neon): 7 SQL migrations create all 36 required tables plus support tables, enums, indexes, triggers, RLS policies, column privileges and reference seed data (see DATABASE_SCHEMA.md). Applied to the owner's Neon database (`neondb`, Postgres 18, us-east-2; the database already contained the managed `neon_auth` schema). `src/lib/db/index.ts` provides `withDb` (role-scoped transactions over the Neon serverless driver). `/api/health/db` proves the running app reads the DB as `app_customer`.
+- Database connection strings are in `.env.local` (git-ignored) as `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED`. The password was pasted in chat, so **rotate it in the Neon console when convenient** and update `.env.local`.
+
 ## Pending
-- Phases 2–14 (see PROJECT_PLAN.md).
+- Phases 3–14 (see PROJECT_PLAN.md).
 - shadcn/ui CLI not run; Button is a hand-written shadcn-style component (cva + tailwind-merge). Add shadcn components as needed (Phase 3/4).
 - Kiswahili language switch (planned with i18n setup; Phase 1 UI is English only).
 - Accessibility audit and Playwright tests (Phase 13); no automated tests exist yet.
@@ -43,11 +46,21 @@ Supabase URL/anon/service-role keys; AI provider key; WhatsApp business number; 
 4. Logo/brand assets, if any.
 5. Preferred AI provider; payment providers with merchant accounts.
 
+## Phase 2 notes and open items
+- `neon login` (browser OAuth) failed with a CSRF cookie error in this environment, so `neon deploy` was **not** run. `neon init` was run and created `neon.ts` (auth: true) linked to project `sparkling-credit-27790994`; that project could not be verified and may not be the database actually in use. `neon.ts` is not committed. Decide whether to keep Neon CLI-managed config.
+- A separate Neon project `brothers-auto-spare-parts` (damp-lab-13541393) was created earlier by mistake of scope; it is empty and unused. Delete it in the Neon console if not wanted.
+- Neon Auth is provisioned in the database (`neon_auth` schema); wiring sign-up/login is Phase 3.
+- File storage provider for product images is undecided (Phase 6).
+
+## Test results (Phase 2)
+- `npm test`: 28/28 database tests pass against Neon (RLS, column privileges, stock rules, photo-publish rules, order/payment constraints, audit immutability).
+- `npm run build`: pass. `GET /api/health/db` on the running app: `{"ok":true,"role":"app_customer","categories":15,"visibleProducts":0}`.
+
 ## Test results (Phase 1)
 - `npx tsc --noEmit`: pass. `npm run lint`: pass. `npm run build`: pass (47 static pages).
 - Manual browser check on production build: homepage renders in light and dark; theme toggle works and persists across navigation; no console errors; no horizontal scroll at 375px; mobile menu opens as full-height drawer with theme toggle; product page renders.
 - Not yet checked: every page visually in both themes, tablet width, keyboard-only navigation.
 
 ## Next actions
-1. Phase 2: create Supabase project, add `supabase/migrations` for all 36 entities, RLS, storage buckets, RLS tests.
-2. Owner supplies contact details and photography plan.
+1. Phase 3: wire Neon Auth (Managed Better Auth), link `profiles.auth_user_id`, protected routes, admin and customer dashboards, audit logging.
+2. Owner confirms WhatsApp number and photography plan.

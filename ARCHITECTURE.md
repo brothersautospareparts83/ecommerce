@@ -13,10 +13,10 @@
 |---|---|---|
 | Web | Next.js (App Router), React, TypeScript | Server Components + Server Actions + Route Handlers |
 | UI | Tailwind CSS, shadcn/ui, Lucide | Design tokens as CSS variables; light/dark |
-| Data | Supabase Postgres | SQL migrations in `supabase/migrations` |
-| Auth | Supabase Auth | Roles in `profiles.role` + `roles` table; never client-assignable |
-| Files | Supabase Storage | Buckets: `product-images` (public read), `imports` (private), `ai-uploads` (private) |
-| Hosting | Vercel + Supabase | Free tiers first |
+| Data | Neon Postgres (`@neondatabase/serverless`) | SQL migrations in `db/migrations`, applied by `npm run db:migrate` |
+| Auth | Neon Auth (Managed Better Auth, `neon_auth` schema) — Phase 3 | Roles in `profiles.role` + `roles` table; never client-assignable |
+| Files | Neon Object Storage or S3-compatible store (decided in Phase 6, behind an adapter) | Buckets: product images (public read), imports (private), AI uploads (private) |
+| Hosting | Vercel + Neon | Free tiers first |
 | i18n | `next-intl` (en default, sw) | Locale prefix routing |
 | Import | `exceljs`/`xlsx` + `papaparse`, `zod` | Parsing in server route; batch inserts |
 | Images | `sharp` | WebP/AVIF, thumbnails, responsive sizes |
@@ -33,7 +33,7 @@
 │  │  └─ api/                      # webhooks (payments, whatsapp), import, ai, search
 │  ├─ components/ (ui, layout, product, finder, admin, ai)
 │  ├─ lib/
-│  │  ├─ supabase/ (browser, server, admin)
+│  │  ├─ db/ (withDb: role-scoped transactions)
 │  │  ├─ adapters/
 │  │  │  ├─ catalog/   # CatalogProvider: vin decode, parts by vehicle, diagrams
 │  │  │  ├─ images/    # ImageSourceProvider: find by part number
@@ -44,7 +44,7 @@
 │  │  ├─ search/ import/ inventory/ pricing/ orders/ vin/ i18n/ validation/
 │  ├─ messages/ (en.json, sw.json)
 │  └─ types/
-├─ supabase/ (migrations, seed.sql, tests)
+├─ db/migrations/ (SQL)   scripts/migrate.mjs
 ├─ tests/ (unit, integration, e2e)
 ├─ docs/ (guides)
 └─ *.md
@@ -75,4 +75,4 @@ CSS variables from the owner's official brand (logo and flyer in `public/brand/`
 ## 8. Known constraints and decisions
 - Licensed catalog data (VIN decode, diagrams, OEM images) requires commercial agreements; PartSouq data must not be scraped. Phase 7 ships a manual catalog + admin-verified compatibility; API providers are added only after license verification.
 - Payments: no provider is claimed live until credentials exist and a successful sandbox test is recorded.
-- The tooling available in this environment includes Neon and Render connectors but no Supabase connector; Supabase work will use the Supabase CLI / dashboard (user must create the project).
+- **Database is Neon, not Supabase** (owner decision). Supabase-specific features are replaced: RLS uses Postgres roles `app_customer` / `app_staff` plus `app.user_id` session settings instead of `auth.uid()`; auth is Neon Auth; file storage is chosen in Phase 6.
