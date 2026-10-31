@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* Brand palette (from the official logo and flyer): black, orange, silver */
+:root {
+  --brand-black: #0a0c10;
+  --brand-orange: #f47b20;
+  --brand-silver: #c0c7d1;
+}
+
+/* Semantic tokens — light (default) */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef2;
+  --fg: #12141a;
+  --muted: #4b5262;
+  --border: #d3d7de;
+  --accent: #f47b20;
+  --accent-fg: #0a0c10;
+  --accent-text: #c2410c; /* orange readable as text on light (AA) */
+  --hero-bg: #0a0c10;
+  --hero-fg: #ffffff;
+  /* Header, hero and footer stay black in both themes, matching the logo artwork */
+  --chrome-bg: #0a0c10;
+  --chrome-fg: #f2f4f7;
+  --chrome-muted: #aab2c0;
+  --chrome-border: #232830;
+  --shadow: 0 1px 2px rgb(10 12 16 / 0.06), 0 8px 24px -8px rgb(10 12 16 / 0.16);
+  --ring: #c2410c;
+  color-scheme: light;
+}
+
+/* Semantic tokens — dark */
+:root[data-theme="dark"] {
+  --bg: #0a0c10;
+  --surface: #14171d;
+  --surface-2: #1b1f27;
+  --fg: #eef1f6;
+  --muted: #a8b1c0;
+  --border: #272c36;
+  --accent: #f47b20;
+  --accent-fg: #0a0c10;
+  --accent-text: #ff9a4d;
+  --hero-bg: #050608;
+  --hero-fg: #ffffff;
+  --chrome-bg: #050608;
+  --chrome-border: #1d2128;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -8px rgb(0 0 0 / 0.7);
+  --ring: #f47b20;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-text: var(--accent-text);
+  --color-hero: var(--hero-bg);
+  --color-hero-fg: var(--hero-fg);
+  --color-chrome: var(--chrome-bg);
+  --color-chrome-fg: var(--chrome-fg);
+  --color-chrome-muted: var(--chrome-muted);
+  --color-chrome-border: var(--chrome-border);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
