@@ -86,6 +86,19 @@ function num(v: unknown): number | null {
   return Number(s);
 }
 
+/** Maps a header row's cell texts to columns, or null when the row is not a header (needs DESCRIPTION and PART). */
+function mapHeader(texts: string[]): Record<string, number> | null {
+  const hasDesc = texts.some((t) => SYNONYMS.description.some((re) => re.test(t)));
+  const hasPart = texts.some((t) => SYNONYMS.part.some((re) => re.test(t)));
+  if (!(hasDesc && hasPart)) return null;
+  const map: Record<string, number> = {};
+  for (const [field, res] of Object.entries(SYNONYMS)) {
+    const col = texts.findIndex((t, i) => i > 0 && res.some((re) => re.test(t)));
+    if (col > 0) map[field] = col;
+  }
+  return map.description ? map : null;
+}
+
 export async function readWorkbook(path: string): Promise<{ sheets: SheetInfo[]; rows: RawRow[] }> {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(path);
@@ -126,6 +139,14 @@ export async function readWorkbook(path: string): Promise<{ sheets: SheetInfo[];
 
     for (let r = (info.headerRow ?? 0) + 1; r <= ws.rowCount; r++) {
       const row = ws.getRow(r);
+      // A sheet can hold several tables, each with its own header row (e.g. "store 3": the second table has
+      // B/PRICE and S/PRICE columns). Re-read the column layout there and skip the header row itself.
+      const again = mapHeader((row.values as ExcelJS.CellValue[]).map((c) => text(cellValue(c))));
+      if (again) {
+        header = again;
+        info.assumptions.push(`Row ${r} starts a new table with its own columns; columns re-read from there.`);
+        continue;
+      }
       const get = (field: string) => (header![field] ? cellValue(row.getCell(header![field]).value) : null);
       const description = text(get("description"));
       const partRaw = text(get("part"));
