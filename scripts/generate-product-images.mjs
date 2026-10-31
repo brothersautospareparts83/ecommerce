@@ -1,13 +1,15 @@
 // Generates AI reference images (owner decision 2026-10-31) for products that have no image yet, crops each
 // tightly to the part, saves public/products/<sku>.webp and records it as an approved 'illustrative' image.
 //   node --env-file=.env.local scripts/generate-product-images.mjs <limit> [--home] [--dry-run]
-// --home: only the products shown on the home page (newest published). Needs CLOUDFLARE_* in .env.local.
+// --home: the products shown on the home page (newest published). --stock: most units in stock first
+// (no orders exist yet, so stock is the stand-in for "best selling"). Default: by SKU. Needs CLOUDFLARE_* in .env.local.
 import fs from "node:fs";
 import pg from "pg";
 import sharp from "sharp";
 
 const limit = Number(process.argv[2] ?? 4);
 const home = process.argv.includes("--home");
+const stock = process.argv.includes("--stock");
 const dry = process.argv.includes("--dry-run");
 const { CLOUDFLARE_ACCOUNT_ID: acct, CLOUDFLARE_API_TOKEN: token, DATABASE_URL_UNPOOLED, DATABASE_URL } = process.env;
 if (!acct || !token) throw new Error("CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOKEN missing");
@@ -15,9 +17,9 @@ if (!acct || !token) throw new Error("CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOK
 const db = new pg.Client({ connectionString: DATABASE_URL_UNPOOLED ?? DATABASE_URL });
 await db.connect();
 const { rows } = await db.query(
-  `select p.id, p.sku, p.name from products p
+  `select p.id, p.sku, p.name from products p left join inventory inv on inv.product_id = p.id
    where p.status = 'published' and not exists (select 1 from product_images i where i.product_id = p.id)
-   order by ${home ? "p.created_at desc" : "p.sku"} limit $1`,
+   order by ${home ? "p.created_at desc" : stock ? "coalesce(inv.quantity_on_hand, 0) desc, p.sku" : "p.sku"} limit $1`,
   [limit],
 );
 fs.mkdirSync("public/products", { recursive: true });
