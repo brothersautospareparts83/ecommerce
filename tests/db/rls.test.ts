@@ -216,13 +216,11 @@ describe("product photography rules", () => {
     await client.query("update products set status='draft' where id=$1", [draft]);
   });
 
-  it("an illustrative image can never be approved", async () => {
+  it("an illustrative (AI reference) image can be approved, per the owner decision", async () => {
     await owner();
-    const msg = await failure(
-      "insert into product_images (product_id, storage_path, url, kind, verification_status) values ($1,'x','https://example.test/x','illustrative','approved')",
-      [draft],
-    );
-    expect(msg).toMatch(/illustrative_never_approved/);
+    const r = await client.query("insert into product_images (product_id, storage_path, url, kind, verification_status) values ($1,'x','https://example.test/x','illustrative','approved') returning id", [draft]);
+    expect(r.rowCount).toBe(1);
+    await client.query("delete from product_images where id=$1", [r.rows[0].id]);
   });
 
   it("rejecting the last approved photo demotes a published product", async () => {

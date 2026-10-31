@@ -114,8 +114,8 @@ const FROM = `
   left join categories c on c.id = p.category_id
   left join lateral (
     select i.url from product_images i
-    where i.product_id = p.id and i.verification_status = 'approved' and i.kind <> 'illustrative'
-    order by i.is_primary desc, i.created_at limit 1
+    where i.product_id = p.id and i.verification_status = 'approved'
+    order by (i.kind = 'illustrative'), i.is_primary desc, i.created_at limit 1
   ) img on true`;
 
 /**
@@ -196,8 +196,8 @@ export async function getProductBySlug(db: Queryable, slug: string): Promise<Pro
   const [imgs, oem, compat] = await Promise.all([
     db.query(
       `select id, url, kind, source_name, attribution from product_images
-       where product_id = $1 and verification_status = 'approved' and kind <> 'illustrative'
-       order by is_primary desc, created_at`,
+       where product_id = $1 and verification_status = 'approved'
+       order by (kind = 'illustrative'), is_primary desc, created_at`,
       [id],
     ),
     db.query("select part_number, is_primary, is_alternative from oem_part_numbers where product_id = $1 order by is_primary desc, part_number", [id]),
