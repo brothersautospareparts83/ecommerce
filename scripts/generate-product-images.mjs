@@ -31,7 +31,13 @@ for (const p of rows) {
     method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ prompt, steps: 6 }),
   });
   const j = await res.json();
-  if (!j.result?.image) { console.log(p.sku, p.name, "FAILED", JSON.stringify(j.errors)); continue; }
+  if (!j.result?.image) {
+    const msg = JSON.stringify(j.errors);
+    console.log(p.sku, p.name, "FAILED", msg);
+    // Daily free allowance used up (or rate limited): stop; re-run later, finished products are skipped.
+    if (res.status === 429 || /allocation|quota|limit/i.test(msg)) { console.log("Stopping: free limit reached."); break; }
+    continue;
+  }
   const raw = Buffer.from(j.result.image, "base64");
   // Trim the empty background, then centre the part so it fills ~85% of a square white frame.
   const trimmed = await sharp(raw).trim({ background: "#ffffff", threshold: 22 }).resize(680, 680, { fit: "inside" }).toBuffer();
