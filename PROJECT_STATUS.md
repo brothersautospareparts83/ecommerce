@@ -24,6 +24,8 @@ Project folder: `C:\Users\user\OneDrive\Documents\Brothers Auto` (synced by OneD
 
 - Phase 3 (Neon Auth): sign-up, sign-in, sign-out, forgot/reset password pages; `/api/auth` proxy; `src/proxy.ts` route protection; `ensure_profile()` provisions a customer profile on first login (migration 0008); customer dashboard (`/account`, orders, profile with +255 validation); admin shell (`/admin` live dashboard figures, `/admin/users` role management, `/admin/audit-logs`, `/admin/login`); audit logging of role changes; `scripts/set-role.mjs` to bootstrap the owner. See SECURITY.md.
 
+- Storefront polish (owner request, using a design mockup for icons and arrangement only): neutral black/orange palette with all blue tints removed; header with utility strip, search and a navigation bar with active highlight and dropdowns; phone bottom bar (Home, Shop, Cart, Account, More) and menu drawer; homepage finder card with four icon tabs next to an AI Parts Expert teaser (marked Coming soon); trust strip; icon category tiles; footer with columns and a disabled newsletter; shop search, category filter, sort and in-stock filter (demo data). No sideways scrolling on any public page at 375px in light or dark. The mockup's photos and claims ("100% Genuine", "Trusted by Thousands", invented phone numbers) were deliberately not copied.
+
 ## Pending
 - Phases 4–14 (see PROJECT_PLAN.md).
 - shadcn/ui CLI not run; Button is a hand-written shadcn-style component (cva + tailwind-merge). Add shadcn components as needed (Phase 3/4).

@@ -11,6 +11,13 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  // The bottom bar's "More" button asks this drawer to open.
+  useEffect(() => {
+    const openMenu = () => setOpen(true);
+    window.addEventListener("open-menu", openMenu);
+    return () => window.removeEventListener("open-menu", openMenu);
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);

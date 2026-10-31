@@ -28,11 +28,14 @@ export function whatsappUrl(message?: string): string {
   return `https://wa.me/${site.whatsappNumber}${text}`;
 }
 
+/** Links shown in the phone menu drawer. The desktop menu lives in components/layout/nav-bar.tsx. */
 export const navLinks = [
   { href: "/shop", label: "Shop" },
   { href: "/categories", label: "Categories" },
   { href: "/finder", label: "Parts Finder" },
   { href: "/ai-assistant", label: "AI Parts Expert" },
   { href: "/quotation", label: "Request Quote" },
+  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
+  { href: "/faq", label: "FAQ" },
 ];

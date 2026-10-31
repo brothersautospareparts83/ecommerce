@@ -14,7 +14,7 @@ export function WhatsAppButton({
   size?: "md" | "lg";
 }) {
   return (
-    <LinkButton href={whatsappUrl(message)} variant={variant} size={size} target="_blank" rel="noopener noreferrer">
+    <LinkButton href={whatsappUrl(message)} variant={variant} size={size} className="px-3 text-sm sm:px-6 sm:text-base" target="_blank" rel="noopener noreferrer">
       <MessageCircle className="h-5 w-5" /> {label}
     </LinkButton>
   );

@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Hash, ScanLine, CarFront } from "lucide-react";
+import { Search, Hash, ScanLine, CarFront, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const modes = [
-  { id: "vin", label: "Chassis / VIN", icon: ScanLine, placeholder: "Enter chassis number, VIN or frame number" },
-  { id: "oem", label: "OEM Part Number", icon: Hash, placeholder: "e.g. enter an OEM or part number" },
-  { id: "name", label: "Product Name", icon: Search, placeholder: "e.g. brake pads, chujio la oil, front shock" },
-  { id: "vehicle", label: "Select Vehicle", icon: CarFront, placeholder: "Make, model and year, e.g. Toyota Harrier 2015" },
+  { id: "vin", label: "Chassis No.", icon: ScanLine, placeholder: "Enter chassis number, VIN or frame number" },
+  { id: "oem", label: "Part Number", icon: Hash, placeholder: "Enter an OEM or part number" },
+  { id: "name", label: "Part Name", icon: Search, placeholder: "e.g. brake pads, chujio la oil, front shock" },
+  { id: "vehicle", label: "Vehicle", icon: CarFront, placeholder: "Make, model and year, e.g. Toyota Harrier 2015" },
 ] as const;
+
+// Quick shop searches (plain keyword links, not ranking claims).
+const quick = ["Toyota Vitz", "Toyota Harrier", "Brake Pads", "Oil Filter"];
 
 export function PartsFinder() {
   const [mode, setMode] = useState<(typeof modes)[number]["id"]>("name");
@@ -21,7 +25,10 @@ export function PartsFinder() {
 
   return (
     <div className="rounded-2xl border border-border bg-surface p-4 shadow-card sm:p-6">
-      <div role="tablist" aria-label="Search method" className="mb-4 grid grid-cols-2 gap-2 md:grid-cols-4">
+      <h2 className="mb-4 flex items-center gap-2 font-display text-lg font-extrabold sm:text-xl">
+        <Zap className="h-5 w-5 text-accent" aria-hidden="true" /> Find Your Exact Spare Part
+      </h2>
+      <div role="tablist" aria-label="Search method" className="mb-4 grid grid-cols-4 gap-2">
         {modes.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -30,11 +37,11 @@ export function PartsFinder() {
             aria-selected={mode === id}
             onClick={() => setMode(id)}
             className={cn(
-              "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-semibold transition-colors cursor-pointer",
+              "flex flex-col items-center justify-center gap-1 rounded-lg border px-1 py-2.5 text-[11px] font-semibold leading-tight transition-colors cursor-pointer sm:flex-row sm:gap-2 sm:px-3 sm:text-sm",
               mode === id ? "border-accent bg-accent text-accent-fg" : "border-border text-muted hover:text-fg",
             )}
           >
-            <Icon className="h-4 w-4" /> {label}
+            <Icon className="h-5 w-5 sm:h-4 sm:w-4" aria-hidden="true" /> <span>{label}</span>
           </button>
         ))}
       </div>
@@ -51,12 +58,20 @@ export function PartsFinder() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={active.placeholder}
-          className="h-12 flex-1 rounded-lg border border-border bg-bg px-4 text-sm outline-none placeholder:text-muted focus:border-accent"
+          className="h-12 min-w-0 flex-1 rounded-lg border border-border bg-bg px-4 text-sm outline-none placeholder:text-muted focus:border-accent"
         />
         <Button type="submit" size="lg">
-          <Search className="h-4 w-4" /> Find Parts
+          <Search className="h-4 w-4" /> Search
         </Button>
       </form>
+      <p className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
+        <span className="font-semibold">Try:</span>
+        {quick.map((t) => (
+          <Link key={t} href={`/shop?q=${encodeURIComponent(t)}`} className="rounded-full border border-border px-3 py-1 font-medium hover:border-accent hover:text-fg">
+            {t}
+          </Link>
+        ))}
+      </p>
     </div>
   );
 }

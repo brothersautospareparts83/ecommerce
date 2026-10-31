@@ -34,7 +34,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted">
         <Link href="/shop" className="hover:text-fg">Shop</Link> /{" "}
         {category && (<><Link href={`/categories/${category.slug}`} className="hover:text-fg">{category.name}</Link> / </>)}
@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="self-start overflow-hidden rounded-2xl border border-border">
-          <div className="aspect-square">
+          <div className="aspect-[4/3] sm:aspect-square">
             <ImagePlaceholder />
           </div>
         </div>
@@ -53,7 +53,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             DEMO RECORD
           </p>
           <div className="mb-3"><ClassificationBadge value={product.classification} /></div>
-          <h1 className="font-display text-3xl font-extrabold">{product.name}</h1>
+          <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{product.name}</h1>
           <p className="mt-4 font-display text-3xl font-extrabold">{formatTZS(product.price)}</p>
           <div className="mt-2"><StockStatus stock={product.stock} min={product.minStock} /></div>
 

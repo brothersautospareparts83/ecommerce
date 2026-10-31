@@ -1,50 +1,50 @@
 @import "tailwindcss";
 
-/* Brand palette (from the official logo and flyer): black, orange, silver */
+/* Brand palette (from the official logo and flyer): black, orange, silver. No blue tints. */
 :root {
-  --brand-black: #0a0c10;
+  --brand-black: #0a0a0b;
   --brand-orange: #f47b20;
-  --brand-silver: #c0c7d1;
+  --brand-silver: #c4c4c8;
 }
 
 /* Semantic tokens — light (default) */
 :root {
-  --bg: #f4f5f7;
+  --bg: #f5f5f4;
   --surface: #ffffff;
-  --surface-2: #eceef2;
-  --fg: #12141a;
-  --muted: #4b5262;
-  --border: #d3d7de;
+  --surface-2: #ececea;
+  --fg: #141414;
+  --muted: #55555b;
+  --border: #d6d6d3;
   --accent: #f47b20;
-  --accent-fg: #0a0c10;
+  --accent-fg: #0a0a0b;
   --accent-text: #c2410c; /* orange readable as text on light (AA) */
-  --hero-bg: #0a0c10;
+  --hero-bg: #0a0a0b;
   --hero-fg: #ffffff;
   /* Header, hero and footer stay black in both themes, matching the logo artwork */
-  --chrome-bg: #0a0c10;
-  --chrome-fg: #f2f4f7;
-  --chrome-muted: #aab2c0;
-  --chrome-border: #232830;
-  --shadow: 0 1px 2px rgb(10 12 16 / 0.06), 0 8px 24px -8px rgb(10 12 16 / 0.16);
+  --chrome-bg: #0a0a0b;
+  --chrome-fg: #f4f4f5;
+  --chrome-muted: #a8a8ae;
+  --chrome-border: #27272a;
+  --shadow: 0 1px 2px rgb(10 10 11 / 0.06), 0 8px 24px -8px rgb(10 10 11 / 0.16);
   --ring: #c2410c;
   color-scheme: light;
 }
 
-/* Semantic tokens — dark */
+/* Semantic tokens — dark (neutral charcoal, no blue) */
 :root[data-theme="dark"] {
-  --bg: #0a0c10;
-  --surface: #14171d;
-  --surface-2: #1b1f27;
-  --fg: #eef1f6;
-  --muted: #a8b1c0;
-  --border: #272c36;
+  --bg: #0a0a0b;
+  --surface: #151516;
+  --surface-2: #1e1e20;
+  --fg: #f1f1f2;
+  --muted: #a6a6ac;
+  --border: #2c2c2f;
   --accent: #f47b20;
-  --accent-fg: #0a0c10;
+  --accent-fg: #0a0a0b;
   --accent-text: #ff9a4d;
-  --hero-bg: #050608;
+  --hero-bg: #050505;
   --hero-fg: #ffffff;
-  --chrome-bg: #050608;
-  --chrome-border: #1d2128;
+  --chrome-bg: #050505;
+  --chrome-border: #222225;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -8px rgb(0 0 0 / 0.7);
   --ring: #f47b20;
   color-scheme: dark;
