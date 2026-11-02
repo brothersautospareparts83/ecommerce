@@ -25,7 +25,7 @@ export function CartView() {
         {lines.map((l) => (
           <li key={l.productId} className="flex gap-4 p-4">
             <Link href={`/products/${l.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border">
-              <ProductImage src={l.imageUrl} alt={l.name} />
+              <ProductImage src={l.imageUrl} alt={l.name} eager />
             </Link>
             <div className="min-w-0 flex-1">
               <Link href={`/products/${l.slug}`} className="font-semibold hover:underline">{l.name}</Link>

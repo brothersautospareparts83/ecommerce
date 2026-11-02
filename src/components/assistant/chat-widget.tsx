@@ -29,7 +29,8 @@ export function ChatWidget() {
     end.current?.scrollIntoView({ block: "end" });
   }, [msgs, open, pending]);
 
-  if (pathname.startsWith("/admin")) return null;
+  // Not on admin pages, and not on cart or checkout where the round button would cover prices and totals.
+  if (pathname.startsWith("/admin") || pathname.startsWith("/cart") || pathname.startsWith("/checkout")) return null;
 
   const send = (q: string) => {
     const t = q.trim();

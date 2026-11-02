@@ -65,7 +65,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
         <div className="space-y-3 self-start">
           <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-border sm:aspect-square">
-            <ProductImage src={p.images[0]?.url ?? p.imageUrl} alt={p.name} />
+            <ProductImage src={p.images[0]?.url ?? p.imageUrl} alt={p.name} eager />
           </div>
           {p.images.length > 1 && (
             <ul className="grid grid-cols-4 gap-2">

@@ -13,10 +13,10 @@ export function ImagePlaceholder({ className, label = "No photo yet" }: { classN
 }
 
 /** Product photo. A plain <img> because photos come from many admin-approved sources. */
-export function ProductImage({ src, alt, className }: { src: string | null; alt: string; className?: string }) {
+export function ProductImage({ src, alt, className, eager = false }: { src: string | null; alt: string; className?: string; eager?: boolean }) {
   if (!src) return <ImagePlaceholder />;
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} loading="lazy" className={cn("h-full w-full bg-white object-contain", className)} />;
+  return <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} className={cn("h-full w-full bg-white object-contain", className)} />;
 }
 
 const classStyles: Record<Classification, string> = {
