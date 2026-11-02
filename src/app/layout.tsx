@@ -10,7 +10,7 @@ import { ChatWidget } from "@/components/assistant/chat-widget";
 import { LanguageProvider } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], display: "swap" });
+const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], style: ["italic"], display: "swap" });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -27,7 +27,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-screen pb-16 antialiased lg:pb-0">
         <LanguageProvider>
           <CartProvider>
-            <Header />
+            <Suspense fallback={<div className="h-[116px] bg-chrome lg:h-[64px]" />}>
+              <Header />
+            </Suspense>
             <main id="main">{children}</main>
             <Footer />
             <Suspense fallback={null}>

@@ -50,3 +50,6 @@ imports/
 *.xlsx
 *.xls
 screenshots/
+
+.vercel
+.env*

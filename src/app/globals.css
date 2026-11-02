@@ -3,28 +3,28 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Design system "Showroom": warm off-white page, white cards, near-black ink, one orange accent
- * taken from the logo. Phones first. A single light theme and no decorative motion.
+ * Design system from the approved mockups: black header and footer, white cards on light grey, orange
+ * accent (#F47B20), WhatsApp green, silver. Phones first. A single theme and no decorative motion.
  */
 :root {
-  --bg: #f6f1e7;
-  --surface: #fffdf8;
-  --surface-2: #ece4d3;
-  --fg: #14201a;
-  --muted: #5d6a62;
-  --border: #ddd3bd;
-  --accent: #1c3d2e;
-  --accent-fg: #f6f1e7;
-  --accent-text: #1c3d2e; /* orange readable as text on light */
-  --accent-soft: #e2ece5;
-  --hero-bg: #12281f;
+  --bg: #f4f4f4;
+  --surface: #ffffff;
+  --surface-2: #ededed;
+  --fg: #0a0a0b;
+  --muted: #5b5b61;
+  --border: #e3e3e3;
+  --accent: #f47b20;
+  --accent-fg: #ffffff;
+  --accent-text: #c2410c; /* orange readable as text on light */
+  --accent-soft: #fff1e6;
+  --hero-bg: #0a0a0b;
   --hero-fg: #ffffff;
-  --chrome-bg: #fffdf8;
-  --chrome-fg: #14201a;
-  --chrome-muted: #5d6a62;
-  --chrome-border: #ddd3bd;
+  --chrome-bg: #0a0a0b;
+  --chrome-fg: #ffffff;
+  --chrome-muted: #c4c4c8;
+  --chrome-border: #26262a;
   --shadow: 0 1px 2px rgb(22 20 15 / 0.04), 0 8px 24px -12px rgb(22 20 15 / 0.14);
-  --ring: #1c3d2e;
+  --ring: #c2410c;
   color-scheme: light;
 }
 
@@ -47,8 +47,10 @@
   --color-chrome-border: var(--chrome-border);
   --shadow-card: var(--shadow);
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
   --color-gold: #d9b46a;
+  --color-notice: #fff3d6;
 }
 
 html {
@@ -66,9 +68,14 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Italic serif used for the tagline, as in the approved mockups */
+.tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
 }
 
 :focus-visible {

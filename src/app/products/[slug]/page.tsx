@@ -100,8 +100,8 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
               </ul>
             </div>
           ) : (
-            <div className="mt-6 flex items-start gap-3 rounded-2xl bg-surface-2 p-4 text-sm">
-              <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
+            <div className="mt-6 flex items-start gap-3 rounded-2xl bg-notice p-4 text-sm">
+              <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <p className="text-muted">
                 <span className="font-semibold text-fg"><T en="Check fitment before you buy." sw="Hakiki inafaa kabla ya kununua." /></span> <T en="We only list a vehicle as compatible once it is verified. Send us your vehicle details or chassis number and we will confirm." sw="Tunaorodhesha gari kama linafaa baada ya kuthibitishwa tu. Tutumie taarifa za gari lako au chassis number nasi tutathibitisha." />
               </p>

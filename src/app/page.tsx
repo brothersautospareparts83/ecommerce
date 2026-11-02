@@ -9,8 +9,7 @@ import { categories } from "@/lib/categories";
 import { T } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-const featuredSlugs = ["brake-systems", "engine-components", "suspension-steering", "oil-filters", "electrical-components", "cooling-systems"];
-const quick = ["Brake pads", "Oil filter", "Shock absorber", "Spark plug", "Wheel bearing"];
+const featuredSlugs = ["engine-components", "brake-systems", "suspension-steering", "electrical-components", "cooling-systems", "oil-filters"];
 
 const trust = [
   { icon: Truck, en: "Delivery or pickup", sw: "Usafirishaji au kuchukua" },
@@ -57,93 +56,81 @@ function SectionTitle({ children, href, link }: { children: React.ReactNode; hre
 
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-6xl space-y-10 px-4 pb-6 pt-5 sm:space-y-14 sm:pt-8">
-      {/* Opening: one clear promise, quick searches, two actions */}
-      <section>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent-text">
-          <T en="Kariakoo, Dar es Salaam" sw="Kariakoo, Dar es Salaam" />
-        </p>
-        <h1 className="max-w-xl text-[1.9rem] font-extrabold leading-[1.1] sm:text-5xl">
-          <T en="The right spare part for your car or motorcycle." sw="Kipuri sahihi cha gari au pikipiki yako." />
-        </h1>
-        <p className="mt-3 max-w-lg text-[15px] text-muted sm:text-base">
-          <T en="Over 1,500 parts. Send your order on WhatsApp and we confirm the fit with your chassis number." sw="Zaidi ya vipuri 1,500. Tuma oda yako kwa WhatsApp na tunathibitisha inafaa kwa chassis number yako." />
-        </p>
-        <ul className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
-          {quick.map((q) => (
-            <li key={q} className="shrink-0">
-              <Link href={`/shop?q=${encodeURIComponent(q)}`} className="block rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium">
-                {q}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <LinkButton href="/shop" size="sm" className="rounded-full px-4"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
-          <WhatsAppButton size="sm" />
+    <>
+      {/* Hero: light panel with orange slashes and the car, as in the approved design */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#e9e9e9]">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-0 h-full w-28 -skew-x-[22deg] bg-accent/90 lg:w-48" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-2 top-0 h-full w-6 -skew-x-[22deg] bg-[#0a0a0b] lg:w-10" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-2 px-4 pt-6 lg:grid-cols-2 lg:pt-12">
+          <div className="pb-2 lg:pb-12">
+            <h1 className="max-w-[16rem] text-[1.7rem] font-extrabold leading-[1.12] sm:max-w-md sm:text-4xl lg:max-w-lg lg:text-5xl">
+              <T en="The right spare part for your car or motorcycle." sw="Kipuri sahihi cha gari au pikipiki yako." />
+            </h1>
+            <p className="tagline mt-2 text-sm text-muted sm:text-base">Quality Parts Keep You Moving</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <LinkButton href="/shop" size="sm" className="px-4"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+              <WhatsAppButton size="sm" />
+            </div>
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply lg:w-full" />
         </div>
-        <ul className="mt-6 grid grid-cols-3 gap-2">
+      </section>
+
+      <div className="mx-auto max-w-6xl space-y-9 px-4 pb-6 sm:space-y-12">
+        {/* Three promises on a white card that overlaps the hero */}
+        <ul className="relative z-10 -mt-3 grid grid-cols-3 gap-1 rounded-2xl bg-surface p-3 shadow-card">
           {trust.map(({ icon: Icon, en, sw }) => (
-            <li key={en} className="flex flex-col items-center gap-1.5 rounded-2xl bg-surface-2 px-2 py-3 text-center text-xs font-semibold leading-tight sm:flex-row sm:justify-center sm:gap-2 sm:text-sm">
-              <Icon className="h-5 w-5 text-accent-text" aria-hidden="true" />
+            <li key={en} className="flex flex-col items-center gap-1.5 px-1 py-1 text-center text-[11px] font-semibold leading-tight sm:flex-row sm:justify-center sm:gap-3 sm:text-sm">
+              <Icon className="h-7 w-7 text-accent" strokeWidth={1.6} aria-hidden="true" />
               <T en={en} sw={sw} />
             </li>
           ))}
         </ul>
-      </section>
 
-      <section>
-        <SectionTitle href="/categories" link={<T en="All" sw="Zote" />}><T en="Shop by category" sw="Nunua kwa kundi" /></SectionTitle>
-        <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-          {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
-            <li key={slug}>
-              <Link href={`/categories/${slug}`} className="flex h-full flex-col gap-3 rounded-2xl border border-border bg-surface p-4 shadow-card">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent-text"><Icon className="h-5 w-5" aria-hidden="true" /></span>
-                <span className="text-[15px] font-semibold leading-snug">{name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section>
+          <SectionTitle href="/categories" link={<T en="See all" sw="Tazama zote" />}><T en="Shop by category" sw="Nunua kwa kundi" /></SectionTitle>
+          <ul className="grid grid-cols-3 gap-2.5 lg:grid-cols-6">
+            {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
+              <li key={slug}>
+                <Link href={`/categories/${slug}`} className="flex h-full flex-col items-center gap-2 rounded-2xl border border-border bg-surface px-2 py-4 text-center shadow-card">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent"><Icon className="h-6 w-6" aria-hidden="true" /></span>
+                  <span className="text-xs font-semibold leading-snug sm:text-sm">{name.replace(" Components", "").replace(" Systems", "")}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <section>
-        <SectionTitle href="/shop" link={<T en="View all" sw="Tazama zote" />}><T en="Popular parts" sw="Vipuri maarufu" /></SectionTitle>
-        <Suspense fallback={null}>
-          <PopularParts />
-        </Suspense>
-      </section>
+        <section>
+          <SectionTitle href="/shop" link={<T en="View all" sw="Tazama zote" />}><T en="Popular parts" sw="Vipuri maarufu" /></SectionTitle>
+          <Suspense fallback={null}>
+            <PopularParts />
+          </Suspense>
+        </section>
 
-      {/* The one dark band on the page */}
-      <section className="rounded-3xl bg-hero px-5 py-8 text-hero-fg sm:px-10 sm:py-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold"><T en="Genuine · OEM · Aftermarket" sw="Halisi · OEM · Aftermarket" /></p>
-        <h2 className="mt-3 max-w-lg text-2xl font-bold sm:text-4xl"><T en="Honest advice on every part." sw="Ushauri wa kweli kwa kila kipuri." /></h2>
-        <p className="mt-3 max-w-lg text-[15px] text-white/70">
-          <T en="We tell you what you are buying, confirm the fit with your chassis number, and send a real photo of your part before delivery." sw="Tunakuambia unachonunua, tunathibitisha inafaa kwa chassis number yako, na kukutumia picha halisi ya kipuri kabla ya kukufikishia." />
-        </p>
-        <LinkButton href="/finder?mode=vin" size="sm" className="mt-5 rounded-full bg-gold px-4 text-[#12281f]"><T en="Find parts by chassis" sw="Tafuta kwa chassis" /></LinkButton>
-      </section>
+        <section>
+          <SectionTitle><T en="How ordering works" sw="Jinsi ya kuagiza" /></SectionTitle>
+          <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map(({ icon: Icon, en, sw, textEn, textSw }, i) => (
+              <li key={en} className="flex gap-4 rounded-2xl border border-border bg-surface p-4 sm:flex-col">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-fg">{i + 1}</span>
+                <div>
+                  <h3 className="flex items-center gap-2 font-bold"><Icon className="hidden h-4 w-4 text-accent sm:block" aria-hidden="true" /><T en={en} sw={sw} /></h3>
+                  <p className="mt-1 text-sm text-muted"><T en={textEn} sw={textSw} /></p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-      <section>
-        <SectionTitle><T en="How ordering works" sw="Jinsi ya kuagiza" /></SectionTitle>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map(({ icon: Icon, en, sw, textEn, textSw }, i) => (
-            <li key={en} className="flex gap-4 rounded-2xl border border-border bg-surface p-4 sm:flex-col">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-fg">{i + 1}</span>
-              <div>
-                <h3 className="flex items-center gap-2 font-bold"><Icon className="hidden h-4 w-4 text-accent-text sm:block" aria-hidden="true" /><T en={en} sw={sw} /></h3>
-                <p className="mt-1 text-sm text-muted"><T en={textEn} sw={textSw} /></p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-8">
-        <h2 className="text-xl font-bold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
-        <p className="mt-1 text-sm text-muted"><T en="Send the part name, its number or a photo. We reply on WhatsApp." sw="Tuma jina la kipuri, namba yake au picha. Tunajibu kwa WhatsApp." /></p>
-        <p className="mt-3 font-semibold">{site.phones.join("  ·  ")}</p>
-        <div className="mt-4"><WhatsAppButton size="sm" /></div>
-      </section>
-    </div>
+        <section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8">
+          <h2 className="text-xl font-bold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
+          <p className="mt-1 text-sm text-muted"><T en="Send the part name, its number or a photo. We reply on WhatsApp." sw="Tuma jina la kipuri, namba yake au picha. Tunajibu kwa WhatsApp." /></p>
+          <p className="mt-3 font-semibold">{site.phones.join("  ·  ")}</p>
+          <div className="mt-4"><WhatsAppButton size="sm" /></div>
+        </section>
+      </div>
+    </>
   );
 }

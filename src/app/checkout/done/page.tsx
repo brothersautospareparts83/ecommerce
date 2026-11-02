@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { T } from "@/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { ClearCartOnce } from "@/components/cart/order-done";
 import { asPublic } from "@/lib/db";
@@ -49,7 +50,7 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
               <T en="Send order on WhatsApp" sw="Tuma oda kwa WhatsApp" />
             </LinkButton>
           </div>
-          <div className="mt-4 rounded-3xl border border-border bg-surface p-5 text-sm">
+          <div className="mt-4 rounded-2xl border border-border bg-surface p-5 text-sm">
             <p><T en="Your tracking code:" sw="Code yako ya kufuatilia:" /> <span className="font-bold">{code}</span></p>
             <p className="mt-1 text-muted">Save it. You need the order number and this code to follow your order and approve the photo of your part.</p>
             <Link href={`/orders/track?ref=${ref}&code=${code}`} className="mt-2 inline-block font-semibold text-accent-text hover:underline"><T en="Track this order" sw="Fuatilia oda hii" /></Link>
@@ -64,6 +65,7 @@ export default function DonePage(props: PageProps<"/checkout/done">) {
   return (
     <div className="mx-auto max-w-xl px-4 pb-8 pt-8 text-center sm:pt-12">
       <ClearCartOnce />
+      <CheckCircle2 className="mx-auto mb-3 h-16 w-16 text-[#1fa855]" aria-hidden="true" />
       <h1 className="text-3xl font-extrabold"><T en="Thank you, your order is saved" sw="Asante, oda yako imehifadhiwa" /></h1>
       <Suspense fallback={null}>
         <Receipt searchParams={props.searchParams} />

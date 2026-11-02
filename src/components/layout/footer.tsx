@@ -1,39 +1,30 @@
-﻿import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
-import { TL } from "@/lib/i18n";
-import { site, toIntl } from "@/lib/site";
+import Link from "next/link";
+import { AtSign, MapPin, MessageCircle, Phone } from "lucide-react";
+import { site, toIntl, whatsappUrl } from "@/lib/site";
 
-const links = [
-  { href: "/shop", label: "Shop" },
-  { href: "/categories", label: "Categories" },
-  { href: "/parts-guide", label: "Parts Guide" },
-  { href: "/orders/track", label: "Track Order" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
-];
-
+/** Black footer bar as in the approved design: phones, WhatsApp, socials, tagline, location. */
 export function Footer() {
   return (
-    <footer className="mt-10 border-t border-border bg-surface-2">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="space-y-3">
-          <p className="text-lg font-extrabold italic tracking-wide">BROTHERS <span className="text-accent-text">AUTO SPARE PARTS</span></p>
-          <p className="flex items-start gap-2 text-sm text-muted"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {site.location}</p>
-        </div>
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-          {links.map((l) => (
-            <li key={l.href}><Link href={l.href} className="text-muted hover:text-fg"><TL k={l.label} /></Link></li>
+    <footer className="mt-10 bg-chrome text-chrome-fg">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 text-sm lg:flex-row lg:items-center lg:justify-between">
+        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 font-semibold">
+          {site.phones.map((p, i) => (
+            <li key={p}>
+              <a href={`tel:+${toIntl(p)}`} className="flex items-center gap-2">
+                {i === 0 ? <Phone className="h-4 w-4 text-white" /> : <MessageCircle className="h-4 w-4 text-white" />} {p}
+              </a>
+            </li>
           ))}
+          <li>
+            <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2"><AtSign className="h-4 w-4" /> @{site.instagram.handle.replace(/^@/, "")}</a>
+          </li>
         </ul>
-        <ul className="space-y-2 text-sm">
-          {site.phones.map((p) => (
-            <li key={p}><a href={`tel:+${toIntl(p)}`} className="flex items-center gap-2 font-semibold"><Phone className="h-4 w-4 text-accent-text" /> {p}</a></li>
-          ))}
-        </ul>
+        <p className="tagline text-lg text-accent">Quality Parts Keep You Moving</p>
+        <p className="flex items-center gap-2 text-chrome-muted"><MapPin className="h-4 w-4 text-white" /> {site.location}</p>
       </div>
-      <div className="border-t border-border">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-muted">
-          © {site.name}. Prices in Tanzanian Shillings (TSh). <Link href="/privacy" className="underline">Privacy</Link> · <Link href="/terms" className="underline">Terms</Link>
+      <div className="border-t border-chrome-border">
+        <p className="mx-auto max-w-6xl px-4 py-3 text-xs text-chrome-muted">
+          © {site.name}. Prices in Tanzanian Shillings (TSh). <Link href="/privacy" className="underline">Privacy</Link> · <Link href="/terms" className="underline">Terms</Link> · <a href={whatsappUrl()} className="underline">WhatsApp</a>
         </p>
       </div>
     </footer>
