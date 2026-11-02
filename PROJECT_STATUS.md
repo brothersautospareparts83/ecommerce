@@ -100,3 +100,12 @@ Supabase URL/anon/service-role keys; AI provider key; WhatsApp business number; 
 ## Next actions
 1. Promote the owner account (set-role script), then Phase 4: product CRUD, categories/brands, SKU and OEM numbers, stock movements UI, search/filter/sort.
 2. Owner confirms WhatsApp number and photography plan.
+
+## Storefront redesign "Showroom" - 2026-11-02
+- The old UI was removed and rebuilt: warm off-white page, white rounded cards, near-black ink, one orange accent (tokens in `src/app/globals.css`), one light theme, no decorative motion. Phones first (375px): sticky header with search, bottom bar (Home, Shop, Guide, Cart, Contact), floating chat button above it.
+- Rebuilt pages: home, shop, product, cart, checkout, order received, order tracking, about, contact, categories, parts guide, account and sign-in. Admin keeps its layout with the new tokens and shapes.
+- Swahili added for the product, shop, cart, checkout, order received, tracking and parts guide pages (product names stay English).
+- Design source: Figma file i9Pppw3jr2rcDkYsKJKJDl (mobile home). A full test order (BAS-261102-00023) was placed on a phone-size screen and cancelled; stock was not touched.
+- Tests: all pass (catalogue tests now hide real products inside their rolled-back transaction; the photo rule test follows migration 0014).
+- Deploy note: a Suspense boundary around `BottomNav` is required, otherwise `next build` fails. Always check `vercel ls` after a push.
+- Still open: Gemini key for the AI chat, categories for 409 uncategorised products, prices for 27 products, real photos, daily check of /admin/orders, revoke the old Cloudflare token.
