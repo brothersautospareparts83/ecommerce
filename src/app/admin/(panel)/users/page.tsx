@@ -24,7 +24,7 @@ async function Users() {
       <p className="mt-1 text-sm text-muted">
         Admins can move people between Customer and Staff. Only the Owner can grant Admin or Owner. You cannot change your own role. Every change is recorded in the audit log.
       </p>
-      <div className="mt-6 overflow-x-auto rounded-xl border border-border bg-surface">
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-surface">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border text-xs uppercase tracking-wider text-muted">
             <tr><th className="px-4 py-3">User</th><th className="px-4 py-3">Type</th><th className="px-4 py-3">Joined</th><th className="px-4 py-3">Role</th></tr>

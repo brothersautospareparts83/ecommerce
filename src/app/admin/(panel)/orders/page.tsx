@@ -34,7 +34,7 @@ export default async function OrdersPage({ searchParams }: PageProps<"/admin/ord
         ))}
       </nav>
       {rows.length === 0 ? (
-        <p className="rounded-xl border border-border bg-surface p-6 text-muted">No orders yet.</p>
+        <p className="rounded-2xl border border-border bg-surface p-6 text-muted">No orders yet.</p>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-left text-sm">

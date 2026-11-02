@@ -28,7 +28,7 @@ async function Catalog() {
         <h2 className="mb-3 font-display text-lg font-bold">Categories</h2>
         <ul className="space-y-3">
           {cats.map((c) => (
-            <li key={c.id} className="rounded-xl border border-border bg-surface p-4">
+            <li key={c.id} className="rounded-2xl border border-border bg-surface p-4">
               <ActionForm action={saveCategory} submitLabel="Save" variant="secondary" className="grid items-end gap-3 sm:grid-cols-[2fr_2fr_90px_auto_auto]">
                 <input type="hidden" name="id" value={c.id} />
                 <Field label={`Name (${c.n} products)`} htmlFor={`en-${c.id}`}><input id={`en-${c.id}`} name="nameEn" defaultValue={c.name_en} required className={adminInput} /></Field>
@@ -43,13 +43,13 @@ async function Catalog() {
 
       <section>
         <h2 className="mb-3 font-display text-lg font-bold">Brands</h2>
-        <ActionForm action={addBrand} submitLabel="Add brand" className="mb-4 grid items-end gap-3 rounded-xl border border-border bg-surface p-4 sm:grid-cols-[2fr_1.5fr_auto]">
+        <ActionForm action={addBrand} submitLabel="Add brand" className="mb-4 grid items-end gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-[2fr_1.5fr_auto]">
           <Field label="New brand name" htmlFor="brand-name"><input id="brand-name" name="name" required minLength={2} className={adminInput} /></Field>
           <Field label="Country (optional)" htmlFor="brand-country"><input id="brand-country" name="country" className={adminInput} /></Field>
         </ActionForm>
         <ul className="space-y-3">
           {brands.map((b) => (
-            <li key={b.id} className="rounded-xl border border-border bg-surface p-4">
+            <li key={b.id} className="rounded-2xl border border-border bg-surface p-4">
               <ActionForm action={saveBrand} submitLabel="Save" variant="secondary" className="grid items-end gap-3 sm:grid-cols-[3fr_auto_auto]">
                 <input type="hidden" name="id" value={b.id} />
                 <Field label={`Name (${b.n} products)`} htmlFor={`b-${b.id}`}><input id={`b-${b.id}`} name="name" defaultValue={b.name} required className={adminInput} /></Field>

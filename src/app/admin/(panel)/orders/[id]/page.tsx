@@ -39,7 +39,7 @@ export default async function OrderPage({ params }: PageProps<"/admin/orders/[id
         <p className="text-sm text-muted">Placed {formatDate(o.created_at)} · {orderStatusLabel[o.status]} · {o.payment_status === "paid" ? "Paid" : "Not paid"}</p>
       </div>
 
-      <section className="grid gap-4 rounded-xl border border-border bg-surface p-5 sm:grid-cols-2">
+      <section className="grid gap-4 rounded-2xl border border-border bg-surface p-5 sm:grid-cols-2">
         <div>
           <h2 className="font-semibold">Customer</h2>
           <p>{o.customer_name}</p>
@@ -71,7 +71,7 @@ export default async function OrderPage({ params }: PageProps<"/admin/orders/[id
       </section>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-5">
+        <section className="space-y-3 rounded-2xl border border-border bg-surface p-5">
           <h2 className="font-semibold">Status</h2>
           <ActionForm action={setOrderStatus} submitLabel="Update status">
             <input type="hidden" name="orderId" value={o.id} />
@@ -88,7 +88,7 @@ export default async function OrderPage({ params }: PageProps<"/admin/orders/[id
           )}
         </section>
 
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-5">
+        <section className="space-y-3 rounded-2xl border border-border bg-surface p-5">
           <h2 className="font-semibold">Payment</h2>
           {o.payment_status === "paid" ? (
             <p className="text-sm">Payment received and recorded.</p>
@@ -105,7 +105,7 @@ export default async function OrderPage({ params }: PageProps<"/admin/orders/[id
         </section>
       </div>
 
-      <section className="space-y-4 rounded-xl border border-border bg-surface p-5">
+      <section className="space-y-4 rounded-2xl border border-border bg-surface p-5">
         <h2 className="font-semibold">Photo of the exact part (customer approval)</h2>
         <p className="text-sm text-muted">Take a real photo of the part you will deliver, put it online, and paste its https address here. The customer sees it with their link and approves or rejects it.</p>
         <ActionForm action={addPhotoCheck} submitLabel="Send photo to customer">
@@ -130,7 +130,7 @@ export default async function OrderPage({ params }: PageProps<"/admin/orders/[id
         )}
       </section>
 
-      <section className="rounded-xl border border-border bg-surface p-5">
+      <section className="rounded-2xl border border-border bg-surface p-5">
         <h2 className="font-semibold">History</h2>
         <ul className="mt-2 space-y-1 text-sm text-muted">
           {history.map((h, i) => <li key={i}>{formatDate(h.created_at)}: {h.from_status ? `${orderStatusLabel[h.from_status]} → ` : ""}{orderStatusLabel[h.to_status]}</li>)}

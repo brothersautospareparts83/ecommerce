@@ -13,7 +13,7 @@ import { addImage, addPartNumber, adjustStock, removePartNumber, removeProduct, 
 
 export const metadata: Metadata = { title: "Edit product (admin)" };
 
-const card = "rounded-xl border border-border bg-surface p-5";
+const card = "rounded-2xl border border-border bg-surface p-5";
 const h2 = "mb-3 font-display text-lg font-bold";
 
 async function Editor({ params }: Pick<PageProps<"/admin/products/[id]">, "params">) {

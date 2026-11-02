@@ -22,7 +22,7 @@ async function Logs() {
       {rows.length === 0 ? (
         <p className="mt-6 rounded-xl border border-dashed border-border p-8 text-center text-muted">No actions recorded yet.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-xl border border-border bg-surface">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-surface">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-border text-xs uppercase tracking-wider text-muted">
               <tr><th className="px-4 py-3">When</th><th className="px-4 py-3">Who</th><th className="px-4 py-3">Action</th><th className="px-4 py-3">Target</th><th className="px-4 py-3">Change</th></tr>

@@ -44,7 +44,7 @@ async function Stats() {
       <p className="mt-1 text-sm text-muted">Live figures from the database. Best-seller rankings arrive with the analytics phase.</p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map(([label, value, note]) => (
-          <div key={label} className="rounded-xl border border-border bg-surface p-5">
+          <div key={label} className="rounded-2xl border border-border bg-surface p-5">
             <p className="text-xs font-bold uppercase tracking-widest text-muted">{label}</p>
             <p className="mt-2 font-display text-3xl font-extrabold">{value}</p>
             {note && <p className="mt-1 text-xs text-muted">{note}</p>}

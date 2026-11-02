@@ -78,7 +78,7 @@ async function List({ searchParams }: Pick<PageProps<"/admin/products">, "search
         <LinkButton href="/admin/products/new">+ New product</LinkButton>
       </div>
 
-      <form action="/admin/products" className="mt-5 grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-3 lg:grid-cols-[2fr_1fr_1fr_1.4fr_auto]">
+      <form action="/admin/products" className="mt-5 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-surface p-3 lg:grid-cols-[2fr_1fr_1fr_1.4fr_auto]">
         <input name="q" defaultValue={q} placeholder="Search name, SKU or part number" aria-label="Search" className={`${field} col-span-2 lg:col-span-1`} />
         <select name="status" defaultValue={status} aria-label="Status" className={field}>
           <option value="">All statuses</option>
@@ -100,7 +100,7 @@ async function List({ searchParams }: Pick<PageProps<"/admin/products">, "search
       </form>
 
       <p className="mt-4 text-sm text-muted"><span className="font-semibold text-fg">{total}</span> products</p>
-      <div className="mt-2 overflow-x-auto rounded-xl border border-border bg-surface">
+      <div className="mt-2 overflow-x-auto rounded-2xl border border-border bg-surface">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border text-xs uppercase tracking-wider text-muted">
             <tr>

@@ -66,7 +66,7 @@ async function Inventory({ searchParams }: Pick<PageProps<"/admin/inventory">, "
           ["Stock value (at buying price)", formatTZS(Number(s.valuation)), s.uncosted > 0 ? `${s.uncosted} items in stock have no buying price and are not counted` : undefined],
           ["Out of stock", String(s.out_count), `${s.low_count} at or below minimum level`],
         ].map(([label, value, note]) => (
-          <div key={label} className="rounded-xl border border-border bg-surface p-5">
+          <div key={label} className="rounded-2xl border border-border bg-surface p-5">
             <p className="text-xs font-bold uppercase tracking-widest text-muted">{label}</p>
             <p className="mt-2 font-display text-2xl font-extrabold">{value}</p>
             {note && <p className="mt-1 text-xs text-muted">{note}</p>}
@@ -75,7 +75,7 @@ async function Inventory({ searchParams }: Pick<PageProps<"/admin/inventory">, "
       </div>
 
       <div className="flex flex-wrap gap-2">{tab("all", "All")}{tab("low", "Low stock")}{tab("out", "Out of stock")}</div>
-      <div className="overflow-x-auto rounded-xl border border-border bg-surface">
+      <div className="overflow-x-auto rounded-2xl border border-border bg-surface">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border text-xs uppercase tracking-wider text-muted">
             <tr><th className="px-3 py-3">Product</th><th className="px-3 py-3">Location</th><th className="px-3 py-3 text-right">On hand</th><th className="px-3 py-3 text-right">Minimum</th><th className="px-3 py-3 text-right">Value</th></tr>
@@ -104,7 +104,7 @@ async function Inventory({ searchParams }: Pick<PageProps<"/admin/inventory">, "
 
       <section>
         <h2 className="mb-2 font-display text-lg font-bold">Recent stock changes</h2>
-        <div className="overflow-x-auto rounded-xl border border-border bg-surface">
+        <div className="overflow-x-auto rounded-2xl border border-border bg-surface">
           <table className="w-full text-left text-xs">
             <tbody className="divide-y divide-border">
               {moves.map((m, i) => (
