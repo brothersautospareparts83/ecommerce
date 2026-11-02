@@ -223,10 +223,10 @@ describe("product photography rules", () => {
     await client.query("delete from product_images where id=$1", [r.rows[0].id]);
   });
 
-  it("rejecting the last approved photo demotes a published product", async () => {
+  it("rejecting the last approved photo keeps a published product published (owner decision, migration 0014)", async () => {
     await owner();
     await client.query("update product_images set verification_status='rejected' where product_id=$1", [published]);
-    expect((await one("select status from products where id=$1", [published])).status).toBe("image_required");
+    expect((await one("select status from products where id=$1", [published])).status).toBe("published");
   });
 
   it("publishes once a real approved photo exists", async () => {

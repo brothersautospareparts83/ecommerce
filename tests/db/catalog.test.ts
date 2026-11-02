@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from
 import pg from "pg";
 import { getProductBySlug, listCategories, listProducts, expandSearchTerms, type ProductFilters } from "@/lib/catalog/queries";
 
-// Runs against the real database inside a transaction that is rolled back after every test.
+// Runs against the real database inside a transaction that is rolled back after every test (nothing is kept).
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
 beforeAll(() => client.connect());
 afterAll(() => client.end());
@@ -51,6 +51,8 @@ beforeEach(async () => {
   await client.query("insert into vehicle_compatibility (product_id, vehicle_id, verified, verified_at) values ($1, $2, true, now())", [a, veh1]);
   await client.query("insert into vehicle_compatibility (product_id, vehicle_id, verified) values ($1, $2, false)", [a, veh2]);
 
+  // The live catalogue is not empty: hide every real product for this (rolled back) transaction so the fixtures are the whole catalogue.
+  await client.query("update products set status = 'draft' where status = 'published' and sku not like 'T-%'");
   await client.query("set local role app_customer");
 });
 afterEach(() => client.query("rollback"));
