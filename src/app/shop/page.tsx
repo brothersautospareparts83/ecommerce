@@ -12,6 +12,7 @@ export const metadata: Metadata = { title: "Shop All Products" };
 
 const sorts: { value: SortKey; label: string }[] = [
   { value: "relevance", label: "Best match" },
+  { value: "mixed", label: "Mixed" },
   { value: "newest", label: "Newest" },
   { value: "price-asc", label: "Price: low to high" },
   { value: "price-desc", label: "Price: high to low" },
@@ -33,7 +34,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
   const category = cats.some((c) => c.slug === one(sp.category)) ? one(sp.category) : "";
   const brand = brands.some((b) => b.slug === one(sp.brand)) ? one(sp.brand) : "";
   const classification = classes.some((c) => c.value === one(sp.classification)) ? one(sp.classification) : "";
-  const sort = (sorts.some((s) => s.value === one(sp.sort)) ? one(sp.sort) : q ? "relevance" : "newest") as SortKey;
+  const sort = (sorts.some((s) => s.value === one(sp.sort)) ? one(sp.sort) : q ? "relevance" : "mixed") as SortKey;
   const inStock = one(sp.stock) === "1";
   const page = Math.max(1, parseInt(one(sp.page), 10) || 1);
 

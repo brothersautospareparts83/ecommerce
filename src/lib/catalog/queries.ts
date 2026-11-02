@@ -33,7 +33,7 @@ export interface ProductSummary {
   inStock: boolean;
 }
 
-export type SortKey = "relevance" | "newest" | "price-asc" | "price-desc" | "name";
+export type SortKey = "relevance" | "mixed" | "newest" | "price-asc" | "price-desc" | "name";
 
 export interface ProductFilters {
   q?: string;
@@ -79,6 +79,9 @@ export async function expandSearchTerms(db: Queryable, rawQuery: string): Promis
 }
 
 const SORTS: Record<Exclude<SortKey, "relevance">, string> = {
+  // A different but stable shuffle each day (Dar es Salaam time), so different kinds of parts are mixed together
+  // instead of grouped by how they were imported, and paging stays consistent within the day.
+  mixed: "md5(p.id::text || to_char(now() at time zone 'Africa/Dar_es_Salaam', 'YYYYMMDD')), p.name",
   newest: "p.published_at desc nulls last, p.name",
   "price-asc": "p.price_tzs asc, p.name",
   "price-desc": "p.price_tzs desc, p.name",

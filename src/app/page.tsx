@@ -31,8 +31,13 @@ const why = [
 
 async function LatestSection() {
   // Parts that have a picture and a price look best on the home page.
-  const { items } = await publicProducts({ sort: "newest", pageSize: 40 });
-  const shown = items.filter((p) => p.imageUrl && p.priceTzs > 0).slice(0, 8);
+  const { items } = await publicProducts({ sort: "mixed", pageSize: 48 });
+  // One of each kind of part, so the row shows variety instead of eight of the same thing.
+  const seen = new Set<string>();
+  const shown = items
+    .filter((p) => p.imageUrl && p.priceTzs > 0)
+    .filter((p) => (seen.has(p.name.toLowerCase()) ? false : (seen.add(p.name.toLowerCase()), true)))
+    .slice(0, 8);
   return <LatestProducts products={shown} />;
 }
 
