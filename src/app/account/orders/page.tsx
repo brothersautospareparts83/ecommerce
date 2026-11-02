@@ -22,13 +22,13 @@ async function Orders() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-extrabold">My orders</h1>
+      <h1 className="text-3xl font-extrabold">My orders</h1>
       {orders.length === 0 ? (
-        <p className="mt-6 rounded-xl border border-dashed border-border p-8 text-center text-muted">
+        <p className="mt-6 rounded-2xl border border-dashed border-border p-8 text-center text-muted">
           No orders yet. <Link href="/shop" className="font-semibold text-accent-text hover:underline">Browse parts</Link>
         </p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-xl border border-border bg-surface">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-surface shadow-card">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-border text-xs uppercase tracking-wider text-muted">
               <tr><th className="px-4 py-3">Order</th><th className="px-4 py-3">Date</th><th className="px-4 py-3">Items</th><th className="px-4 py-3">Status</th><th className="px-4 py-3 text-right">Total</th></tr>

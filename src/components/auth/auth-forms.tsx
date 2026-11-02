@@ -7,7 +7,7 @@ import { authClient } from "@/lib/auth/client";
 import { Button } from "@/components/ui/button";
 
 const inputCls =
-  "h-12 w-full rounded-lg border border-border bg-bg px-4 text-sm outline-none placeholder:text-muted focus:border-accent";
+  "h-12 w-full rounded-xl border border-border bg-bg px-4 text-sm outline-none placeholder:text-muted focus:border-accent";
 
 /** Only same-site paths are allowed as post-login destinations. */
 function safeRedirect(value: string | null, fallback: string) {
@@ -40,7 +40,7 @@ function Field({ label, id, ...props }: React.InputHTMLAttributes<HTMLInputEleme
 
 function ErrorMessage({ message }: { message: string | null }) {
   return message ? (
-    <p role="alert" className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-300">
+    <p role="alert" className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-300">
       {message}
     </p>
   ) : null;
@@ -126,7 +126,7 @@ export function RegisterForm() {
     }
   }
 
-  if (notice) return <p role="status" className="rounded-lg border border-border bg-surface-2 p-4 text-sm">{notice}</p>;
+  if (notice) return <p role="status" className="rounded-xl border border-border bg-surface-2 p-4 text-sm">{notice}</p>;
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -165,7 +165,7 @@ export function ForgotPasswordForm() {
     }
   }
 
-  if (sent) return <p role="status" className="rounded-lg border border-border bg-surface-2 p-4 text-sm">If an account exists for that email, a reset link is on its way.</p>;
+  if (sent) return <p role="status" className="rounded-xl border border-border bg-surface-2 p-4 text-sm">If an account exists for that email, a reset link is on its way.</p>;
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -184,8 +184,8 @@ export function ResetPasswordForm() {
   const [done, setDone] = useState(false);
   const [pending, setPending] = useState(false);
 
-  if (!token) return <p role="alert" className="rounded-lg border border-border bg-surface-2 p-4 text-sm">This reset link is missing or has expired. <Link href="/forgot-password" className="font-semibold text-accent-text hover:underline">Request a new one</Link>.</p>;
-  if (done) return <p role="status" className="rounded-lg border border-border bg-surface-2 p-4 text-sm">Password updated. <Link href="/login" className="font-semibold text-accent-text hover:underline">Sign in</Link>.</p>;
+  if (!token) return <p role="alert" className="rounded-xl border border-border bg-surface-2 p-4 text-sm">This reset link is missing or has expired. <Link href="/forgot-password" className="font-semibold text-accent-text hover:underline">Request a new one</Link>.</p>;
+  if (done) return <p role="status" className="rounded-xl border border-border bg-surface-2 p-4 text-sm">Password updated. <Link href="/login" className="font-semibold text-accent-text hover:underline">Sign in</Link>.</p>;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

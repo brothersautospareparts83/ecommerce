@@ -6,14 +6,14 @@ import { SignOutButton } from "@/components/auth/auth-forms";
 async function AccountShell({ children }: { children: React.ReactNode }) {
   await requireUser();
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 pb-6 pt-5 sm:pt-8">
       <nav aria-label="Account" className="mb-8 flex flex-wrap items-center gap-2 border-b border-border pb-4">
         {[
           { href: "/account", label: "Overview" },
           { href: "/account/orders", label: "Orders" },
           { href: "/account/profile", label: "Profile" },
         ].map((l) => (
-          <Link key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-semibold hover:bg-surface-2">
+          <Link key={l.href} href={l.href} className="rounded-xl px-3 py-2 text-sm font-semibold hover:bg-surface-2">
             {l.label}
           </Link>
         ))}

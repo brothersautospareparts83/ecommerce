@@ -48,8 +48,8 @@ async function Guide() {
               const f = found.get(p.match);
               const have = (f?.n ?? 0) > 0;
               return (
-                <article key={p.name} className="flex gap-3 rounded-xl border border-border bg-surface p-3">
-                  <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg border border-border bg-white">
+                <article key={p.name} className="flex gap-3 rounded-2xl border border-border bg-surface shadow-card p-3">
+                  <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-border bg-white">
                     {f?.img ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={f.img} alt={p.name} loading="lazy" className="h-full w-full object-contain" />
@@ -87,8 +87,8 @@ async function Guide() {
 
 export default function PartsGuidePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <h1 className="font-display text-2xl font-extrabold">Car parts guide</h1>
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
+      <h1 className="text-3xl font-extrabold">Car parts guide</h1>
       <p className="mt-2 max-w-2xl text-sm text-muted">
         The main parts of a car, grouped by system, and what each one does. This is general information about part types.
         Whether a part fits your exact vehicle depends on the make, model, year and chassis number, so send us your chassis number
@@ -104,7 +104,7 @@ export default function PartsGuidePage() {
           <Guide />
         </Suspense>
       </div>
-      <div className="mt-10 flex flex-col items-start gap-3 rounded-xl border border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-10 flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface shadow-card p-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm">Can&apos;t find your part, or not sure which one you need? Send us the part name, a photo or your chassis number.</p>
         <div className="flex gap-3">
           <WhatsAppButton />

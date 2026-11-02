@@ -16,10 +16,10 @@ async function Grid() {
           <Link
             key={slug}
             href={`/categories/${slug}`}
-            className="group rounded-xl border border-border bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-card"
+            className="group rounded-2xl border border-border bg-surface shadow-card p-5 "
           >
             {Icon && (
-              <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-surface-2 text-accent-text group-hover:bg-accent group-hover:text-accent-fg">
+              <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-2 text-accent-text group-hover:bg-accent group-hover:text-accent-fg">
                 <Icon className="h-6 w-6" />
               </span>
             )}
@@ -34,9 +34,9 @@ async function Grid() {
 
 export default function CategoriesPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <h1 className="font-display text-3xl font-extrabold">Product Categories</h1>
-      <Suspense fallback={<div className="mt-8 h-40 animate-pulse rounded-xl bg-surface-2" />}>
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
+      <h1 className="text-3xl font-extrabold">Product Categories</h1>
+      <Suspense fallback={<div className="mt-8 h-40 rounded-xl bg-surface-2" />}>
         <Grid />
       </Suspense>
     </div>

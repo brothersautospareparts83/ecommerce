@@ -20,17 +20,17 @@ async function Overview() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-display text-3xl font-extrabold">Hello{profile.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}</h1>
+        <h1 className="text-3xl font-extrabold">Hello{profile.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}</h1>
         <p className="mt-1 text-muted">{profile.email}</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-border bg-surface p-5">
+        <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
           <p className="text-xs font-bold uppercase tracking-widest text-muted">Account type</p>
           <p className="mt-1 font-display text-lg font-bold capitalize">{customer?.customer_type ?? "retail"}</p>
           <p className="text-xs text-muted">{roleLabel[profile.role]} access</p>
         </div>
-        <div className="rounded-xl border border-border bg-surface p-5">
+        <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
           <p className="text-xs font-bold uppercase tracking-widest text-muted">Phone</p>
           <p className="mt-1 font-display text-lg font-bold">{profile.phone ?? "Not added"}</p>
           <Link href="/account/profile" className="text-xs font-semibold text-accent-text hover:underline">Update profile</Link>
@@ -50,11 +50,11 @@ async function Overview() {
           <Link href="/account/orders" className="text-sm font-semibold text-accent-text hover:underline">View all</Link>
         </div>
         {orders.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-border p-8 text-center text-muted">
+          <div className="rounded-2xl border border-dashed border-border p-8 text-center text-muted">
             You have no orders yet. <Link href="/shop" className="font-semibold text-accent-text hover:underline">Browse parts</Link>
           </div>
         ) : (
-          <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
+          <ul className="divide-y divide-border rounded-2xl border border-border bg-surface shadow-card">
             {orders.map((o) => (
               <li key={o.reference} className="flex items-center justify-between gap-4 px-4 py-3 text-sm">
                 <span className="font-semibold">{o.reference}</span>

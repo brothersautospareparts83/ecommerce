@@ -4,14 +4,14 @@ import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { updateProfile, type ProfileFormState } from "./actions";
 
-const inputCls = "h-12 w-full rounded-lg border border-border bg-bg px-4 text-sm outline-none focus:border-accent";
+const inputCls = "h-12 w-full rounded-xl border border-border bg-bg px-4 text-sm outline-none focus:border-accent";
 
 export function ProfileForm({ fullName, phone, language, email }: { fullName: string; phone: string; language: string; email: string }) {
   const [state, action, pending] = useActionState<ProfileFormState, FormData>(updateProfile, { ok: false, message: "" });
   return (
     <form action={action} className="max-w-lg space-y-4">
       {state.message && (
-        <p role={state.ok ? "status" : "alert"} className={`rounded-lg border px-4 py-3 text-sm ${state.ok ? "border-emerald-500/40 bg-emerald-500/10" : "border-red-500/40 bg-red-500/10"}`}>
+        <p role={state.ok ? "status" : "alert"} className={`rounded-xl border px-4 py-3 text-sm ${state.ok ? "border-emerald-500/40 bg-emerald-500/10" : "border-red-500/40 bg-red-500/10"}`}>
           {state.message}
         </p>
       )}

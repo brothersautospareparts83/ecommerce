@@ -27,9 +27,9 @@ async function Content({ params, searchParams }: Pick<PageProps<"/categories/[sl
       <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
         <Link href="/categories" className="hover:text-fg">Categories</Link> / <span className="text-fg">{category.name}</span>
       </nav>
-      <h1 className="font-display text-3xl font-extrabold">{category.name}</h1>
+      <h1 className="text-3xl font-extrabold">{category.name}</h1>
       {result.items.length === 0 ? (
-        <div className="mt-8 rounded-xl border border-dashed border-border p-8 text-center">
+        <div className="mt-8 rounded-2xl border border-dashed border-border p-8 text-center">
           <p className="font-semibold">No products are listed online in this category yet.</p>
           <p className="mt-1 text-sm text-muted">We may still have it in the shop. Ask us on WhatsApp.</p>
           <div className="mt-4"><WhatsAppButton /></div>
@@ -54,8 +54,8 @@ async function Content({ params, searchParams }: Pick<PageProps<"/categories/[sl
 
 export default function CategoryPage(props: PageProps<"/categories/[slug]">) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-surface-2" />}>
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
+      <Suspense fallback={<div className="h-40 rounded-xl bg-surface-2" />}>
         <Content params={props.params} searchParams={props.searchParams} />
       </Suspense>
     </div>

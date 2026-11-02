@@ -30,25 +30,19 @@ const promises = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-surface-2 to-bg text-fg dark:bg-hero dark:from-hero dark:to-hero dark:text-hero-fg">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-24 w-[70%] -skew-y-[12deg] bg-gradient-to-l from-accent/70 via-accent/25 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
-          <p className="anim-fade-up text-xs font-bold uppercase tracking-[0.2em] text-accent"><T en="About us" sw="Kuhusu sisi" /></p>
-          <h1 className="anim-fade-up anim-d1 mt-3 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-5xl">
-            Brothers Auto <span className="text-accent">Spare Parts</span>
-          </h1>
-          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-            <T en={`${site.motto}. A spare parts shop in Kariakoo, Dar es Salaam, for cars and motorcycles.`} sw={`${site.motto}. Duka la vipuri vya magari na pikipiki, Kariakoo, Dar es Salaam.`} />
-          </p>
-          <div className="anim-fade-up anim-d3 mt-6 flex flex-wrap gap-3">
-            <LinkButton href="/shop" size="lg"><T en="Browse the parts" sw="Tazama vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
-            <WhatsAppButton />
-          </div>
+      <section className="mx-auto max-w-6xl px-4 pb-2 pt-5 sm:pt-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent-text"><T en="About us" sw="Kuhusu sisi" /></p>
+        <h1 className="mt-2 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">Brothers Auto Spare Parts</h1>
+        <p className="mt-3 max-w-2xl text-[15px] text-muted sm:text-base">
+          <T en={`${site.motto}. A spare parts shop in Kariakoo, Dar es Salaam, for cars and motorcycles.`} sw={`${site.motto}. Duka la vipuri vya magari na pikipiki, Kariakoo, Dar es Salaam.`} />
+        </p>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+          <LinkButton href="/shop" size="lg" className="rounded-full"><T en="Browse the parts" sw="Tazama vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+          <WhatsAppButton />
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:space-y-16 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-6xl space-y-10 px-4 py-8 sm:space-y-14">
         <Reveal>
           <section className="grid items-center gap-8 md:grid-cols-[1fr_260px]">
             <div className="space-y-4">
@@ -75,8 +69,8 @@ export default function AboutPage() {
             <h2 className="font-display text-xl font-extrabold sm:text-2xl"><T en="How ordering works" sw="Jinsi kuagiza kunavyofanya kazi" /></h2>
             <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {steps.map(({ icon: Icon, en, sw, enText, swText }, i) => (
-                <li key={en} className="rounded-xl border border-border bg-surface p-4">
-                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+                <li key={en} className="rounded-2xl border border-border bg-surface shadow-card p-4">
+                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent-text"><Icon className="h-5 w-5" aria-hidden="true" /></span>
                   <p className="text-xs font-bold text-accent-text">{i + 1}</p>
                   <h3 className="font-display text-sm font-bold"><T en={en} sw={sw} /></h3>
                   <p className="mt-1 text-xs leading-relaxed text-muted"><T en={enText} sw={swText} /></p>
@@ -91,7 +85,7 @@ export default function AboutPage() {
             <h2 className="font-display text-xl font-extrabold sm:text-2xl"><T en="What you can count on" sw="Unachoweza kutegemea" /></h2>
             <ul className="mt-5 grid gap-3 md:grid-cols-3">
               {promises.map(({ en, sw, enText, swText }) => (
-                <li key={en} className="rounded-xl border border-border bg-surface p-5">
+                <li key={en} className="rounded-2xl border border-border bg-surface shadow-card p-5">
                   <BadgeCheck className="mb-3 h-6 w-6 text-accent-text" aria-hidden="true" />
                   <h3 className="font-display font-bold"><T en={en} sw={sw} /></h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted"><T en={enText} sw={swText} /></p>
