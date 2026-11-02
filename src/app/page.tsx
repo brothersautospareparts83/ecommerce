@@ -55,6 +55,11 @@ export default function HomePage() {
           }}
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+        {/* Orange diagonal accents, top and bottom right */}
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-4 h-10 w-[60%] -skew-y-[14deg] bg-gradient-to-l from-accent/70 via-accent/25 to-transparent" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-16 h-3 w-[45%] -skew-y-[14deg] bg-gradient-to-l from-accent/50 to-transparent" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-24 w-[75%] -skew-y-[14deg] bg-gradient-to-l from-accent/80 via-accent/30 to-transparent" />
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-10 -right-16 h-3 w-[50%] -skew-y-[14deg] bg-gradient-to-l from-accent/50 to-transparent" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-8 sm:px-6 sm:py-16 lg:grid-cols-[1.2fr_1fr] lg:py-20">
           <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
@@ -70,11 +75,11 @@ export default function HomePage() {
             matching and reliable service from Brothers Auto Spare Parts.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-            <LinkButton href="/shop" size="lg" className="col-span-2">
+            <LinkButton href="/shop" size="lg" className="col-span-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00] shadow-[0_0_28px_rgba(245,124,32,0.5)]">
               Explore Spare Parts <ArrowRight className="h-4 w-4" />
             </LinkButton>
-            <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="px-2 text-sm sm:px-6 sm:text-base">
-              Find Parts by Chassis
+            <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-white/30 bg-black/40 px-2 text-sm sm:px-6 sm:text-base">
+              <ScanSearch className="h-4 w-4 shrink-0" aria-hidden="true" /> Find Parts by Chassis
             </LinkButton>
             <WhatsAppButton />
           </div>

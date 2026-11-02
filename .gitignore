@@ -49,3 +49,4 @@ neon.ts.disabled
 imports/
 *.xlsx
 *.xls
+screenshots/
