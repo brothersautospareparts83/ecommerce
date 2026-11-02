@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
+import { CartBadge } from "@/components/cart/cart-badge";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { NavBar } from "./nav-bar";
@@ -31,8 +32,9 @@ export function Header() {
               </Link>
               <ThemeToggle className={iconBtn} />
             </div>
-            <Link href="/cart" aria-label="Shopping cart" className={iconBtn}>
+            <Link href="/cart" aria-label="Shopping cart" className={`${iconBtn} relative`}>
               <ShoppingCart className="h-5 w-5" />
+              <CartBadge />
             </Link>
             <MobileNav />
           </div>

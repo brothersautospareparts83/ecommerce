@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
+import { AddToCart } from "@/components/cart/add-to-cart";
 import { ClassificationBadge, ProductCard, ProductImage, StockStatus } from "@/components/product/product-card";
 import { conditionLabel, publicProduct, publicProducts } from "@/lib/catalog/public";
 import { formatPrice } from "@/lib/utils";
@@ -110,7 +110,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
           )}
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" disabled title="Online checkout opens in a later update">Add to Cart</Button>
+            <AddToCart product={{ productId: p.id, slug: p.slug, sku: p.sku, name: p.name, priceTzs: p.priceTzs, imageUrl: p.images[0]?.url ?? p.imageUrl }} />
             <WhatsAppButton label="Order on WhatsApp" message={`Hello, I would like to order: ${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""}, SKU ${p.sku}.`} />
           </div>
 
