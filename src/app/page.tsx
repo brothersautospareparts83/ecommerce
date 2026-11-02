@@ -56,27 +56,15 @@ export default function HomePage() {
           }}
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        <Image
-          src="/brand/hero-car-light.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hero-zoom object-cover object-[78%_70%] dark:hidden sm:object-[70%_60%]"
-        />
-        <Image
-          src="/brand/hero-car-dark.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hero-zoom hidden object-cover object-[78%_70%] dark:block sm:object-[70%_60%]"
-        />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 overflow-hidden dark:block"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
-        {/* Shading so the text stays readable over the car: heavier at the left and on phones */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent sm:from-white/80 sm:via-white/30 dark:from-black/90 dark:via-black/55 dark:sm:from-black/85 dark:sm:via-black/40" />
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/80 to-transparent sm:hidden dark:from-black/80" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-24 pt-8 sm:px-6 sm:py-20 lg:py-28">
+        {/* Large screens: the photo sits behind the text */}
+        <div className="absolute inset-0 hidden sm:block">
+          <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="hero-zoom object-cover object-[70%_60%] dark:hidden" />
+          <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hero-zoom hidden object-cover object-[70%_60%] dark:block" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 overflow-hidden dark:block"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
+          {/* Shading so the text stays readable over the photo */}
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent dark:from-black/85 dark:via-black/40" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-8 sm:px-6 sm:py-20 lg:py-28">
           <div className="max-w-xl sm:max-w-[58%]">
           <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
@@ -98,6 +86,11 @@ export default function HomePage() {
             </LinkButton>
             <WhatsAppButton />
           </div>
+          </div>
+          {/* Phones: the car gets its own space under the text, so nothing covers it */}
+          <div className="relative -mx-4 mt-2 aspect-[4/3] overflow-hidden sm:hidden">
+            <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="hero-zoom object-cover object-[80%_50%] dark:hidden" />
+            <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hero-zoom hidden object-cover object-[80%_50%] dark:block" />
           </div>
         </div>
       </section>
