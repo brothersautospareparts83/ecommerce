@@ -1,15 +1,15 @@
 "use client";
 
-import { TL } from "@/lib/i18n";
-import { useState } from "react";
-import { Check, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TL } from "@/lib/i18n";
 import { useCart, type CartLine } from "@/lib/cart";
 
-/** Parts with no selling price yet can't be bought online; customers ask on WhatsApp instead. */
+/** "Order now": puts the part in the order and goes straight to checkout. Parts with no price yet go through WhatsApp instead. */
 export function AddToCart({ product }: { product: Omit<CartLine, "quantity"> }) {
   const { add } = useCart();
-  const [added, setAdded] = useState(false);
+  const router = useRouter();
   const unpriced = product.priceTzs <= 0;
   return (
     <Button
@@ -18,12 +18,11 @@ export function AddToCart({ product }: { product: Omit<CartLine, "quantity"> }) 
       title={unpriced ? "No price yet: ask us on WhatsApp" : undefined}
       onClick={() => {
         add(product);
-        setAdded(true);
-        setTimeout(() => setAdded(false), 2000);
+        router.push("/checkout");
       }}
     >
-      {added ? <Check className="h-5 w-5" aria-hidden="true" /> : <ShoppingCart className="h-5 w-5" aria-hidden="true" />}
-      {added ? <TL k="Added to cart" /> : <TL k="Add to Cart" />}
+      <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+      <TL k="Order now" />
     </Button>
   );
 }
