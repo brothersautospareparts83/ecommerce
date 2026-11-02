@@ -1,13 +1,15 @@
 // Applies the Base44-generated reference images (one per part name, from the PartImageMaker records of the
 // Woodland Auto Parts Base44 app) to every product with that name. Replaces the earlier Cloudflare images; products
 // with a real (non-illustrative) photo are left alone. Owner decision 2026-10-31.
-//   node --env-file=.env.local scripts/apply-base44-images.mjs <records.json> [--dry-run]
+//   node --env-file=.env.local scripts/apply-base44-images.mjs <records.json> [--dry-run] [--only-missing]
+// --only-missing: only products with no image at all (keeps existing AI images as they are).
 // <records.json>: the PartImageMaker records exported from Base44 ({entities:[{part_name,image_url}]} or a bare array).
 import fs from "node:fs";
 import pg from "pg";
 import sharp from "sharp";
 
 const dry = process.argv.includes("--dry-run");
+const onlyMissing = process.argv.includes("--only-missing");
 const SOURCE = "AI reference image (Base44)";
 
 const file0 = process.argv.slice(2).find((x) => !x.startsWith("--"));
@@ -24,7 +26,7 @@ let products = 0, replaced = 0;
 for (const [name, remote] of urlByName) {
   const { rows } = await db.query(
     `select p.id from products p where p.status = 'published' and lower(trim(p.name)) = $1
-       and not exists (select 1 from product_images i where i.product_id = p.id and i.kind <> 'illustrative')`,
+       and not exists (select 1 from product_images i where i.product_id = p.id ${onlyMissing ? "" : "and i.kind <> 'illustrative'"})`,
     [name],
   );
   if (!rows.length) continue;
