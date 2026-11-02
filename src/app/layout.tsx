@@ -29,7 +29,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Header />
             <main id="main">{children}</main>
             <Footer />
-            <BottomNav />
+            <Suspense fallback={null}>
+              <BottomNav />
+            </Suspense>
             <Suspense fallback={null}>
               <ChatWidget />
             </Suspense>
