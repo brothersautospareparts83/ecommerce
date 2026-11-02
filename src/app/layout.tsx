@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { BottomNav } from "@/components/layout/bottom-nav";
 import { CartProvider } from "@/lib/cart";
 import { ChatWidget } from "@/components/assistant/chat-widget";
 import { LanguageProvider } from "@/lib/i18n";
@@ -22,12 +23,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={inter.variable} data-theme="light">
-      <body>
+      <body className="min-h-screen pb-16 antialiased lg:pb-0">
         <LanguageProvider>
           <CartProvider>
             <Header />
             <main id="main">{children}</main>
             <Footer />
+            <BottomNav />
             <Suspense fallback={null}>
               <ChatWidget />
             </Suspense>

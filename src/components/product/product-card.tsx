@@ -17,7 +17,7 @@ export function ImagePlaceholder({ className, label = "No photo yet" }: { classN
 export function ProductImage({ src, alt, className, eager = false }: { src: string | null; alt: string; className?: string; eager?: boolean }) {
   if (!src) return <ImagePlaceholder />;
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} className={cn("h-full w-full bg-white object-contain", className)} />;
+  return <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} className={cn("h-full w-full bg-white object-contain p-2", className)} />;
 }
 
 const classStyles: Record<Classification, string> = {
@@ -46,15 +46,15 @@ export function StockStatus({ inStock }: { inStock: boolean }) {
 
 export function ProductCard({ product }: { product: ProductSummary }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-accent hover:shadow-xl">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface text-fg shadow-card">
       <Link href={`/products/${product.slug}`} className="flex flex-1 flex-col">
         <div className="aspect-[4/3] overflow-hidden bg-white sm:aspect-square">
-          <ProductImage src={product.imageUrl} alt={product.name} className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
+          <ProductImage src={product.imageUrl} alt={product.name} className="" />
         </div>
         <div className="flex flex-1 flex-col gap-1 px-3 pt-3 sm:px-4">
           {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
           <h3 className="font-display text-sm font-semibold leading-snug group-hover:text-accent-text">{product.name}</h3>
-          <p className="text-xs text-zinc-500">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
+          <p className="text-xs text-muted">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
         </div>
       </Link>
       <div className="flex flex-col gap-2 px-3 pb-3 pt-2 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:pb-4">

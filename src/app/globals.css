@@ -2,25 +2,29 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* Clean slate: one plain black-and-white theme, no motion. The names stay so existing pages compile until the redesign. */
+/*
+ * Design system "Showroom": warm off-white page, white cards, near-black ink, one orange accent
+ * taken from the logo. Phones first. A single light theme and no decorative motion.
+ */
 :root {
-  --bg: #ffffff;
+  --bg: #faf8f5;
   --surface: #ffffff;
-  --surface-2: #f4f4f4;
-  --fg: #111111;
-  --muted: #666666;
-  --border: #dddddd;
-  --accent: #111111;
+  --surface-2: #f2efe9;
+  --fg: #16140f;
+  --muted: #6b665c;
+  --border: #e7e2d9;
+  --accent: #f47b20;
   --accent-fg: #ffffff;
-  --accent-text: #111111;
-  --hero-bg: #ffffff;
-  --hero-fg: #111111;
+  --accent-text: #b8470a; /* orange readable as text on light */
+  --accent-soft: #fff1e6;
+  --hero-bg: #16140f;
+  --hero-fg: #ffffff;
   --chrome-bg: #ffffff;
-  --chrome-fg: #111111;
-  --chrome-muted: #666666;
-  --chrome-border: #dddddd;
-  --shadow: none;
-  --ring: #111111;
+  --chrome-fg: #16140f;
+  --chrome-muted: #6b665c;
+  --chrome-border: #e7e2d9;
+  --shadow: 0 1px 2px rgb(22 20 15 / 0.04), 0 8px 24px -12px rgb(22 20 15 / 0.14);
+  --ring: #b8470a;
   color-scheme: light;
 }
 
@@ -34,6 +38,7 @@
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
   --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
   --color-hero: var(--hero-bg);
   --color-hero-fg: var(--hero-fg);
   --color-chrome: var(--chrome-bg);
@@ -45,19 +50,32 @@
   --font-display: var(--font-inter), system-ui, sans-serif;
 }
 
+html {
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  line-height: 1.5;
 }
 
-main,
-header,
-footer {
-  padding: 1rem;
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
 }
 
-input {
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.6rem;
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
