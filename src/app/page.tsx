@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
 const featuredSlugs = ["engine-components", "brake-systems", "suspension-steering", "oil-filters", "electrical-components"];
 
 const trust = [
-  { icon: ShieldCheck, title: "Clearly Labelled Parts", text: "Genuine, OEM equivalent or aftermarket" },
+  { icon: ShieldCheck, title: "Honest about every part", text: "We tell you what you are buying" },
   { icon: Truck, title: "Delivery or Pickup", text: "Across Tanzania or from Kariakoo" },
   { icon: Headset, title: "Expert Support", text: site.phones[0] },
   { icon: Bike, title: "Cars & Motorcycles", text: "Parts for both" },
@@ -24,7 +24,7 @@ const trust = [
 
 const why = [
   { icon: ScanSearch, title: "Smart vehicle matching", text: "Search by chassis, OEM number, part name or vehicle to find parts that fit." },
-  { icon: ShieldCheck, title: "Honest classification", text: "Every part is labelled Genuine OEM, OEM equivalent or Aftermarket. Never blurred." },
+  { icon: ShieldCheck, title: "Honest advice", text: "Ask us if a part is genuine, OEM equivalent or aftermarket. We tell you straight, and we never pass off one as another." },
   { icon: MapPinned, title: "Based in Kariakoo", text: "A local team in Dar es Salaam you can visit, call or message." },
   { icon: Truck, title: "Delivery or pickup", text: "Choose local delivery or collect your order from the shop." },
 ];
