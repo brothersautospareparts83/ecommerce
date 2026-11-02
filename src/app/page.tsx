@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Bike, Headset, LayoutGrid, MapPinned, MessageCircle, ScanSearch, ShieldCheck, Star, Truck, Wrench } from "lucide-react";
+import { ArrowRight, Bike, Headset, LayoutGrid, MapPinned, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Section } from "@/components/home/section";
 import { PartsFinder } from "@/components/home/parts-finder";
@@ -29,15 +29,11 @@ const why = [
   { icon: Truck, title: "Delivery or pickup", text: "Choose local delivery or collect your order from the shop." },
 ];
 
-const types = [
-  { name: "Genuine OEM", text: "Made by or for the vehicle manufacturer, to original specification." },
-  { name: "OEM equivalent", text: "Built to match original specifications by an established manufacturer." },
-  { name: "Aftermarket", text: "Independently produced replacements, often at a lower price." },
-];
-
 async function LatestSection() {
-  const { items } = await publicProducts({ sort: "newest", pageSize: 4 });
-  return <LatestProducts products={items} />;
+  // Parts that have a picture and a price look best on the home page.
+  const { items } = await publicProducts({ sort: "newest", pageSize: 40 });
+  const shown = items.filter((p) => p.imageUrl && p.priceTzs > 0).slice(0, 8);
+  return <LatestProducts products={shown} />;
 }
 
 export default function HomePage() {
@@ -54,17 +50,17 @@ export default function HomePage() {
           }}
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-16 pt-10 sm:px-6 sm:py-24 lg:grid-cols-[1.2fr_1fr] lg:py-28">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-8 sm:px-6 sm:py-16 lg:grid-cols-[1.2fr_1fr] lg:py-20">
           <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> CARS · MOTORCYCLES · DELIVERY
           </p>
-          <h1 className="max-w-3xl font-display text-[2rem] font-extrabold leading-[1.08] tracking-tight sm:text-6xl">
+          <h1 className="max-w-3xl font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
             QUALITY PARTS.
             <br />
             <span className="text-accent">TRUSTED PERFORMANCE.</span>
           </h1>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-[#c4c4c8] sm:mt-6 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:mt-5 sm:text-base">
             Find the right automotive spare parts with confidence. Discover quality products, smart vehicle
             matching and reliable service from Brothers Auto Spare Parts.
           </p>
@@ -137,23 +133,20 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="font-display text-lg font-extrabold">Not sure what your car needs?</h2>
+            <p className="mt-1 text-sm text-muted">Browse every main part of a car by system, see what it does, and check if we have it.</p>
+          </div>
+          <LinkButton href="/parts-guide">Open the parts guide <ArrowRight className="h-4 w-4" /></LinkButton>
+        </div>
+      </section>
+
       <Suspense fallback={null}>
         <LatestSection />
       </Suspense>
 
-      <div className="bg-surface-2">
-        <Section eyebrow="Know what you buy" title="Genuine and Aftermarket Parts" intro="Each product is clearly classified so you always know exactly what you are getting.">
-          <div className="grid gap-4 md:grid-cols-3">
-            {types.map((t) => (
-              <div key={t.name} className="rounded-xl border border-border bg-surface p-6">
-                <BadgeCheck className="mb-3 h-6 w-6 text-accent-text" />
-                <h3 className="font-display text-lg font-bold">{t.name}</h3>
-                <p className="mt-2 text-sm text-muted">{t.text}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-      </div>
 
       <Section eyebrow="Why Brothers" title="Why Choose Brothers Auto">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -182,14 +175,6 @@ export default function HomePage() {
         </Section>
       </div>
 
-      <Section eyebrow="Reviews" title="Customer Reviews" className="pt-0 sm:pt-0">
-        <div className="flex items-start gap-4 rounded-xl border border-dashed border-border bg-surface p-6">
-          <Star className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
-          <p className="text-sm text-muted">
-            Reviews appear here once customers who have bought from us submit them. We never publish invented reviews or ratings.
-          </p>
-        </div>
-      </Section>
 
       <div className="bg-surface-2">
         <Section eyebrow="For the trade" title="Garage and Wholesale Services" intro="Mechanics, garages, dealers and fleet operators can request bulk quotations and, once approved, trade pricing.">

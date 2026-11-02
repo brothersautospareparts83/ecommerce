@@ -79,7 +79,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
         </div>
 
         <div>
-          <div className="mb-3"><ClassificationBadge value={p.classification} /></div>
+          {p.classification !== "unverified" && <div className="mb-3"><ClassificationBadge value={p.classification} /></div>}
           <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{p.name}</h1>
           <p className="mt-4 font-display text-3xl font-extrabold">{formatPrice(p.priceTzs)}</p>
           <div className="mt-2"><StockStatus inStock={p.inStock} /></div>
