@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { CartBadge } from "@/components/cart/cart-badge";
 import { SearchForm } from "./search-form";
+import { ThemeSwitch } from "@/components/theme/theme-switch";
 import { LangSwitch, TL } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -59,6 +60,7 @@ export function Header() {
               <Logo />
               <div className="flex items-center gap-1">
                 <LangSwitch className="flex items-center gap-1 text-xs font-bold text-white" />
+                <ThemeSwitch className="mx-1" />
                 <CartLink />
               </div>
             </div>
@@ -72,6 +74,7 @@ export function Header() {
             <p className="text-center text-lg font-bold"><TL k={title} /></p>
             <div className="flex items-center">
               <LangSwitch className="flex items-center gap-1 text-xs font-bold text-white" />
+                <ThemeSwitch className="mx-1" />
               <CartLink />
             </div>
           </div>
@@ -93,6 +96,7 @@ export function Header() {
         </nav>
         <SearchForm id="search-desktop" className="ml-auto w-72" />
         <LangSwitch className="flex items-center gap-1 text-xs font-bold text-white" />
+                <ThemeSwitch className="mx-1" />
         <CartLink />
       </div>
     </header>

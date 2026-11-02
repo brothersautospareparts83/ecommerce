@@ -58,22 +58,24 @@ export default function HomePage() {
   return (
     <>
       {/* Hero: light panel with orange slashes and the car, as in the approved design */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#e9e9e9]">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[var(--hero-from)] to-[var(--hero-to)] text-[var(--hero-text)]">
         <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-0 h-full w-28 -skew-x-[22deg] bg-accent/90 lg:w-48" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-2 top-0 h-full w-6 -skew-x-[22deg] bg-[#0a0a0b] lg:w-10" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-2 top-0 h-full w-6 -skew-x-[22deg] bg-[var(--stripe-dark)] lg:w-10" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-2 px-4 pt-6 lg:grid-cols-2 lg:pt-12">
           <div className="pb-2 lg:pb-12">
             <h1 className="max-w-[16rem] text-[1.7rem] font-extrabold leading-[1.12] sm:max-w-md sm:text-4xl lg:max-w-lg lg:text-5xl">
               <T en="The right spare part for your car or motorcycle." sw="Kipuri sahihi cha gari au pikipiki yako." />
             </h1>
-            <p className="tagline mt-2 text-sm text-muted sm:text-base">Quality Parts Keep You Moving</p>
+            <p className="tagline mt-2 text-sm text-[var(--hero-sub)] sm:text-base">Quality Parts Keep You Moving</p>
             <div className="mt-4 flex flex-wrap gap-2">
               <LinkButton href="/shop" size="sm" className="px-4"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
               <WhatsAppButton size="sm" />
             </div>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply lg:w-full" />
+          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply gold:hidden lg:w-full" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/hero-prado-cutout.webp" alt="" width={1536} height={1024} loading="eager" decoding="async" className="relative mx-auto -mb-1 hidden w-[88%] max-w-xl gold:block lg:w-full" />
         </div>
       </section>
 

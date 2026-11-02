@@ -21,9 +21,15 @@ export const metadata: Metadata = {
   openGraph: { siteName: site.name, type: "website", locale: "en_TZ" },
 };
 
+// Runs before first paint: the saved colour theme (orange by default). Prevents a flash of the wrong theme.
+const themeInit = `(function(){try{var t=localStorage.getItem('ba-theme');document.documentElement.dataset.theme=t==='gold'?'gold':'orange'}catch(e){}})()`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} data-theme="light">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} data-theme="orange" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body className="min-h-screen pb-16 antialiased lg:pb-0">
         <LanguageProvider>
           <CartProvider>
