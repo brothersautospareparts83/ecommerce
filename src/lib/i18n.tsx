@@ -22,7 +22,7 @@ export const SW: Record<string, string> = {
   "Enter chassis number, VIN or frame number": "Weka namba ya chassis, VIN au frame", "Enter an OEM or part number": "Weka namba ya OEM au ya kipuri",
   "e.g. brake pads, chujio la oil, front shock": "mf. brake pads, chujio la oil, front shock", "Make, model and year, e.g. Toyota Harrier 2015": "Chapa, modeli na mwaka, mf. Toyota Harrier 2015",
   "Search parts, part numbers, brands…": "Tafuta vipuri, namba za vipuri, chapa…",
-  "Add to Cart": "Weka Kikapuni", "Added to cart": "Imewekwa kikapuni", "Your cart": "Kikapu chako", "Your cart is empty.": "Kikapu chako ni tupu.", "Browse parts": "Tazama vipuri",
+  "Add to Cart": "Weka Kikapuni", "Add to cart": "Weka kikapuni", "Added to cart": "Imewekwa kikapuni", "Your cart": "Kikapu chako", "Your cart is empty.": "Kikapu chako ni tupu.", "Browse parts": "Tazama vipuri",
   Subtotal: "Jumla ndogo", Checkout: "Lipa / Kamilisha", "Order summary": "Muhtasari wa oda", "Full name": "Jina kamili",
   "Phone (WhatsApp if possible)": "Simu (WhatsApp ikiwezekana)", "Email (optional)": "Barua pepe (si lazima)", "How do you want to get it?": "Unataka kuipataje?",
   "Collect from the shop (Kariakoo)": "Nachukua dukani (Kariakoo)", "Delivery (fee confirmed with you)": "Kufikishiwa (gharama tunakuthibitishia)",

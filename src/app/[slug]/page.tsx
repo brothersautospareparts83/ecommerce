@@ -6,7 +6,6 @@ import { ComingSoon } from "@/components/layout/coming-soon";
 const pages: Record<string, { title: string; description: string }> = {
   "ai-assistant": { title: "AI Parts Expert", description: "A Kiswahili and English assistant that searches our real inventory. Needs an AI provider key." },
   quotation: { title: "Request a Quotation", description: "Request prices for multiple parts and receive a reviewed quotation." },
-  about: { title: "About Brothers Auto Spare Parts", description: "Our story, based in Kariakoo, Dar es Salaam. Content to be supplied by the business owner." },
   faq: { title: "Frequently Asked Questions", description: "Answers about ordering, delivery and parts, to be written with the owner." },
   cart: { title: "Shopping Cart", description: "Your cart and secure checkout are coming soon." },
   privacy: { title: "Privacy Policy", description: "Legal text must be provided or approved by the business owner before publishing." },

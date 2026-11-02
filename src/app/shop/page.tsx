@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { PackageSearch, SearchX } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
 import { CollapsibleFilters } from "@/components/product/collapsible-filters";
+import { CategoryBar } from "@/components/product/category-bar";
+import { T } from "@/lib/i18n";
 import { Button, LinkButton } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { publicBrands, publicCategories, searchAndLog, type SortKey } from "@/lib/catalog/public";
@@ -132,7 +134,16 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
 export default function ShopPage(props: PageProps<"/shop">) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="mb-5 font-display text-2xl font-extrabold sm:text-3xl">Shop all products</h1>
+      <nav aria-label="Breadcrumb" className="mb-2 text-sm text-muted">
+        <Link href="/" className="hover:text-fg"><T en="Home" sw="Mwanzo" /></Link> / <span className="text-fg"><T en="Shop" sw="Duka" /></span>
+      </nav>
+      <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
+        <T en="All" sw="Vipuri" /> <span className="text-accent"><T en="parts" sw="vyote" /></span>
+      </h1>
+      <p className="mb-5 mt-1 text-sm text-muted">
+        <T en="Spare parts for cars and motorcycles. Prices in TSh. Ask us on WhatsApp if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh. Tuulize WhatsApp ukiwa huna uhakika kinachofaa." />
+      </p>
+      <CategoryBar />
       <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-surface-2" />}>
         <Results searchParams={props.searchParams} />
       </Suspense>

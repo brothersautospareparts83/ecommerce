@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ImageOff } from "lucide-react";
 import { cn, formatPrice } from "@/lib/utils";
+import { QuickAdd } from "@/components/cart/quick-add";
 import { classificationLabel, type Classification, type ProductSummary } from "@/lib/catalog/queries";
 
 export function ImagePlaceholder({ className, label = "No photo yet" }: { className?: string; label?: string }) {
@@ -45,21 +46,25 @@ export function StockStatus({ inStock }: { inStock: boolean }) {
 
 export function ProductCard({ product }: { product: ProductSummary }) {
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent"
-    >
-      <div className="aspect-square overflow-hidden">
-        <ProductImage src={product.imageUrl} alt={product.name} className="transition-transform duration-500 group-hover:scale-105" />
-      </div>
-      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
-        {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
-        <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
-        <p className="text-xs text-zinc-500">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
-        <div className="mt-auto pt-2">
-          <span className="font-display text-[15px] font-extrabold sm:text-base">{formatPrice(product.priceTzs)}</span>
+    <div className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent">
+      <Link href={`/products/${product.slug}`} className="flex flex-1 flex-col">
+        <div className="aspect-square overflow-hidden">
+          <ProductImage src={product.imageUrl} alt={product.name} className="transition-transform duration-500 group-hover:scale-105" />
         </div>
+        <div className="flex flex-1 flex-col gap-1 px-3 pt-3 sm:px-4">
+          {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
+          <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
+          <p className="text-xs text-zinc-500">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
+        </div>
+      </Link>
+      <div className="flex flex-col gap-2 px-3 pb-3 pt-2 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:pb-4">
+        <span className="font-display text-[15px] font-extrabold sm:text-base">{formatPrice(product.priceTzs)}</span>
+        {product.priceTzs > 0 && (
+          <QuickAdd
+            product={{ productId: product.id, slug: product.slug, sku: product.sku, name: product.name, priceTzs: product.priceTzs, imageUrl: product.imageUrl }}
+          />
+        )}
       </div>
-    </Link>
+    </div>
   );
 }
