@@ -46,7 +46,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-white text-zinc-900 dark:bg-hero dark:text-hero-fg">
+      <section className="relative overflow-hidden bg-white text-zinc-900 dark:bg-black dark:text-hero-fg">
         <div
           aria-hidden="true"
           className="absolute inset-0 hidden opacity-[0.07] dark:block"
@@ -56,16 +56,13 @@ export default function HomePage() {
           }}
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        {/* Large screens: the photo sits behind the text */}
-        <div className="absolute inset-0 hidden sm:block">
-          <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="hero-zoom object-cover object-[70%_60%] dark:hidden" />
-          <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hero-zoom hidden object-cover object-[70%_60%] dark:block" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 overflow-hidden dark:block"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
-          {/* Shading so the text stays readable over the photo */}
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent dark:from-black/85 dark:via-black/40" />
+        {/* The photo is shown whole (never cropped or zoomed): centred on large screens, along the bottom on phones */}
+        <div className="absolute inset-x-0 bottom-12 aspect-[16/9] sm:inset-0 sm:bottom-0 sm:aspect-auto">
+          <Image src="/brand/hero-car-light.webp" alt="" fill sizes="(min-width: 1400px) 1100px, 100vw" quality={90} className="object-contain object-bottom sm:object-center dark:hidden" />
+          <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="(min-width: 1400px) 1100px, 100vw" quality={90} className="hidden object-contain object-bottom sm:object-center dark:block" />
         </div>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-14 pt-0 sm:gap-8 sm:px-6 sm:py-20 lg:py-28">
-          <div className="max-w-xl sm:max-w-[58%]">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
+          <div className="max-w-xl sm:max-w-[44%]">
           <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
           </p>
@@ -86,11 +83,6 @@ export default function HomePage() {
             </LinkButton>
             <WhatsAppButton />
           </div>
-          </div>
-          {/* Phones: the car gets its own space under the text, so nothing covers it */}
-          <div className="relative order-first -mx-4 aspect-[16/10] overflow-hidden bg-gradient-to-b from-zinc-100 to-white sm:hidden dark:from-zinc-900 dark:to-black">
-            <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="object-cover object-[75%_55%] dark:hidden" />
-            <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hidden object-cover object-[75%_55%] dark:block" />
           </div>
         </div>
       </section>
