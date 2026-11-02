@@ -56,7 +56,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted">
+      <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
         <Link href="/shop" className="hover:text-fg">Shop</Link> /{" "}
         {p.categorySlug && (<><Link href={`/categories/${p.categorySlug}`} className="hover:text-fg">{p.categoryName}</Link> / </>)}
         <span className="text-fg">{p.name}</span>
@@ -64,13 +64,13 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
         <div className="space-y-3 self-start">
-          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-border sm:aspect-square">
+          <div className="aspect-square overflow-hidden rounded-3xl border border-border bg-white p-3">
             <ProductImage src={p.images[0]?.url ?? p.imageUrl} alt={p.name} eager />
           </div>
           {p.images.length > 1 && (
             <ul className="grid grid-cols-4 gap-2">
               {p.images.slice(0, 8).map((img) => (
-                <li key={img.id} className="aspect-square overflow-hidden rounded-lg border border-border">
+                <li key={img.id} className="aspect-square overflow-hidden rounded-xl border border-border bg-white">
                   <ProductImage src={img.url} alt={`${p.name} photo`} />
                 </li>
               ))}
@@ -78,15 +78,15 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
           )}
         </div>
 
-        <div>
+        <div className="rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-7 lg:self-start">
           {p.classification !== "unverified" && <div className="mb-3"><ClassificationBadge value={p.classification} /></div>}
-          <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{p.name}</h1>
-          <p className="mt-4 font-display text-3xl font-extrabold">{formatPrice(p.priceTzs)}</p>
+          <h1 className="text-2xl font-extrabold leading-tight sm:text-3xl">{p.name}</h1>
+          <p className="mt-3 text-3xl font-extrabold text-accent-text">{formatPrice(p.priceTzs)}</p>
 
           {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}
 
           {p.compatibility.length > 0 ? (
-            <div className="mt-6 rounded-lg border border-border bg-surface-2 p-4 text-sm">
+            <div className="mt-6 rounded-2xl bg-surface-2 p-4 text-sm">
               <p className="mb-2 flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-accent-text" /> Verified to fit</p>
               <ul className="space-y-1 text-muted">
                 {p.compatibility.map((c, i) => (
@@ -99,7 +99,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
               </ul>
             </div>
           ) : (
-            <div className="mt-6 flex items-start gap-3 rounded-lg border border-border bg-surface-2 p-4 text-sm">
+            <div className="mt-6 flex items-start gap-3 rounded-2xl bg-surface-2 p-4 text-sm">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
               <p className="text-muted">
                 <span className="font-semibold text-fg">Check fitment before you buy.</span> We only list a vehicle as compatible once it is verified.
@@ -108,12 +108,12 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
             </div>
           )}
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3">
             <AddToCart product={{ productId: p.id, slug: p.slug, sku: p.sku, name: p.name, priceTzs: p.priceTzs, imageUrl: p.images[0]?.url ?? p.imageUrl }} />
             <WhatsAppButton label="Order on WhatsApp" message={`Hello, I would like to order: ${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""}, SKU ${p.sku}.`} />
           </div>
 
-          <dl className="mt-8 divide-y divide-border rounded-xl border border-border bg-surface">
+          <dl className="mt-6 divide-y divide-border rounded-2xl border border-border">
             {specs.map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 px-4 py-3 text-sm">
                 <dt className="text-muted">{k}</dt>
@@ -132,7 +132,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
       {related.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 font-display text-xl font-extrabold">More in {p.categoryName}</h2>
+          <h2 className="mb-4 text-xl font-bold">More in {p.categoryName}</h2>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {related.map((r) => (<ProductCard key={r.id} product={r} />))}
           </div>
@@ -144,8 +144,8 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
 export default function ProductPage(props: PageProps<"/products/[slug]">) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
-      <Suspense fallback={<div className="h-64 animate-pulse rounded-xl bg-surface-2" />}>
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-4 sm:pt-8">
+      <Suspense fallback={<div className="h-64 rounded-3xl bg-surface-2" />}>
         <Product params={props.params} />
       </Suspense>
     </div>

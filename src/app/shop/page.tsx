@@ -27,7 +27,7 @@ const classes = [
 ];
 
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
-const field = "h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm outline-none focus:border-accent";
+const field = "h-12 w-full rounded-xl border border-border bg-bg px-3 text-sm outline-none focus:border-accent focus:bg-surface";
 
 async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams">) {
   const sp = await searchParams;
@@ -54,13 +54,11 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
 
   return (
     <>
-      <form action="/shop" className="rounded-xl border border-border bg-surface p-3 sm:p-4">
+      <CategoryBar active={category} />
+      <form action="/shop" className="rounded-2xl border border-border bg-surface p-3 sm:p-4">
         <CollapsibleFilters activeCount={[q, one(sp.category), one(sp.type), inStock ? "1" : ""].filter(Boolean).length}>
         <div className="grid grid-cols-2 gap-x-3 gap-y-2 lg:grid-cols-4">
-          <div className="col-span-2 lg:col-span-4">
-            <label htmlFor="shop-q" className="mb-1 block text-xs font-semibold text-muted">Search by name, part number or SKU</label>
-            <input id="shop-q" name="q" type="search" defaultValue={q} placeholder="e.g. brake drum, 42431-0K120, breki" className={field} />
-          </div>
+          <input type="hidden" name="q" value={q} />
           <div>
             <label htmlFor="shop-cat" className="mb-1 block text-xs font-semibold text-muted">Category</label>
             <select id="shop-cat" name="category" defaultValue={category} className={field}>
@@ -90,7 +88,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
               </select>
             </div>
           )}
-          <Button type="submit" size="md">Apply</Button>
+          <Button type="submit" size="lg" className="col-span-2 rounded-xl lg:col-span-1 lg:self-end">Apply</Button>
         </div>
         </CollapsibleFilters>
       </form>
@@ -104,7 +102,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
       </div>
 
       {result.items.length === 0 ? (
-        <div className="mt-6 flex flex-col items-center rounded-xl border border-dashed border-border px-6 py-14 text-center">
+        <div className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-border px-6 py-14 text-center">
           {filtered ? <SearchX className="mb-3 h-8 w-8 text-muted" /> : <PackageSearch className="mb-3 h-8 w-8 text-muted" />}
           <p className="font-display text-lg font-bold">{filtered ? "No products match your search" : "Our online catalogue is being prepared"}</p>
           <p className="mt-1 max-w-md text-sm text-muted">
@@ -133,18 +131,14 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
 
 export default function ShopPage(props: PageProps<"/shop">) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
-      <nav aria-label="Breadcrumb" className="mb-2 text-sm text-muted">
-        <Link href="/" className="hover:text-fg"><T en="Home" sw="Mwanzo" /></Link> / <span className="text-fg"><T en="Shop" sw="Duka" /></span>
-      </nav>
-      <h1 className="font-display text-3xl font-bold sm:text-4xl">
-        <T en="All" sw="Vipuri" /> <span className="text-accent"><T en="parts" sw="vyote" /></span>
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
+      <h1 className="text-3xl font-extrabold sm:text-4xl">
+        <T en="Shop" sw="Duka" />
       </h1>
-      <p className="mb-5 mt-1 text-sm text-muted">
+      <p className="mb-4 mt-1 text-sm text-muted">
         <T en="Spare parts for cars and motorcycles. Prices in TSh. Ask us on WhatsApp if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh. Tuulize WhatsApp ukiwa huna uhakika kinachofaa." />
       </p>
-      <CategoryBar />
-      <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-surface-2" />}>
+      <Suspense fallback={<div className="h-40 rounded-2xl bg-surface-2" />}>
         <Results searchParams={props.searchParams} />
       </Suspense>
     </div>

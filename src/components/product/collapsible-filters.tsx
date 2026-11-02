@@ -13,7 +13,7 @@ export function CollapsibleFilters({ children, activeCount = 0 }: { children: Re
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex h-11 w-full items-center justify-between rounded-lg px-1 text-sm font-semibold lg:hidden"
+        className="flex h-11 w-full cursor-pointer items-center justify-between px-1 text-sm font-semibold lg:hidden"
       >
         <span className="flex items-center gap-2">
           <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
