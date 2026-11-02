@@ -58,8 +58,8 @@ export default function HomePage() {
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         {/* The photo is shown whole (never cropped or zoomed): centred on large screens, along the bottom on phones */}
         <div className="absolute inset-x-0 bottom-12 aspect-[16/9] sm:inset-0 sm:bottom-0 sm:aspect-auto">
-          <Image src="/brand/hero-car-light.webp" alt="" fill sizes="(min-width: 1400px) 1100px, 100vw" quality={90} className="object-contain object-bottom sm:object-center dark:hidden" />
-          <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="(min-width: 1400px) 1100px, 100vw" quality={90} className="hidden object-contain object-bottom sm:object-center dark:block" />
+          <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" quality={90} className="[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] object-contain object-bottom sm:object-center dark:hidden" />
+          <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" quality={90} className="[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] hidden object-contain object-bottom sm:object-center dark:block" />
         </div>
         <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
           <div className="max-w-xl sm:max-w-[44%]">
