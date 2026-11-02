@@ -37,9 +37,6 @@ export const navLinks = [
   { href: "/categories", label: "Categories" },
   { href: "/finder", label: "Parts Finder" },
   { href: "/parts-guide", label: "Parts Guide" },
-  { href: "/ai-assistant", label: "AI Parts Expert" },
-  { href: "/quotation", label: "Request Quote" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
-  { href: "/faq", label: "FAQ" },
 ];

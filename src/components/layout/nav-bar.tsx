@@ -20,20 +20,9 @@ const items: Item[] = [
       ...categories.slice(0, 6).map((c) => ({ href: `/categories/${c.slug}`, label: c.name })),
     ],
   },
-  { href: "/finder?mode=vehicle", match: "/finder", label: "Vehicle Catalog" },
-  { href: "/ai-assistant", label: "AI Assistant" },
+  { href: "/parts-guide", label: "Parts Guide" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
-  {
-    href: "/quotation",
-    label: "More",
-    children: [
-      { href: "/quotation", label: "Request a Quotation" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms & Conditions" },
-    ],
-  },
 ];
 
 export function NavBar() {

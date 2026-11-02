@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShoppingCart, Bike, Headset, LayoutGrid, MapPinned, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench } from "lucide-react";
+import { ArrowRight, ShoppingCart, Bike, Headset, LayoutGrid, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench, Search, Camera } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Section } from "@/components/home/section";
 import { PartsFinder } from "@/components/home/parts-finder";
-import { AiExpertCard } from "@/components/home/ai-card";
 import { Suspense } from "react";
 import { LatestProducts } from "@/components/home/product-tabs";
 import { publicProducts } from "@/lib/catalog/public";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
-import { categories, vehicleBrands } from "@/lib/categories";
+import { categories } from "@/lib/categories";
 import { site } from "@/lib/site";
 import { T } from "@/lib/i18n";
 
@@ -23,11 +22,11 @@ const trust = [
   { icon: ShieldCheck, title: "Honest advice", sw: "Ushauri wa kweli", text: "We tell you what you are buying", textSw: "Tunakuambia unachonunua" },
 ];
 
-const why = [
-  { icon: ScanSearch, title: "Smart vehicle matching", sw: "Kulinganisha gari kwa busara", text: "Search by chassis, OEM number, part name or vehicle to find parts that fit.", textSw: "Tafuta kwa chassis, namba ya OEM, jina la kipuri au gari ili kupata vipuri vinavyofaa." },
-  { icon: ShieldCheck, title: "Honest advice", sw: "Ushauri wa kweli", text: "Ask us if a part is genuine, OEM equivalent or aftermarket. We tell you straight, and we never pass off one as another.", textSw: "Tuulize kama kipuri ni halisi, OEM au aftermarket. Tunakuambia ukweli, na hatuchanganyi kimoja na kingine." },
-  { icon: MapPinned, title: "Based in Kariakoo", sw: "Tuko Kariakoo", text: "A local team in Dar es Salaam you can visit, call or message.", textSw: "Timu ya hapa Dar es Salaam unayoweza kutembelea, kupigia au kuandikia." },
-  { icon: Truck, title: "Delivery or pickup", sw: "Usafirishaji au kuchukua", text: "Choose local delivery or collect your order from the shop.", textSw: "Chagua kufikishiwa au kuchukua oda yako dukani." },
+const steps = [
+  { icon: Search, title: "Find your part", sw: "Tafuta kipuri chako", text: "Search by name or part number, or open the parts guide.", textSw: "Tafuta kwa jina au namba ya kipuri, au fungua mwongozo wa vipuri." },
+  { icon: MessageCircle, title: "Send your order on WhatsApp", sw: "Tuma oda kwa WhatsApp", text: "We confirm the price, delivery fee and how to pay.", textSw: "Tunakuthibitishia bei, gharama ya usafirishaji na jinsi ya kulipa." },
+  { icon: Camera, title: "Check the fit and the photo", sw: "Hakiki inafaa na picha", text: "We check it fits your car, and send a real photo of your part to approve.", textSw: "Tunakagua inafaa gari lako, na kukutumia picha halisi ya kipuri uidhinishe." },
+  { icon: Truck, title: "Delivery or pickup", sw: "Kufikishiwa au kuchukua", text: "We deliver, or you collect from the shop in Kariakoo.", textSw: "Tunakufikishia, au unachukua dukani Kariakoo." },
 ];
 
 async function LatestSection() {
@@ -103,10 +102,7 @@ export default function HomePage() {
 
       {/* Parts finder + AI expert */}
       <section className="relative z-10 mx-auto mt-4 max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-4 lg:grid-cols-[1.9fr_1fr]">
-          <PartsFinder />
-          <AiExpertCard />
-        </div>
+        <PartsFinder />
       </section>
 
       <Section eyebrow={<T en="Browse" sw="Vinjari" />} title={<T en="Featured Categories" sw="Makundi Maarufu" />} intro={<T en="Find parts for every vehicle system." sw="Pata vipuri vya kila mfumo wa gari." />}>
@@ -133,81 +129,40 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="font-display text-lg font-extrabold"><T en="Not sure what your car needs?" sw="Huna uhakika gari lako linahitaji nini?" /></h2>
-            <p className="mt-1 text-sm text-muted"><T en="Browse every main part of a car by system, see what it does, and check if we have it." sw="Tazama vipuri vikuu vya gari kwa mfumo, ujue kila kimoja kinafanya nini, na uone kama tunacho." /></p>
-          </div>
-          <LinkButton href="/parts-guide"><T en="Open the parts guide" sw="Fungua mwongozo wa vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
-        </div>
-      </section>
-
       <Suspense fallback={null}>
         <LatestSection />
       </Suspense>
 
-
-      <Section eyebrow={<T en="Why Brothers" sw="Kwa nini Brothers" />} title={<T en="Why Choose Brothers Auto" sw="Kwa Nini Uchague Brothers Auto" />}>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {why.map(({ icon: Icon, title, sw, text, textSw }) => (
-            <div key={title} className="rounded-xl border border-border bg-surface p-3.5 shadow-card sm:p-6">
-              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-hero text-accent sm:mb-4 sm:h-11 sm:w-11">
-                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-              </span>
-              <h3 className="font-display text-sm font-bold leading-snug sm:text-base"><T en={title} sw={sw} /></h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:mt-2 sm:text-sm"><T en={text} sw={textSw} /></p>
-            </div>
+      <Section eyebrow={<T en="How it works" sw="Jinsi inavyofanya kazi" />} title={<T en="Order in four easy steps" sw="Agiza kwa hatua nne rahisi" />}>
+        <ol className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {steps.map(({ icon: Icon, title, sw, text, textSw }, i) => (
+            <li key={title} className="rounded-xl border border-border bg-surface p-4 shadow-card">
+              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-hero text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+              <p className="text-xs font-bold text-accent-text">{i + 1}</p>
+              <h3 className="font-display text-sm font-bold leading-snug"><T en={title} sw={sw} /></h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted"><T en={text} sw={textSw} /></p>
+            </li>
           ))}
-        </div>
+        </ol>
       </Section>
 
-      <div className="bg-surface-2">
-        <Section eyebrow={<T en="Vehicles" sw="Magari" />} title={<T en="Vehicle Brands We Serve" sw="Chapa za Magari Tunazohudumia" />}>
-          <ul className="flex flex-wrap gap-2">
-            {vehicleBrands.map((b) => (
-              <li key={b} className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold">
-                {b}
-              </li>
-            ))}
-            <li className="rounded-full border border-dashed border-border px-4 py-2 text-sm text-muted"><T en="and more" sw="na zaidi" /></li>
-          </ul>
-        </Section>
-      </div>
-
-
-      <div className="bg-surface-2">
-        <Section eyebrow={<T en="For the trade" sw="Kwa wafanyabiashara" />} title={<T en="Garage and Wholesale Services" sw="Huduma za Gereji na Jumla" />} intro={<T en="Mechanics, garages, dealers and fleet operators can request bulk quotations and, once approved, trade pricing." sw="Mafundi, gereji, wauzaji na wamiliki wa magari mengi wanaweza kuomba bei za jumla na, wakishaidhinishwa, bei za biashara." />}>
-          <LinkButton href="/quotation" size="lg"><T en="Request a Quotation" sw="Omba Bei" /> <ArrowRight className="h-4 w-4" /></LinkButton>
-        </Section>
-      </div>
-
-      <Section title={<T en="WhatsApp Support" sw="Msaada wa WhatsApp" />} eyebrow={<T en="Talk to us" sw="Ongea nasi" />}>
-        <div className="grid items-center gap-6 overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8 md:grid-cols-[260px_1fr] md:gap-8">
-          <Image
-            src="/brand/flyer.webp"
-            alt="Brothers Auto Spare Parts flyer: Bora sehemu za gari, with phone 0627 858827 and 0741 939 264"
-            width={1024}
-            height={1536}
-            sizes="260px"
-            className="mx-auto hidden h-auto w-full max-w-[260px] rounded-lg md:block"
-          />
-          <div className="space-y-5">
-            <div className="flex items-start gap-4">
-              <MessageCircle className="mt-1 h-8 w-8 shrink-0 text-accent-text" />
-              <p className="max-w-xl text-muted">
-                Tupigie au WhatsApp. Send us the part name, OEM number or a photo and our team will help you find the right part.
-              </p>
+      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6">
+        <div className="relative overflow-hidden rounded-2xl bg-hero p-6 text-hero-fg sm:p-8">
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-20 w-[70%] -skew-y-[12deg] bg-gradient-to-l from-accent/60 via-accent/20 to-transparent" />
+          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="font-display text-xl font-extrabold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
+              <p className="mt-1 text-sm text-[#c4c4c8]"><T en="Call or message us. Send the part name, its number or a photo." sw="Tupigie au tuandikie. Tuma jina la kipuri, namba yake au picha." /></p>
+              <p className="mt-3 font-display text-lg font-extrabold">{site.phones.join("  ·  ")}</p>
+              <p className="text-xs text-[#a8a8ae]">{site.location}</p>
             </div>
-            <ul className="space-y-1 font-display text-lg font-extrabold sm:text-xl">
-              {site.phones.map((p) => (<li key={p}>{p}</li>))}
-            </ul>
-            <p className="text-sm text-muted">{site.instagram.handle} · {site.location}</p>
-            <WhatsAppButton />
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton />
+              <LinkButton href="/about" variant="outline" size="lg"><T en="About us" sw="Kuhusu sisi" /></LinkButton>
+            </div>
           </div>
         </div>
-      </Section>
-
+      </section>
     </>
   );
 }
