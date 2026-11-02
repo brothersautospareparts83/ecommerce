@@ -154,14 +154,14 @@ export default function HomePage() {
 
 
       <Section eyebrow="Why Brothers" title="Why Choose Brothers Auto">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {why.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-xl border border-border bg-surface p-6 shadow-card">
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-hero text-accent">
-                <Icon className="h-5 w-5" />
+            <div key={title} className="rounded-xl border border-border bg-surface p-3.5 shadow-card sm:p-6">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-hero text-accent sm:mb-4 sm:h-11 sm:w-11">
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
-              <h3 className="font-display font-bold">{title}</h3>
-              <p className="mt-2 text-sm text-muted">{text}</p>
+              <h3 className="font-display text-sm font-bold leading-snug sm:text-base">{title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:mt-2 sm:text-sm">{text}</p>
             </div>
           ))}
         </div>
@@ -188,14 +188,14 @@ export default function HomePage() {
       </div>
 
       <Section title="WhatsApp Support" eyebrow="Talk to us">
-        <div className="grid items-center gap-8 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8 md:grid-cols-[260px_1fr]">
+        <div className="grid items-center gap-6 overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8 md:grid-cols-[260px_1fr] md:gap-8">
           <Image
             src="/brand/flyer.webp"
             alt="Brothers Auto Spare Parts flyer: Bora sehemu za gari, with phone 0627 858827 and 0741 939 264"
             width={1024}
             height={1536}
             sizes="260px"
-            className="mx-auto h-auto w-full max-w-[260px] rounded-lg"
+            className="mx-auto hidden h-auto w-full max-w-[260px] rounded-lg md:block"
           />
           <div className="space-y-5">
             <div className="flex items-start gap-4">
@@ -204,7 +204,7 @@ export default function HomePage() {
                 Tupigie au WhatsApp. Send us the part name, OEM number or a photo and our team will help you find the right part.
               </p>
             </div>
-            <ul className="space-y-1 font-display text-xl font-extrabold">
+            <ul className="space-y-1 font-display text-lg font-extrabold sm:text-xl">
               {site.phones.map((p) => (<li key={p}>{p}</li>))}
             </ul>
             <p className="text-sm text-muted">{site.instagram.handle} · {site.location}</p>
