@@ -115,12 +115,12 @@ export default function HomePage() {
 
       {/* The one dark band on the page */}
       <section className="rounded-3xl bg-hero px-5 py-8 text-hero-fg sm:px-10 sm:py-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent"><T en="Genuine · OEM · Aftermarket" sw="Halisi · OEM · Aftermarket" /></p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold"><T en="Genuine · OEM · Aftermarket" sw="Halisi · OEM · Aftermarket" /></p>
         <h2 className="mt-3 max-w-lg text-2xl font-bold sm:text-4xl"><T en="Honest advice on every part." sw="Ushauri wa kweli kwa kila kipuri." /></h2>
         <p className="mt-3 max-w-lg text-[15px] text-white/70">
           <T en="We tell you what you are buying, confirm the fit with your chassis number, and send a real photo of your part before delivery." sw="Tunakuambia unachonunua, tunathibitisha inafaa kwa chassis number yako, na kukutumia picha halisi ya kipuri kabla ya kukufikishia." />
         </p>
-        <LinkButton href="/finder?mode=vin" size="sm" className="mt-5 rounded-full px-4"><T en="Find parts by chassis" sw="Tafuta kwa chassis" /></LinkButton>
+        <LinkButton href="/finder?mode=vin" size="sm" className="mt-5 rounded-full bg-gold px-4 text-[#12281f]"><T en="Find parts by chassis" sw="Tafuta kwa chassis" /></LinkButton>
       </section>
 
       <section>

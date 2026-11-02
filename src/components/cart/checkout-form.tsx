@@ -33,8 +33,8 @@ export function CheckoutForm() {
         <label className="block text-sm font-semibold"><TL k="Email (optional)" /><input name="email" type="email" autoComplete="email" className={field} /></label>
         <fieldset className="space-y-2">
           <legend className="text-sm font-semibold"><TL k="How do you want to get it?" /></legend>
-          <label className="flex items-center gap-3 rounded-2xl border border-border bg-bg px-4 py-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft"><input type="radio" name="method" value="pickup" className="accent-[#f47b20]" checked={method === "pickup"} onChange={() => setMethod("pickup")} /> <TL k="Collect from the shop (Kariakoo)" /></label>
-          <label className="flex items-center gap-3 rounded-2xl border border-border bg-bg px-4 py-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft"><input type="radio" name="method" value="delivery" className="accent-[#f47b20]" checked={method === "delivery"} onChange={() => setMethod("delivery")} /> <TL k="Delivery (fee confirmed with you)" /></label>
+          <label className="flex items-center gap-3 rounded-2xl border border-border bg-bg px-4 py-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft"><input type="radio" name="method" value="pickup" className="accent-[#1c3d2e]" checked={method === "pickup"} onChange={() => setMethod("pickup")} /> <TL k="Collect from the shop (Kariakoo)" /></label>
+          <label className="flex items-center gap-3 rounded-2xl border border-border bg-bg px-4 py-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft"><input type="radio" name="method" value="delivery" className="accent-[#1c3d2e]" checked={method === "delivery"} onChange={() => setMethod("delivery")} /> <TL k="Delivery (fee confirmed with you)" /></label>
         </fieldset>
         {method === "delivery" && (
           <>

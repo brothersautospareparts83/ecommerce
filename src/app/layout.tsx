@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,6 +10,7 @@ import { ChatWidget } from "@/components/assistant/chat-widget";
 import { LanguageProvider } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
+const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], display: "swap" });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={inter.variable} data-theme="light">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} data-theme="light">
       <body className="min-h-screen pb-16 antialiased lg:pb-0">
         <LanguageProvider>
           <CartProvider>
