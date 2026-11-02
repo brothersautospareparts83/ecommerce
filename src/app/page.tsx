@@ -64,7 +64,7 @@ export default function HomePage() {
           {/* Shading so the text stays readable over the photo */}
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent dark:from-black/85 dark:via-black/40" />
         </div>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-8 sm:px-6 sm:py-20 lg:py-28">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-14 pt-0 sm:gap-8 sm:px-6 sm:py-20 lg:py-28">
           <div className="max-w-xl sm:max-w-[58%]">
           <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
@@ -88,7 +88,7 @@ export default function HomePage() {
           </div>
           </div>
           {/* Phones: the car gets its own space under the text, so nothing covers it */}
-          <div className="relative -mx-4 mt-3 aspect-[16/10] overflow-hidden sm:hidden">
+          <div className="relative order-first -mx-4 aspect-[16/10] overflow-hidden sm:hidden">
             <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="object-cover object-[75%_55%] dark:hidden" />
             <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hidden object-cover object-[75%_55%] dark:block" />
           </div>
