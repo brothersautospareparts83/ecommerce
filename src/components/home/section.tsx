@@ -17,7 +17,7 @@ export function Section({
         {eyebrow && (
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-accent-text">{eyebrow}</p>
         )}
-        <h2 className="font-display text-xl font-extrabold tracking-tight sm:text-2xl">{title}</h2>
+        <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">{title}</h2>
         {intro && <p className="mt-2 text-sm text-muted">{intro}</p>}
       </div>
       <Reveal>{children}</Reveal>

@@ -95,7 +95,7 @@ export function ChatWidget() {
           type="button"
           onClick={() => setOpen(true)}
           aria-label={t("Chat with us", "Ongea nasi")}
-          className="wa-pulse fixed bottom-[4.75rem] right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1fa855] text-white shadow-lg transition-transform hover:scale-105 lg:bottom-6"
+          className="fixed bottom-[4.75rem] right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1fa855] text-white shadow-lg transition-transform hover:scale-105 lg:bottom-6"
         >
           {WA}
           {order.length > 0 && <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[11px] font-bold text-accent-fg">{order.length}</span>}

@@ -64,19 +64,19 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
           <div className="max-w-xl sm:max-w-[44%]">
-          <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
-            <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
+          <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-medium tracking-wide text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
+            <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="Cars · Motorcycles · Delivery" sw="Magari · Pikipiki · Usafirishaji" />
           </p>
-          <h1 className="anim-fade-up anim-d1 max-w-3xl font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
-            <T en="QUALITY PARTS." sw="VIPURI BORA." />
+          <h1 className="anim-fade-up anim-d1 max-w-3xl font-display text-[1.9rem] font-bold leading-[1.12] tracking-tight sm:text-5xl">
+            <T en="Quality parts." sw="Vipuri bora." />
             <br />
-            <span className="text-accent"><T en="TRUSTED PERFORMANCE." sw="UTENDAJI UNAOAMINIKA." /></span>
+            <span className="text-accent"><T en="Trusted performance." sw="Utendaji unaoaminika." /></span>
           </h1>
           <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-[#c4c4c8] sm:mt-5 sm:text-base">
             <T en="Find the right automotive spare parts with confidence. Discover quality products, smart vehicle matching and reliable service from Brothers Auto Spare Parts." sw="Pata vipuri sahihi vya magari kwa uhakika. Gundua bidhaa bora, ulinganishaji wa gari kwa busara na huduma ya kuaminika kutoka Brothers Auto Spare Parts." />
           </p>
           <div className="anim-fade-up anim-d3 mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-            <LinkButton href="/shop" size="lg" className="btn-glow col-span-2 gap-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00]">
+            <LinkButton href="/shop" size="lg" className="col-span-2 gap-2">
               <ShoppingCart className="h-4 w-4" aria-hidden="true" /> <T en="Explore Spare Parts" sw="Tazama Vipuri" /> <ArrowRight className="h-4 w-4" />
             </LinkButton>
             <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-zinc-400 bg-white/80 px-2 text-sm text-zinc-900 hover:bg-white dark:border-white/30 dark:bg-black/40 dark:text-white sm:px-6 sm:text-base">
@@ -93,7 +93,7 @@ export default function HomePage() {
         <ul className="grid grid-cols-4 rounded-2xl border border-white/10 bg-hero/95 py-4 text-hero-fg shadow-card backdrop-blur md:grid-cols-5 md:py-5">
           {trust.map(({ icon: Icon, title, sw, text, textSw }, i) => (
             <li key={title} className={`flex flex-col items-center gap-1.5 border-white/10 px-1.5 text-center [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
-              <Icon className="icon-bob h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
+              <Icon className="h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
               <p className="text-[11px] font-bold leading-tight sm:text-sm"><T en={title} sw={sw} /></p>
               <p className="hidden text-xs text-[#a8a8ae] md:block"><T en={text} sw={textSw} /></p>
             </li>

@@ -11,7 +11,7 @@ export function LatestProducts({ products }: { products: ProductSummary[] }) {
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-accent-text">Popular parts</p>
-          <h2 className="font-display text-xl font-extrabold sm:text-2xl">Parts in the shop</h2>
+          <h2 className="font-display text-xl font-bold sm:text-2xl">Parts in the shop</h2>
         </div>
         <LinkButton href="/shop" variant="secondary" size="sm">View all <ArrowRight className="h-4 w-4" /></LinkButton>
       </div>

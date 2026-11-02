@@ -53,12 +53,12 @@ export function ProductCard({ product }: { product: ProductSummary }) {
         </div>
         <div className="flex flex-1 flex-col gap-1 px-3 pt-3 sm:px-4">
           {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
-          <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
+          <h3 className="font-display text-sm font-semibold leading-snug group-hover:text-accent-text">{product.name}</h3>
           <p className="text-xs text-zinc-500">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
         </div>
       </Link>
       <div className="flex flex-col gap-2 px-3 pb-3 pt-2 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:pb-4">
-        <span className="font-display text-[15px] font-extrabold sm:text-base">{formatPrice(product.priceTzs)}</span>
+        <span className="font-display text-[15px] font-bold sm:text-base">{formatPrice(product.priceTzs)}</span>
         {product.priceTzs > 0 && (
           <QuickAdd
             product={{ productId: product.id, slug: product.slug, sku: product.sku, name: product.name, priceTzs: product.priceTzs, imageUrl: product.imageUrl }}

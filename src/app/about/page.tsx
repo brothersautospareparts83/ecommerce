@@ -35,7 +35,7 @@ export default function AboutPage() {
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-24 w-[70%] -skew-y-[12deg] bg-gradient-to-l from-accent/70 via-accent/25 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
           <p className="anim-fade-up text-xs font-bold uppercase tracking-[0.2em] text-accent"><T en="About us" sw="Kuhusu sisi" /></p>
-          <h1 className="anim-fade-up anim-d1 mt-3 max-w-3xl font-display text-3xl font-extrabold leading-tight sm:text-5xl">
+          <h1 className="anim-fade-up anim-d1 mt-3 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-5xl">
             Brothers Auto <span className="text-accent">Spare Parts</span>
           </h1>
           <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:text-base">

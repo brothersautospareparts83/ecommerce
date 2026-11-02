@@ -112,7 +112,6 @@ body {
   70% { box-shadow: 0 0 0 16px rgba(31, 168, 85, 0); }
   100% { box-shadow: 0 0 0 0 rgba(31, 168, 85, 0); }
 }
-.wa-pulse { animation: wa-ring 2.4s ease-out infinite; }
 
 /* Motion: hero entrance, slow zoom on the hero photo, a light sweep, and a glow on the main button */
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -127,5 +126,3 @@ body {
 .anim-d4 { animation-delay: 0.55s; }
 .hero-zoom { animation: hero-zoom 22s ease-in-out infinite alternate; transform-origin: 70% 60%; }
 .hero-sweep { animation: sweep 7s ease-in-out infinite; }
-.btn-glow { animation: glow 2.6s ease-in-out infinite; }
-.icon-bob { animation: bob 3.2s ease-in-out infinite; }

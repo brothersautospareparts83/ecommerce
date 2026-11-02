@@ -137,7 +137,7 @@ export default function ShopPage(props: PageProps<"/shop">) {
       <nav aria-label="Breadcrumb" className="mb-2 text-sm text-muted">
         <Link href="/" className="hover:text-fg"><T en="Home" sw="Mwanzo" /></Link> / <span className="text-fg"><T en="Shop" sw="Duka" /></span>
       </nav>
-      <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
+      <h1 className="font-display text-3xl font-bold sm:text-4xl">
         <T en="All" sw="Vipuri" /> <span className="text-accent"><T en="parts" sw="vyote" /></span>
       </h1>
       <p className="mb-5 mt-1 text-sm text-muted">
