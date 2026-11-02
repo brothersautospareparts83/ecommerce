@@ -52,12 +52,12 @@ export function ProductCard({ product }: { product: ProductSummary }) {
       <div className="aspect-square overflow-hidden">
         <ProductImage src={product.imageUrl} alt={product.name} />
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <ClassificationBadge value={product.classification} />
+      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
+        {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
         <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
         <p className="text-xs text-muted">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
-        <div className="mt-auto flex items-end justify-between pt-2">
-          <span className="font-display text-base font-extrabold">{formatPrice(product.priceTzs)}</span>
+        <div className="mt-auto flex flex-col gap-0.5 pt-2 sm:flex-row sm:items-end sm:justify-between">
+          <span className="font-display text-[15px] font-extrabold sm:text-base">{formatPrice(product.priceTzs)}</span>
           <StockStatus inStock={product.inStock} />
         </div>
       </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { PackageSearch, SearchX } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
+import { CollapsibleFilters } from "@/components/product/collapsible-filters";
 import { Button, LinkButton } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { publicBrands, publicCategories, searchAndLog, type SortKey } from "@/lib/catalog/public";
@@ -51,6 +52,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
   return (
     <>
       <form action="/shop" className="rounded-xl border border-border bg-surface p-3 sm:p-4">
+        <CollapsibleFilters activeCount={[q, one(sp.category), one(sp.type), inStock ? "1" : ""].filter(Boolean).length}>
         <div className="grid grid-cols-2 gap-x-3 gap-y-2 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-4">
             <label htmlFor="shop-q" className="mb-1 block text-xs font-semibold text-muted">Search by name, part number or SKU</label>
@@ -91,6 +93,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
           </label>
           <Button type="submit" size="md">Apply</Button>
         </div>
+        </CollapsibleFilters>
       </form>
 
       <div className="mt-5 flex items-center justify-between gap-3 text-sm">
