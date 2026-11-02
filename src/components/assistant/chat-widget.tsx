@@ -38,7 +38,10 @@ export function ChatWidget() {
     setText("");
     start(async () => {
       try {
-        const r = await askAssistant(t);
+        const r = await askAssistant(
+          t,
+          msgs.slice(1).map((m) => ({ role: m.from === "me" ? ("user" as const) : ("assistant" as const), text: m.text })),
+        );
         setMsgs((m) => [
           ...m,
           { from: "bot", text: r.text, items: r.items, wa: `Hello Brothers Auto, ${t}` },

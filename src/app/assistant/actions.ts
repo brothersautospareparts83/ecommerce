@@ -2,7 +2,9 @@
 
 import { publicProducts } from "@/lib/catalog/public";
 import { vehicleBrands } from "@/lib/categories";
+import { headers } from "next/headers";
 import { site } from "@/lib/site";
+import { geminiReply, type AiTurn } from "@/lib/assistant-ai";
 
 export type AssistantItem = { name: string; slug: string; sku: string; partNumber: string | null; priceTzs: number; imageUrl: string | null };
 export type AssistantReply = { text: string; items: AssistantItem[]; vehicle: string | null; part: string | null };
@@ -17,7 +19,7 @@ const STOP = new Set(
  * Answers a customer's question from the real catalogue only: names, part numbers and prices come from the database.
  * It never guesses fitment: for a vehicle it shows parts by name and says the team confirms fitment with the chassis number.
  */
-export async function askAssistant(raw: string): Promise<AssistantReply> {
+export async function askAssistant(raw: string, history: AiTurn[] = []): Promise<AssistantReply> {
   const message = String(raw ?? "").replace(/\s+/g, " ").trim().slice(0, 200);
   const empty = { items: [], vehicle: null, part: null };
   if (!message) return { text: "Type a part name, a part number, or your car and the part you need.", ...empty };
@@ -61,5 +63,18 @@ export async function askAssistant(raw: string): Promise<AssistantReply> {
   if (vehicle) {
     lines.push(`For your ${vehicle}: I can only show parts by name here. Our team confirms the part fits your exact vehicle, using your chassis number, before you order.`);
   }
-  return { text: lines.join("\n\n"), items: found, vehicle, part };
+  // With a GEMINI_API_KEY the answer is phrased by the model from these same matches; otherwise (or on any problem) the plain reply is used.
+  const visitor = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
+  const ai = await geminiReply({
+    visitor,
+    message,
+    history: (Array.isArray(history) ? history : []).slice(-6).map((t) => ({
+      role: t.role === "assistant" ? ("assistant" as const) : ("user" as const),
+      text: String(t.text ?? "").slice(0, 400),
+    })),
+    products: found.map((p) => ({ name: p.name, partNumber: p.partNumber, priceTzs: p.priceTzs, sku: p.sku })),
+    vehicle,
+    knownNumbers: site.phones,
+  });
+  return { text: ai ?? lines.join("\n\n"), items: found, vehicle, part };
 }
