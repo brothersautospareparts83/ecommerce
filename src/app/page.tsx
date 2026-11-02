@@ -49,24 +49,24 @@ export default function HomePage() {
       </section>
 
       <Section title={<T en="Shop by category" sw="Nunua kwa kundi" />}>
-        <div className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
           {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
             <Link
               key={slug}
               href={`/categories/${slug}`}
-              className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-surface px-2 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card"
+              className="group flex items-center gap-3 rounded-2xl border border-border bg-surface p-3.5 transition-all duration-500 hover:-translate-y-1 hover:border-accent hover:shadow-card md:flex-col md:px-2 md:py-5 md:text-center"
             >
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface-2 text-accent-text transition-colors group-hover:bg-accent group-hover:text-accent-fg sm:h-16 sm:w-16">
-                <Icon className="h-7 w-7 sm:h-8 sm:w-8" />
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent-text transition-colors group-hover:bg-accent group-hover:text-accent-fg md:h-16 md:w-16 md:rounded-full">
+                <Icon className="h-5 w-5 md:h-8 md:w-8" />
               </span>
-              <span className="font-display text-xs font-bold leading-snug sm:text-sm">{name}</span>
+              <span className="font-display text-sm font-semibold leading-snug md:text-sm">{name}</span>
             </Link>
           ))}
           <Link
             href="/categories"
-            className="flex flex-col items-center justify-center gap-2 rounded-xl bg-accent px-2 py-5 text-center text-accent-fg transition-transform hover:-translate-y-1"
+            className="flex items-center justify-center gap-2 rounded-2xl bg-accent px-3 py-4 text-center text-accent-fg transition-transform duration-500 hover:-translate-y-1 md:flex-col md:py-5"
           >
-            <LayoutGrid className="h-8 w-8" aria-hidden="true" />
+            <LayoutGrid className="h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
             <span className="font-display text-xs font-extrabold leading-snug sm:text-sm"><T en="View All Categories →" sw="Tazama Makundi Yote →" /></span>
           </Link>
         </div>
@@ -77,7 +77,7 @@ export default function HomePage() {
       </Suspense>
 
       {/* 4. Banner */}
-      <section className="relative overflow-hidden bg-white text-zinc-900 dark:bg-black dark:text-hero-fg">
+      <section className="relative mx-4 mt-4 overflow-hidden rounded-2xl border border-border bg-white text-zinc-900 sm:mx-0 sm:mt-0 sm:rounded-none sm:border-0 dark:bg-black dark:text-hero-fg">
         <div
           aria-hidden="true"
           className="absolute inset-0 hidden opacity-[0.07] dark:block"
@@ -89,13 +89,13 @@ export default function HomePage() {
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         {/* The photo is shown whole, never cropped or zoomed: centred on large screens, along the bottom on phones.
             The files are served as they are (already web-sized), so they appear straight away. */}
-        <div className="absolute inset-x-0 bottom-12 aspect-[16/9] sm:inset-x-auto sm:bottom-0 sm:left-1/2 sm:top-0 sm:h-full sm:w-auto sm:-translate-x-1/2">
+        <div className="absolute inset-x-0 bottom-3 aspect-[16/9] sm:inset-x-auto sm:bottom-0 sm:left-1/2 sm:top-0 sm:h-full sm:w-auto sm:-translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/hero-car-light.webp" srcSet="/brand/hero-car-light-800.webp 800w, /brand/hero-car-light.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="eager" fetchPriority="high" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 hero-drift h-full w-full object-cover dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/hero-car-dark.webp" srcSet="/brand/hero-car-dark-800.webp 800w, /brand/hero-car-dark.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="lazy" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 hero-drift h-full w-full object-cover hidden dark:block" />
         </div>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(85vw*0.5625+1.5rem)] pt-6 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
           <div className="max-w-xl sm:max-w-[44%]">
           <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-medium tracking-wide text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="Cars · Motorcycles · Delivery" sw="Magari · Pikipiki · Usafirishaji" />
@@ -122,7 +122,7 @@ export default function HomePage() {
       </section>
 
       {/* Trust bar, overlapping the bottom of the hero */}
-      <section aria-label="Why shop with us" className="relative z-10 mx-auto -mt-12 max-w-7xl px-4 sm:px-6">
+      <section aria-label="Why shop with us" className="relative z-10 mx-auto mt-4 max-w-7xl px-4 sm:-mt-12 sm:px-6">
         <ul className="grid grid-cols-4 rounded-2xl border border-border bg-surface/95 py-4 text-fg shadow-xl backdrop-blur dark:border-white/10 dark:bg-hero/95 dark:text-hero-fg md:grid-cols-5 md:py-5">
           {trust.map(({ icon: Icon, title, sw, text, textSw }, i) => (
             <li key={title} className={`flex flex-col items-center gap-1.5 border-border px-1.5 text-center dark:border-white/10 [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
@@ -135,9 +135,9 @@ export default function HomePage() {
       </section>
 
       <Section eyebrow={<T en="How it works" sw="Jinsi inavyofanya kazi" />} title={<T en="Order in four easy steps" sw="Agiza kwa hatua nne rahisi" />}>
-        <ol className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ icon: Icon, title, sw, text, textSw }, i) => (
-            <li key={title} className="rounded-xl border border-border bg-surface p-4 shadow-card">
+            <li key={title} className="rounded-2xl border border-border bg-surface p-4 shadow-card">
               <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
               <p className="text-xs font-bold text-accent-text">{i + 1}</p>
               <h3 className="font-display text-sm font-bold leading-snug"><T en={title} sw={sw} /></h3>
