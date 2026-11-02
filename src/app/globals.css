@@ -116,7 +116,7 @@ body {
 
 /* Motion: hero entrance, slow zoom on the hero photo, a light sweep, and a glow on the main button */
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes hero-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+@keyframes hero-zoom { from { transform: scale(1); } to { transform: scale(1.03); } }
 @keyframes sweep { 0% { transform: translateX(-120%) skewX(-18deg); } 60%, 100% { transform: translateX(260%) skewX(-18deg); } }
 @keyframes glow { 0%, 100% { box-shadow: 0 0 18px rgba(245, 124, 32, 0.35); } 50% { box-shadow: 0 0 34px rgba(245, 124, 32, 0.7); } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
