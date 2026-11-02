@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { CartProvider } from "@/lib/cart";
+import { ChatWidget } from "@/components/assistant/chat-widget";
 import { site } from "@/lib/site";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
@@ -50,6 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
           <Suspense fallback={null}>
             <BottomNav />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ChatWidget />
           </Suspense>
         </CartProvider>
       </body>

@@ -47,7 +47,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent"
+      className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent"
     >
       <div className="aspect-square overflow-hidden">
         <ProductImage src={product.imageUrl} alt={product.name} />
@@ -55,10 +55,9 @@ export function ProductCard({ product }: { product: ProductSummary }) {
       <div className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
         {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
         <h3 className="font-display text-sm font-bold leading-snug group-hover:text-accent-text">{product.name}</h3>
-        <p className="text-xs text-muted">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
-        <div className="mt-auto flex flex-col gap-0.5 pt-2 sm:flex-row sm:items-end sm:justify-between">
+        <p className="text-xs text-zinc-500">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
+        <div className="mt-auto pt-2">
           <span className="font-display text-[15px] font-extrabold sm:text-base">{formatPrice(product.priceTzs)}</span>
-          <StockStatus inStock={product.inStock} />
         </div>
       </div>
     </Link>

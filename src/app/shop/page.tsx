@@ -88,10 +88,6 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
               </select>
             </div>
           )}
-          <label className="flex h-11 items-center gap-2 text-sm font-medium">
-            <input type="checkbox" name="stock" value="1" defaultChecked={inStock} className="h-4 w-4 accent-[var(--accent)]" />
-            In stock only
-          </label>
           <Button type="submit" size="md">Apply</Button>
         </div>
         </CollapsibleFilters>

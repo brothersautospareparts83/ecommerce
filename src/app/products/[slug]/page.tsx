@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { AddToCart } from "@/components/cart/add-to-cart";
-import { ClassificationBadge, ProductCard, ProductImage, StockStatus } from "@/components/product/product-card";
+import { ClassificationBadge, ProductCard, ProductImage } from "@/components/product/product-card";
 import { conditionLabel, publicProduct, publicProducts } from "@/lib/catalog/public";
 import { formatPrice } from "@/lib/utils";
 
@@ -82,7 +82,6 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
           {p.classification !== "unverified" && <div className="mb-3"><ClassificationBadge value={p.classification} /></div>}
           <h1 className="font-display text-2xl font-extrabold sm:text-3xl">{p.name}</h1>
           <p className="mt-4 font-display text-3xl font-extrabold">{formatPrice(p.priceTzs)}</p>
-          <div className="mt-2"><StockStatus inStock={p.inStock} /></div>
 
           {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}
 

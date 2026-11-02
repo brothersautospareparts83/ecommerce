@@ -69,7 +69,6 @@ async function Guide() {
                           <Link href={`/shop?q=${encodeURIComponent(p.match)}`} className="font-semibold text-accent-text hover:underline">
                             {f!.n} in our catalogue
                           </Link>
-                          {f!.inStock === 0 && <span className="text-muted"> · none in stock now, ask us</span>}
                         </>
                       ) : (
                         <span className="font-semibold text-muted">Not in our catalogue yet: ask us</span>
