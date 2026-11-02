@@ -48,7 +48,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent">
       <Link href={`/products/${product.slug}`} className="flex flex-1 flex-col">
-        <div className="aspect-square overflow-hidden">
+        <div className="aspect-[4/3] overflow-hidden bg-white sm:aspect-square">
           <ProductImage src={product.imageUrl} alt={product.name} className="transition-transform duration-500 group-hover:scale-105" />
         </div>
         <div className="flex flex-1 flex-col gap-1 px-3 pt-3 sm:px-4">
