@@ -43,7 +43,40 @@ async function LatestSection() {
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
+      {/* 1. Find a part: first thing on the page */}
+      <section className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 sm:pt-6">
+        <PartsFinder />
+      </section>
+
+      <Section title={<T en="Shop by category" sw="Nunua kwa kundi" />}>
+        <div className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
+          {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
+            <Link
+              key={slug}
+              href={`/categories/${slug}`}
+              className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-surface px-2 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card"
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface-2 text-accent-text transition-colors group-hover:bg-accent group-hover:text-accent-fg sm:h-16 sm:w-16">
+                <Icon className="h-7 w-7 sm:h-8 sm:w-8" />
+              </span>
+              <span className="font-display text-xs font-bold leading-snug sm:text-sm">{name}</span>
+            </Link>
+          ))}
+          <Link
+            href="/categories"
+            className="flex flex-col items-center justify-center gap-2 rounded-xl bg-accent px-2 py-5 text-center text-accent-fg transition-transform hover:-translate-y-1"
+          >
+            <LayoutGrid className="h-8 w-8" aria-hidden="true" />
+            <span className="font-display text-xs font-extrabold leading-snug sm:text-sm"><T en="View All Categories →" sw="Tazama Makundi Yote →" /></span>
+          </Link>
+        </div>
+      </Section>
+
+      <Suspense fallback={null}>
+        <LatestSection />
+      </Suspense>
+
+      {/* 4. Banner */}
       <section className="relative overflow-hidden bg-white text-zinc-900 dark:bg-black dark:text-hero-fg">
         <div
           aria-hidden="true"
@@ -100,39 +133,6 @@ export default function HomePage() {
           ))}
         </ul>
       </section>
-
-      {/* Parts finder + AI expert */}
-      <section className="relative z-10 mx-auto mt-4 max-w-7xl px-4 sm:px-6">
-        <PartsFinder />
-      </section>
-
-      <Section eyebrow={<T en="Browse" sw="Vinjari" />} title={<T en="Featured Categories" sw="Makundi Maarufu" />} intro={<T en="Find parts for every vehicle system." sw="Pata vipuri vya kila mfumo wa gari." />}>
-        <div className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
-          {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
-            <Link
-              key={slug}
-              href={`/categories/${slug}`}
-              className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-surface px-2 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card"
-            >
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface-2 text-accent-text transition-colors group-hover:bg-accent group-hover:text-accent-fg sm:h-16 sm:w-16">
-                <Icon className="h-7 w-7 sm:h-8 sm:w-8" />
-              </span>
-              <span className="font-display text-xs font-bold leading-snug sm:text-sm">{name}</span>
-            </Link>
-          ))}
-          <Link
-            href="/categories"
-            className="flex flex-col items-center justify-center gap-2 rounded-xl bg-accent px-2 py-5 text-center text-accent-fg transition-transform hover:-translate-y-1"
-          >
-            <LayoutGrid className="h-8 w-8" aria-hidden="true" />
-            <span className="font-display text-xs font-extrabold leading-snug sm:text-sm"><T en="View All Categories →" sw="Tazama Makundi Yote →" /></span>
-          </Link>
-        </div>
-      </Section>
-
-      <Suspense fallback={null}>
-        <LatestSection />
-      </Suspense>
 
       <Section eyebrow={<T en="How it works" sw="Jinsi inavyofanya kazi" />} title={<T en="Order in four easy steps" sw="Agiza kwa hatua nne rahisi" />}>
         <ol className="grid grid-cols-2 gap-3 lg:grid-cols-4">
