@@ -76,8 +76,18 @@ export default function HomePage() {
         <LatestSection />
       </Suspense>
 
-      {/* 4. Banner */}
-      <section className="relative mx-4 mt-4 overflow-hidden rounded-2xl border border-border bg-white text-zinc-900 sm:mx-0 sm:mt-0 sm:rounded-none sm:border-0 dark:bg-black dark:text-hero-fg">
+      {/* 4. Banner, phones: a dark card with the text on top and the whole car below */}
+      <section className="mx-4 mt-4 overflow-hidden rounded-3xl bg-[#141414] px-5 pt-6 text-white sm:hidden">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent"><T en="Genuine · OEM · Aftermarket" sw="Halisi · OEM · Aftermarket" /></p>
+        <h2 className="mt-3 font-display text-[1.4rem] font-bold leading-tight"><T en="Honest advice on every part" sw="Ushauri wa kweli kwa kila kipuri" /></h2>
+        <p className="mt-2 text-[13px] leading-relaxed text-[#c4c4c8]"><T en="We tell you what you are buying and confirm the fit before you order." sw="Tunakuambia unachonunua na kuthibitisha inafaa kabla hujaagiza." /></p>
+        <LinkButton href="/shop" size="lg" className="mt-4 w-full"><T en="Explore spare parts" sw="Tazama vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/hero-car-dark-800.webp" alt="" width={800} height={450} loading="lazy" decoding="async" className="hero-drift -mx-5 mt-2 block w-[calc(100%+2.5rem)] max-w-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" />
+      </section>
+
+      {/* 4. Banner, larger screens */}
+      <section className="relative mt-4 hidden overflow-hidden bg-white text-zinc-900 sm:mt-0 sm:block dark:bg-black dark:text-hero-fg">
         <div
           aria-hidden="true"
           className="absolute inset-0 hidden opacity-[0.07] dark:block"
@@ -121,8 +131,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trust, phones: three small cards */}
+      <section aria-label="Why shop with us" className="mx-auto mt-4 max-w-7xl px-4 sm:hidden">
+        <ul className="grid grid-cols-3 gap-2">
+          {trust.slice(0, 3).map(({ icon: Icon, title, sw }) => (
+            <li key={title} className="flex flex-col items-center gap-1.5 rounded-2xl border border-border bg-surface px-1.5 py-3 text-center">
+              <Icon className="h-6 w-6 text-accent" strokeWidth={1.6} aria-hidden="true" />
+              <p className="text-[11px] font-semibold leading-tight"><T en={title} sw={sw} /></p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* Trust bar, overlapping the bottom of the hero */}
-      <section aria-label="Why shop with us" className="relative z-10 mx-auto mt-4 max-w-7xl px-4 sm:-mt-12 sm:px-6">
+      <section aria-label="Why shop with us" className="relative z-10 mx-auto hidden max-w-7xl px-4 sm:-mt-12 sm:block sm:px-6">
         <ul className="grid grid-cols-4 rounded-2xl border border-border bg-surface/95 py-4 text-fg shadow-xl backdrop-blur dark:border-white/10 dark:bg-hero/95 dark:text-hero-fg md:grid-cols-5 md:py-5">
           {trust.map(({ icon: Icon, title, sw, text, textSw }, i) => (
             <li key={title} className={`flex flex-col items-center gap-1.5 border-border px-1.5 text-center dark:border-white/10 [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
@@ -135,13 +157,16 @@ export default function HomePage() {
       </section>
 
       <Section eyebrow={<T en="How it works" sw="Jinsi inavyofanya kazi" />} title={<T en="Order in four easy steps" sw="Agiza kwa hatua nne rahisi" />}>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="flex flex-col gap-2.5 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
           {steps.map(({ icon: Icon, title, sw, text, textSw }, i) => (
-            <li key={title} className="rounded-2xl border border-border bg-surface p-4 shadow-card">
-              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
-              <p className="text-xs font-bold text-accent-text">{i + 1}</p>
-              <h3 className="font-display text-sm font-bold leading-snug"><T en={title} sw={sw} /></h3>
-              <p className="mt-1 text-xs leading-relaxed text-muted"><T en={text} sw={textSw} /></p>
+            <li key={title} className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-3.5 shadow-card sm:block sm:p-4">
+              <span className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-fg sm:hidden">{i + 1}</span>
+              <span className="mb-3 hidden h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text sm:flex dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+              <div>
+                <p className="hidden text-xs font-bold text-accent-text sm:block">{i + 1}</p>
+                <h3 className="font-display text-sm font-bold leading-snug"><T en={title} sw={sw} /></h3>
+                <p className="mt-0.5 text-xs leading-relaxed text-muted sm:mt-1"><T en={text} sw={textSw} /></p>
+              </div>
             </li>
           ))}
         </ol>
