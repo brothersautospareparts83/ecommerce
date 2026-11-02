@@ -46,10 +46,10 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-hero text-hero-fg">
+      <section className="relative overflow-hidden bg-white text-zinc-900 dark:bg-hero dark:text-hero-fg">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 hidden opacity-[0.07] dark:block"
           style={{
             backgroundImage:
               "repeating-linear-gradient(135deg, #c4c4c8 0 1px, transparent 1px 22px)",
@@ -57,20 +57,28 @@ export default function HomePage() {
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <Image
-          src="/brand/hero-car.webp"
+          src="/brand/hero-car-light.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="hero-zoom object-cover object-[78%_70%] sm:object-[70%_60%]"
+          className="hero-zoom object-cover object-[78%_70%] dark:hidden sm:object-[70%_60%]"
         />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/3 overflow-hidden"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
+        <Image
+          src="/brand/hero-car-dark.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero-zoom hidden object-cover object-[78%_70%] dark:block sm:object-[70%_60%]"
+        />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 overflow-hidden dark:block"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
         {/* Shading so the text stays readable over the car: heavier at the left and on phones */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent sm:from-black/85 sm:via-black/40" />
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-black/80 to-transparent sm:hidden" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent sm:from-white/80 sm:via-white/30 dark:from-black/90 dark:via-black/55 dark:sm:from-black/85 dark:sm:via-black/40" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/80 to-transparent sm:hidden dark:from-black/80" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-24 pt-8 sm:px-6 sm:py-20 lg:py-28">
           <div>
-          <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
+          <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
           </p>
           <h1 className="anim-fade-up anim-d1 max-w-3xl font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
@@ -78,14 +86,14 @@ export default function HomePage() {
             <br />
             <span className="text-accent"><T en="TRUSTED PERFORMANCE." sw="UTENDAJI UNAOAMINIKA." /></span>
           </h1>
-          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:mt-5 sm:text-base">
+          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-[#c4c4c8] sm:mt-5 sm:text-base">
             <T en="Find the right automotive spare parts with confidence. Discover quality products, smart vehicle matching and reliable service from Brothers Auto Spare Parts." sw="Pata vipuri sahihi vya magari kwa uhakika. Gundua bidhaa bora, ulinganishaji wa gari kwa busara na huduma ya kuaminika kutoka Brothers Auto Spare Parts." />
           </p>
           <div className="anim-fade-up anim-d3 mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
             <LinkButton href="/shop" size="lg" className="btn-glow col-span-2 gap-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00]">
               <ShoppingCart className="h-4 w-4" aria-hidden="true" /> <T en="Explore Spare Parts" sw="Tazama Vipuri" /> <ArrowRight className="h-4 w-4" />
             </LinkButton>
-            <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-white/30 bg-black/40 px-2 text-sm sm:px-6 sm:text-base">
+            <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-zinc-400 bg-white/80 px-2 text-sm text-zinc-900 hover:bg-white dark:border-white/30 dark:bg-black/40 dark:text-white sm:px-6 sm:text-base">
               <ScanSearch className="h-4 w-4 shrink-0" aria-hidden="true" /> <T en="Find Parts by Chassis" sw="Tafuta kwa Chassis" />
             </LinkButton>
             <WhatsAppButton />

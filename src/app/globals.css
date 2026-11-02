@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* Brand palette (from the official logo and flyer): black, orange, silver. No blue tints. */
 :root {
   --brand-black: #0a0a0b;
