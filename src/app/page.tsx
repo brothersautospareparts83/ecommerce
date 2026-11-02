@@ -77,7 +77,7 @@ export default function HomePage() {
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent sm:from-white/80 sm:via-white/30 dark:from-black/90 dark:via-black/55 dark:sm:from-black/85 dark:sm:via-black/40" />
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/80 to-transparent sm:hidden dark:from-black/80" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-24 pt-8 sm:px-6 sm:py-20 lg:py-28">
-          <div>
+          <div className="max-w-xl sm:max-w-[58%]">
           <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/60 px-3 py-1 text-xs font-semibold tracking-widest text-zinc-700 dark:border-white/20 dark:bg-transparent dark:text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
           </p>
