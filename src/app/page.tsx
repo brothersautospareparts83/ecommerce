@@ -11,22 +11,23 @@ import { publicProducts } from "@/lib/catalog/public";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { categories, vehicleBrands } from "@/lib/categories";
 import { site } from "@/lib/site";
+import { T } from "@/lib/i18n";
 
 const featuredSlugs = ["engine-components", "brake-systems", "suspension-steering", "oil-filters", "electrical-components"];
 
 const trust = [
-  { icon: Truck, title: "Delivery or pickup", text: "Across Tanzania or from Kariakoo" },
-  { icon: MessageCircle, title: "Order on WhatsApp", text: "Send a part name or number" },
-  { icon: Headset, title: "Expert support", text: site.phones[0] },
-  { icon: Bike, title: "Cars & motorcycles", text: "Parts for both" },
-  { icon: ShieldCheck, title: "Honest advice", text: "We tell you what you are buying" },
+  { icon: Truck, title: "Delivery or pickup", sw: "Usafirishaji au kuchukua", text: "Across Tanzania or from Kariakoo", textSw: "Nchi nzima au kutoka Kariakoo" },
+  { icon: MessageCircle, title: "Order on WhatsApp", sw: "Agiza kwa WhatsApp", text: "Send a part name or number", textSw: "Tuma jina au namba ya kipuri" },
+  { icon: Headset, title: "Expert support", sw: "Msaada wa wataalamu", text: site.phones[0], textSw: site.phones[0] },
+  { icon: Bike, title: "Cars & motorcycles", sw: "Magari na pikipiki", text: "Parts for both", textSw: "Vipuri vya vyote viwili" },
+  { icon: ShieldCheck, title: "Honest advice", sw: "Ushauri wa kweli", text: "We tell you what you are buying", textSw: "Tunakuambia unachonunua" },
 ];
 
 const why = [
-  { icon: ScanSearch, title: "Smart vehicle matching", text: "Search by chassis, OEM number, part name or vehicle to find parts that fit." },
-  { icon: ShieldCheck, title: "Honest advice", text: "Ask us if a part is genuine, OEM equivalent or aftermarket. We tell you straight, and we never pass off one as another." },
-  { icon: MapPinned, title: "Based in Kariakoo", text: "A local team in Dar es Salaam you can visit, call or message." },
-  { icon: Truck, title: "Delivery or pickup", text: "Choose local delivery or collect your order from the shop." },
+  { icon: ScanSearch, title: "Smart vehicle matching", sw: "Kulinganisha gari kwa busara", text: "Search by chassis, OEM number, part name or vehicle to find parts that fit.", textSw: "Tafuta kwa chassis, namba ya OEM, jina la kipuri au gari ili kupata vipuri vinavyofaa." },
+  { icon: ShieldCheck, title: "Honest advice", sw: "Ushauri wa kweli", text: "Ask us if a part is genuine, OEM equivalent or aftermarket. We tell you straight, and we never pass off one as another.", textSw: "Tuulize kama kipuri ni halisi, OEM au aftermarket. Tunakuambia ukweli, na hatuchanganyi kimoja na kingine." },
+  { icon: MapPinned, title: "Based in Kariakoo", sw: "Tuko Kariakoo", text: "A local team in Dar es Salaam you can visit, call or message.", textSw: "Timu ya hapa Dar es Salaam unayoweza kutembelea, kupigia au kuandikia." },
+  { icon: Truck, title: "Delivery or pickup", sw: "Usafirishaji au kuchukua", text: "Choose local delivery or collect your order from the shop.", textSw: "Chagua kufikishiwa au kuchukua oda yako dukani." },
 ];
 
 async function LatestSection() {
@@ -61,31 +62,31 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[78%_70%] sm:object-[70%_60%]"
+          className="hero-zoom object-cover object-[78%_70%] sm:object-[70%_60%]"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/3 overflow-hidden"><div className="hero-sweep h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" /></div>
         {/* Shading so the text stays readable over the car: heavier at the left and on phones */}
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent sm:from-black/85 sm:via-black/40" />
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-black/80 to-transparent sm:hidden" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-24 pt-8 sm:px-6 sm:py-20 lg:py-28">
           <div>
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
-            <Wrench className="h-3.5 w-3.5 text-accent" /> CARS · MOTORCYCLES · DELIVERY
+          <p className="anim-fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
+            <Wrench className="h-3.5 w-3.5 text-accent" /> <T en="CARS · MOTORCYCLES · DELIVERY" sw="MAGARI · PIKIPIKI · USAFIRISHAJI" />
           </p>
-          <h1 className="max-w-3xl font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
-            QUALITY PARTS.
+          <h1 className="anim-fade-up anim-d1 max-w-3xl font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+            <T en="QUALITY PARTS." sw="VIPURI BORA." />
             <br />
-            <span className="text-accent">TRUSTED PERFORMANCE.</span>
+            <span className="text-accent"><T en="TRUSTED PERFORMANCE." sw="UTENDAJI UNAOAMINIKA." /></span>
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:mt-5 sm:text-base">
-            Find the right automotive spare parts with confidence. Discover quality products, smart vehicle
-            matching and reliable service from Brothers Auto Spare Parts.
+          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:mt-5 sm:text-base">
+            <T en="Find the right automotive spare parts with confidence. Discover quality products, smart vehicle matching and reliable service from Brothers Auto Spare Parts." sw="Pata vipuri sahihi vya magari kwa uhakika. Gundua bidhaa bora, ulinganishaji wa gari kwa busara na huduma ya kuaminika kutoka Brothers Auto Spare Parts." />
           </p>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-            <LinkButton href="/shop" size="lg" className="col-span-2 gap-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00] shadow-[0_0_28px_rgba(245,124,32,0.5)]">
-              <ShoppingCart className="h-4 w-4" aria-hidden="true" /> Explore Spare Parts <ArrowRight className="h-4 w-4" />
+          <div className="anim-fade-up anim-d3 mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
+            <LinkButton href="/shop" size="lg" className="btn-glow col-span-2 gap-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00]">
+              <ShoppingCart className="h-4 w-4" aria-hidden="true" /> <T en="Explore Spare Parts" sw="Tazama Vipuri" /> <ArrowRight className="h-4 w-4" />
             </LinkButton>
             <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-white/30 bg-black/40 px-2 text-sm sm:px-6 sm:text-base">
-              <ScanSearch className="h-4 w-4 shrink-0" aria-hidden="true" /> Find Parts by Chassis
+              <ScanSearch className="h-4 w-4 shrink-0" aria-hidden="true" /> <T en="Find Parts by Chassis" sw="Tafuta kwa Chassis" />
             </LinkButton>
             <WhatsAppButton />
           </div>
@@ -96,11 +97,11 @@ export default function HomePage() {
       {/* Trust bar, overlapping the bottom of the hero */}
       <section aria-label="Why shop with us" className="relative z-10 mx-auto -mt-12 max-w-7xl px-4 sm:px-6">
         <ul className="grid grid-cols-4 rounded-2xl border border-white/10 bg-hero/95 py-4 text-hero-fg shadow-card backdrop-blur md:grid-cols-5 md:py-5">
-          {trust.map(({ icon: Icon, title, text }, i) => (
+          {trust.map(({ icon: Icon, title, sw, text, textSw }, i) => (
             <li key={title} className={`flex flex-col items-center gap-1.5 border-white/10 px-1.5 text-center [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
-              <Icon className="h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
-              <p className="text-[11px] font-bold leading-tight sm:text-sm">{title}</p>
-              <p className="hidden text-xs text-[#a8a8ae] md:block">{text}</p>
+              <Icon className="icon-bob h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
+              <p className="text-[11px] font-bold leading-tight sm:text-sm"><T en={title} sw={sw} /></p>
+              <p className="hidden text-xs text-[#a8a8ae] md:block"><T en={text} sw={textSw} /></p>
             </li>
           ))}
         </ul>
@@ -114,7 +115,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Section eyebrow="Browse" title="Featured Categories" intro="Find parts for every vehicle system.">
+      <Section eyebrow={<T en="Browse" sw="Vinjari" />} title={<T en="Featured Categories" sw="Makundi Maarufu" />} intro={<T en="Find parts for every vehicle system." sw="Pata vipuri vya kila mfumo wa gari." />}>
         <div className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
           {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
             <Link
@@ -133,7 +134,7 @@ export default function HomePage() {
             className="flex flex-col items-center justify-center gap-2 rounded-xl bg-accent px-2 py-5 text-center text-accent-fg transition-transform hover:-translate-y-1"
           >
             <LayoutGrid className="h-8 w-8" aria-hidden="true" />
-            <span className="font-display text-xs font-extrabold leading-snug sm:text-sm">View All Categories →</span>
+            <span className="font-display text-xs font-extrabold leading-snug sm:text-sm"><T en="View All Categories →" sw="Tazama Makundi Yote →" /></span>
           </Link>
         </div>
       </Section>
@@ -141,10 +142,10 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-lg font-extrabold">Not sure what your car needs?</h2>
-            <p className="mt-1 text-sm text-muted">Browse every main part of a car by system, see what it does, and check if we have it.</p>
+            <h2 className="font-display text-lg font-extrabold"><T en="Not sure what your car needs?" sw="Huna uhakika gari lako linahitaji nini?" /></h2>
+            <p className="mt-1 text-sm text-muted"><T en="Browse every main part of a car by system, see what it does, and check if we have it." sw="Tazama vipuri vikuu vya gari kwa mfumo, ujue kila kimoja kinafanya nini, na uone kama tunacho." /></p>
           </div>
-          <LinkButton href="/parts-guide">Open the parts guide <ArrowRight className="h-4 w-4" /></LinkButton>
+          <LinkButton href="/parts-guide"><T en="Open the parts guide" sw="Fungua mwongozo wa vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
         </div>
       </section>
 
@@ -153,41 +154,41 @@ export default function HomePage() {
       </Suspense>
 
 
-      <Section eyebrow="Why Brothers" title="Why Choose Brothers Auto">
+      <Section eyebrow={<T en="Why Brothers" sw="Kwa nini Brothers" />} title={<T en="Why Choose Brothers Auto" sw="Kwa Nini Uchague Brothers Auto" />}>
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {why.map(({ icon: Icon, title, text }) => (
+          {why.map(({ icon: Icon, title, sw, text, textSw }) => (
             <div key={title} className="rounded-xl border border-border bg-surface p-3.5 shadow-card sm:p-6">
               <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-hero text-accent sm:mb-4 sm:h-11 sm:w-11">
                 <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
-              <h3 className="font-display text-sm font-bold leading-snug sm:text-base">{title}</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:mt-2 sm:text-sm">{text}</p>
+              <h3 className="font-display text-sm font-bold leading-snug sm:text-base"><T en={title} sw={sw} /></h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:mt-2 sm:text-sm"><T en={text} sw={textSw} /></p>
             </div>
           ))}
         </div>
       </Section>
 
       <div className="bg-surface-2">
-        <Section eyebrow="Vehicles" title="Vehicle Brands We Serve">
+        <Section eyebrow={<T en="Vehicles" sw="Magari" />} title={<T en="Vehicle Brands We Serve" sw="Chapa za Magari Tunazohudumia" />}>
           <ul className="flex flex-wrap gap-2">
             {vehicleBrands.map((b) => (
               <li key={b} className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold">
                 {b}
               </li>
             ))}
-            <li className="rounded-full border border-dashed border-border px-4 py-2 text-sm text-muted">and more</li>
+            <li className="rounded-full border border-dashed border-border px-4 py-2 text-sm text-muted"><T en="and more" sw="na zaidi" /></li>
           </ul>
         </Section>
       </div>
 
 
       <div className="bg-surface-2">
-        <Section eyebrow="For the trade" title="Garage and Wholesale Services" intro="Mechanics, garages, dealers and fleet operators can request bulk quotations and, once approved, trade pricing.">
-          <LinkButton href="/quotation" size="lg">Request a Quotation <ArrowRight className="h-4 w-4" /></LinkButton>
+        <Section eyebrow={<T en="For the trade" sw="Kwa wafanyabiashara" />} title={<T en="Garage and Wholesale Services" sw="Huduma za Gereji na Jumla" />} intro={<T en="Mechanics, garages, dealers and fleet operators can request bulk quotations and, once approved, trade pricing." sw="Mafundi, gereji, wauzaji na wamiliki wa magari mengi wanaweza kuomba bei za jumla na, wakishaidhinishwa, bei za biashara." />}>
+          <LinkButton href="/quotation" size="lg"><T en="Request a Quotation" sw="Omba Bei" /> <ArrowRight className="h-4 w-4" /></LinkButton>
         </Section>
       </div>
 
-      <Section title="WhatsApp Support" eyebrow="Talk to us">
+      <Section title={<T en="WhatsApp Support" sw="Msaada wa WhatsApp" />} eyebrow={<T en="Talk to us" sw="Ongea nasi" />}>
         <div className="grid items-center gap-6 overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8 md:grid-cols-[260px_1fr] md:gap-8">
           <Image
             src="/brand/flyer.webp"

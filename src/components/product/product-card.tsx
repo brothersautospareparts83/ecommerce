@@ -50,7 +50,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white text-zinc-900 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent"
     >
       <div className="aspect-square overflow-hidden">
-        <ProductImage src={product.imageUrl} alt={product.name} />
+        <ProductImage src={product.imageUrl} alt={product.name} className="transition-transform duration-500 group-hover:scale-105" />
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
         {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}

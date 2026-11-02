@@ -1,5 +1,6 @@
 "use client";
 
+import { TL } from "@/lib/i18n";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, LayoutGrid, Menu, ShoppingCart, User } from "lucide-react";
@@ -33,7 +34,7 @@ export function BottomNav() {
                 className={cn(base, active ? "text-accent" : "text-chrome-muted hover:text-chrome-fg")}
               >
                 <Icon className="h-5 w-5" aria-hidden="true" />
-                {label}
+                <TL k={label} />
               </Link>
             </li>
           );

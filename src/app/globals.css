@@ -103,3 +103,27 @@ body {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* Soft pulsing ring on the floating chat button */
+@keyframes wa-ring {
+  0% { box-shadow: 0 0 0 0 rgba(31, 168, 85, 0.55); }
+  70% { box-shadow: 0 0 0 16px rgba(31, 168, 85, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 168, 85, 0); }
+}
+.wa-pulse { animation: wa-ring 2.4s ease-out infinite; }
+
+/* Motion: hero entrance, slow zoom on the hero photo, a light sweep, and a glow on the main button */
+@keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes hero-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+@keyframes sweep { 0% { transform: translateX(-120%) skewX(-18deg); } 60%, 100% { transform: translateX(260%) skewX(-18deg); } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 18px rgba(245, 124, 32, 0.35); } 50% { box-shadow: 0 0 34px rgba(245, 124, 32, 0.7); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.anim-fade-up { opacity: 0; animation: fade-up 0.8s ease-out forwards; }
+.anim-d1 { animation-delay: 0.12s; }
+.anim-d2 { animation-delay: 0.26s; }
+.anim-d3 { animation-delay: 0.4s; }
+.anim-d4 { animation-delay: 0.55s; }
+.hero-zoom { animation: hero-zoom 22s ease-in-out infinite alternate; transform-origin: 70% 60%; }
+.hero-sweep { animation: sweep 7s ease-in-out infinite; }
+.btn-glow { animation: glow 2.6s ease-in-out infinite; }
+.icon-bob { animation: bob 3.2s ease-in-out infinite; }

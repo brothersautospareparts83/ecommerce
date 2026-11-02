@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import { TL } from "@/lib/i18n";
 import { AtSign, MapPin, MessageCircle, Music2, Phone } from "lucide-react";
 import { Logo } from "./logo";
 import { site, toIntl, whatsappUrl } from "@/lib/site";
@@ -50,11 +51,11 @@ export function Footer() {
 
         {columns.map((col) => (
           <div key={col.title}>
-            <h3 className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-accent">{col.title}</h3>
+            <h3 className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-accent"><TL k={col.title} /></h3>
             <ul className="space-y-2 text-sm">
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-chrome-muted transition-colors hover:text-chrome-fg">{l.label}</Link>
+                  <Link href={l.href} className="text-chrome-muted transition-colors hover:text-chrome-fg"><TL k={l.label} /></Link>
                 </li>
               ))}
             </ul>
@@ -62,7 +63,7 @@ export function Footer() {
         ))}
 
         <div className="md:col-span-3 lg:col-span-1">
-          <h3 className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-accent">Stay Connected</h3>
+          <h3 className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-accent"><TL k="Stay Connected" /></h3>
           <ul className="space-y-2 text-sm text-chrome-muted">
             {site.phones.map((p) => (
               <li key={p}>
@@ -91,9 +92,9 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-chrome-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>© {site.name}. All rights reserved. Prices in Tanzanian Shillings (TZS).</p>
           <p className="flex gap-3">
-            <Link href="/privacy" className="hover:text-chrome-fg">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-chrome-fg"><TL k="Privacy Policy" /></Link>
             <span aria-hidden="true">|</span>
-            <Link href="/terms" className="hover:text-chrome-fg">Terms &amp; Conditions</Link>
+            <Link href="/terms" className="hover:text-chrome-fg"><TL k="Terms & Conditions" /></Link>
           </p>
         </div>
       </div>

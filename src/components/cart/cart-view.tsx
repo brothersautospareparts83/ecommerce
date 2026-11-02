@@ -1,5 +1,6 @@
 "use client";
 
+import { TL } from "@/lib/i18n";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { ProductImage } from "@/components/product/product-card";
@@ -14,8 +15,8 @@ export function CartView() {
   if (lines.length === 0) {
     return (
       <div className="mt-6 rounded-xl border border-border bg-surface p-8 text-center">
-        <p className="text-muted">Your cart is empty.</p>
-        <LinkButton href="/shop" className="mt-4">Browse parts</LinkButton>
+        <p className="text-muted"><TL k="Your cart is empty." /></p>
+        <LinkButton href="/shop" className="mt-4"><TL k="Browse parts" /></LinkButton>
       </div>
     );
   }
@@ -43,9 +44,9 @@ export function CartView() {
         ))}
       </ul>
       <div className="rounded-xl border border-border bg-surface p-4">
-        <div className="flex justify-between text-lg font-bold"><span>Subtotal</span><span>{formatTZS(subtotalTzs)}</span></div>
-        <p className="mt-1 text-sm text-muted">Delivery is charged separately and confirmed with you. Prices are checked again when you place the order.</p>
-        <LinkButton href="/checkout" size="lg" className="mt-4 w-full">Checkout</LinkButton>
+        <div className="flex justify-between text-lg font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>
+        <p className="mt-1 text-sm text-muted"><TL k="Delivery is charged separately and confirmed with you. Prices are checked again when you place the order." /></p>
+        <LinkButton href="/checkout" size="lg" className="mt-4 w-full"><TL k="Checkout" /></LinkButton>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Link href="/" aria-label="Brothers Auto Spare Parts home" className={cn("flex items-center gap-3 text-chrome-fg", className)}>
       <Image
-        src="/brand/logo-emblem.webp"
+        src="/brand/logo-emblem-v2.webp"
         alt=""
         width={480}
         height={327}

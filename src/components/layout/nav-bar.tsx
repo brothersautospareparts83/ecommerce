@@ -1,5 +1,6 @@
 "use client";
 
+import { TL } from "@/lib/i18n";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Home } from "lucide-react";
@@ -56,7 +57,7 @@ export function NavBar() {
             <li key={i.label} className="group relative">
               <Link href={i.href} className={cls} aria-current={active ? "page" : undefined}>
                 {i.label === "Home" && <Home className="h-4 w-4" aria-hidden="true" />}
-                {i.label}
+                <TL k={i.label} />
                 {i.children && <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />}
               </Link>
               {i.children && (
@@ -64,7 +65,7 @@ export function NavBar() {
                   {i.children.map((c) => (
                     <li key={c.href + c.label}>
                       <Link href={c.href} className="block rounded-lg px-3 py-2 text-sm text-chrome-fg/85 hover:bg-white/5 hover:text-accent">
-                        {c.label}
+                        <TL k={c.label} />
                       </Link>
                     </li>
                   ))}

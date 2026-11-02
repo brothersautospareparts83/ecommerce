@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/reveal";
 
 export function Section({
   title, eyebrow, intro, children, className, id,
 }: {
-  title: string;
-  eyebrow?: string;
-  intro?: string;
+  title: React.ReactNode;
+  eyebrow?: React.ReactNode;
+  intro?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
   id?: string;
@@ -19,7 +20,7 @@ export function Section({
         <h2 className="font-display text-xl font-extrabold tracking-tight sm:text-2xl">{title}</h2>
         {intro && <p className="mt-2 text-sm text-muted">{intro}</p>}
       </div>
-      {children}
+      <Reveal>{children}</Reveal>
     </section>
   );
 }

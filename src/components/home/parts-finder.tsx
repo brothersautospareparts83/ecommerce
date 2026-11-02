@@ -1,5 +1,6 @@
 "use client";
 
+import { TL, useLang } from "@/lib/i18n";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ const modes = [
 ] as const;
 
 export function PartsFinder() {
+  const { tl } = useLang();
   const [mode, setMode] = useState<(typeof modes)[number]["id"]>("name");
   const [q, setQ] = useState("");
   const router = useRouter();
@@ -23,7 +25,7 @@ export function PartsFinder() {
   return (
     <div className="rounded-2xl border border-border bg-surface p-4 shadow-card sm:p-6">
       <h2 className="mb-4 flex items-center gap-2 font-display text-lg font-extrabold sm:text-xl">
-        <Zap className="h-5 w-5 text-accent" aria-hidden="true" /> Find Your Exact Spare Part
+        <Zap className="h-5 w-5 text-accent" aria-hidden="true" /> <TL k="Find Your Exact Spare Part" />
       </h2>
       <div role="tablist" aria-label="Search method" className="mb-4 grid grid-cols-4 gap-2">
         {modes.map(({ id, label, icon: Icon }) => (
@@ -38,7 +40,7 @@ export function PartsFinder() {
               mode === id ? "border-accent bg-accent text-accent-fg" : "border-border text-muted hover:text-fg",
             )}
           >
-            <Icon className="h-5 w-5 sm:h-4 sm:w-4" aria-hidden="true" /> <span>{label}</span>
+            <Icon className="h-5 w-5 sm:h-4 sm:w-4" aria-hidden="true" /> <span><TL k={label} /></span>
           </button>
         ))}
       </div>
@@ -54,16 +56,16 @@ export function PartsFinder() {
           id="finder-q"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder={active.placeholder}
+          placeholder={tl(active.placeholder)}
           className="h-12 min-w-0 flex-1 rounded-lg border border-border bg-bg px-4 text-sm outline-none placeholder:text-muted focus:border-accent"
         />
         <Button type="submit" size="lg">
-          <Search className="h-4 w-4" /> Search
+          <Search className="h-4 w-4" /> <TL k="Search" />
         </Button>
       </form>
       <p className="mt-3 text-xs text-muted">
-        Search by name (English or Kiswahili), part number or SKU.{" "}
-        <Link href="/shop" className="font-semibold text-accent-text hover:underline">Browse all parts</Link>
+        <TL k="Search by name (English or Kiswahili), part number or SKU." />{" "}
+        <Link href="/shop" className="font-semibold text-accent-text hover:underline"><TL k="Browse all parts" /></Link>
       </p>
     </div>
   );

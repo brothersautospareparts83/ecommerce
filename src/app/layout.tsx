@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { CartProvider } from "@/lib/cart";
 import { ChatWidget } from "@/components/assistant/chat-widget";
-import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
+import { LanguageProvider } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
@@ -44,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <LanguageProvider>
         <CartProvider>
           <Header />
           <main id="main" className="flex-1">
@@ -55,9 +56,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </Suspense>
           <Suspense fallback={null}>
             <ChatWidget />
-            <WhatsAppFloat />
           </Suspense>
         </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

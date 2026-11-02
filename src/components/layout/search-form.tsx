@@ -1,8 +1,12 @@
+"use client";
+
+import { useLang } from "@/lib/i18n";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** Plain GET form (works without JavaScript): submits to /shop?q=... */
 export function SearchForm({ id, className, defaultValue }: { id: string; className?: string; defaultValue?: string }) {
+  const { tl } = useLang();
   return (
     <form action="/shop" role="search" className={cn("relative", className)}>
       <label htmlFor={id} className="sr-only">Search parts</label>
@@ -11,7 +15,7 @@ export function SearchForm({ id, className, defaultValue }: { id: string; classN
         name="q"
         type="search"
         defaultValue={defaultValue}
-        placeholder="Search parts, part numbers, brands…"
+        placeholder={tl("Search parts, part numbers, brands…")}
         autoComplete="off"
         className="h-11 w-full rounded-lg border border-chrome-border bg-white/5 pl-4 pr-12 text-sm text-chrome-fg outline-none placeholder:text-chrome-muted focus:border-accent"
       />

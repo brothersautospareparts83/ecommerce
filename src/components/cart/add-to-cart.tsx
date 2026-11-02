@@ -1,5 +1,6 @@
 "use client";
 
+import { TL } from "@/lib/i18n";
 import { useState } from "react";
 import { Check, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ export function AddToCart({ product }: { product: Omit<CartLine, "quantity"> }) 
       }}
     >
       {added ? <Check className="h-5 w-5" aria-hidden="true" /> : <ShoppingCart className="h-5 w-5" aria-hidden="true" />}
-      {added ? "Added to cart" : "Add to Cart"}
+      {added ? <TL k="Added to cart" /> : <TL k="Add to Cart" />}
     </Button>
   );
 }

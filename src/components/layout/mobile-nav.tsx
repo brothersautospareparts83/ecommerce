@@ -1,5 +1,6 @@
 "use client";
 
+import { TL } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -57,7 +58,7 @@ export function MobileNav() {
             <nav aria-label="Mobile" className="flex flex-col gap-1">
               {navLinks.map((l) => (
                 <Link key={l.href} href={l.href} onClick={close} className="rounded-lg px-3 py-3 font-medium hover:bg-surface-2">
-                  {l.label}
+                  <TL k={l.label} />
                 </Link>
               ))}
               <Link href="/account" onClick={close} className="flex items-center gap-2 rounded-lg px-3 py-3 font-medium hover:bg-surface-2">
