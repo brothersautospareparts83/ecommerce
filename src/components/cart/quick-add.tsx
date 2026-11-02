@@ -15,7 +15,7 @@ export function QuickAdd({ product }: { product: Omit<CartLine, "quantity"> }) {
         add(product);
         router.push("/checkout");
       }}
-      className="inline-flex h-9 w-full items-center justify-center rounded-md bg-accent px-3 text-xs font-bold text-accent-fg transition-all hover:brightness-110 active:scale-95 sm:w-auto"
+      className="inline-flex h-8 w-full items-center justify-center rounded-full bg-accent px-3 text-xs font-bold text-accent-fg transition-all hover:brightness-110 active:scale-95 sm:w-auto"
     >
       <TL k="Order now" />
     </button>

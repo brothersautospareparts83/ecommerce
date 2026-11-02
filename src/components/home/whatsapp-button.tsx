@@ -12,11 +12,11 @@ export function WhatsAppButton({
   label?: string;
   message?: string;
   variant?: "whatsapp" | "outline" | "secondary";
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
 }) {
   return (
-    <LinkButton href={whatsappUrl(message)} variant={variant} size={size} className="px-3 text-sm sm:px-6 sm:text-base" target="_blank" rel="noopener noreferrer">
-      <MessageCircle className="h-5 w-5" /> {label ?? <T en="Chat on WhatsApp" sw="Ongea nasi WhatsApp" />}
+    <LinkButton href={whatsappUrl(message)} variant={variant} size={size} className="rounded-full px-4 text-sm" target="_blank" rel="noopener noreferrer">
+      <MessageCircle className="h-4 w-4" /> {label ?? <T en="Chat on WhatsApp" sw="Ongea nasi WhatsApp" />}
     </LinkButton>
   );
 }

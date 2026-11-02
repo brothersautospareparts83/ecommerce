@@ -78,9 +78,9 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <LinkButton href="/shop" size="lg" className="rounded-full"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
-          <WhatsAppButton />
+        <div className="mt-5 flex flex-wrap gap-2">
+          <LinkButton href="/shop" size="sm" className="rounded-full px-4"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+          <WhatsAppButton size="sm" />
         </div>
         <ul className="mt-6 grid grid-cols-3 gap-2">
           {trust.map(({ icon: Icon, en, sw }) => (
@@ -120,7 +120,7 @@ export default function HomePage() {
         <p className="mt-3 max-w-lg text-[15px] text-white/70">
           <T en="We tell you what you are buying, confirm the fit with your chassis number, and send a real photo of your part before delivery." sw="Tunakuambia unachonunua, tunathibitisha inafaa kwa chassis number yako, na kukutumia picha halisi ya kipuri kabla ya kukufikishia." />
         </p>
-        <LinkButton href="/finder?mode=vin" size="lg" className="mt-5 rounded-full"><T en="Find parts by chassis" sw="Tafuta kwa chassis" /></LinkButton>
+        <LinkButton href="/finder?mode=vin" size="sm" className="mt-5 rounded-full px-4"><T en="Find parts by chassis" sw="Tafuta kwa chassis" /></LinkButton>
       </section>
 
       <section>
@@ -142,7 +142,7 @@ export default function HomePage() {
         <h2 className="text-xl font-bold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
         <p className="mt-1 text-sm text-muted"><T en="Send the part name, its number or a photo. We reply on WhatsApp." sw="Tuma jina la kipuri, namba yake au picha. Tunajibu kwa WhatsApp." /></p>
         <p className="mt-3 font-semibold">{site.phones.join("  ·  ")}</p>
-        <div className="mt-4 sm:max-w-xs"><WhatsAppButton /></div>
+        <div className="mt-4"><WhatsAppButton size="sm" /></div>
       </section>
     </div>
   );
