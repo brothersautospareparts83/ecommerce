@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LinkButton } from "@/components/ui/button";
 import { ClearCartOnce } from "@/components/cart/order-done";
 import { formatTZS } from "@/lib/utils";
@@ -10,10 +11,18 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
   const sp = await searchParams;
   const ref = typeof sp.ref === "string" && /^BAS-\d{6}-\d{5}$/.test(sp.ref) ? sp.ref : null;
   const total = typeof sp.total === "string" && /^\d{1,12}$/.test(sp.total) ? Number(sp.total) : null;
+  const code = typeof sp.code === "string" && /^[A-Za-z0-9]{8}$/.test(sp.code) ? sp.code.toUpperCase() : null;
   return (
     <>
       {ref && <p className="mt-4 text-lg">Order number: <span className="font-bold">{ref}</span></p>}
       {total !== null && <p className="text-muted">Items total: {formatTZS(total)} (delivery, if any, is confirmed with you)</p>}
+      {ref && code && (
+        <div className="mt-4 rounded-xl border border-border bg-surface p-4 text-sm">
+          <p>Your tracking code: <span className="font-bold">{code}</span></p>
+          <p className="mt-1 text-muted">Save it. You need the order number and this code to follow your order and approve the photo of your part.</p>
+          <Link href={`/orders/track?ref=${ref}&code=${code}`} className="mt-2 inline-block font-semibold text-accent-text hover:underline">Track this order</Link>
+        </div>
+      )}
     </>
   );
 }

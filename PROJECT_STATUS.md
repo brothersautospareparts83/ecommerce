@@ -88,6 +88,15 @@ Supabase URL/anon/service-role keys; AI provider key; WhatsApp business number; 
 - Manual browser check on production build: homepage renders in light and dark; theme toggle works and persists across navigation; no console errors; no horizontal scroll at 375px; mobile menu opens as full-height drawer with theme toggle; product page renders.
 - Not yet checked: every page visually in both themes, tablet width, keyboard-only navigation.
 
+## Phase 9 (cart, checkout, orders) - built 2026-11-02
+- Cart in browser localStorage (`src/lib/cart.tsx`); `/cart`, `/checkout`, `/checkout/done`. Guest checkout allowed. Parts with no selling price cannot be added (WhatsApp instead).
+- Prices, stock and totals are decided in the database: `place_order()` (migrations 0015, 0016). Stock is only checked at order time; it is deducted (recorded `sale` movement) when staff confirm the order, and returned on cancel.
+- Each order has a random tracking code. Customers use order number + code at `/orders/track` (no login); `track_order()` hides phone and address.
+- Photo safeguard: staff paste the https address of a REAL photo of the exact part in `/admin/orders/[id]`; the customer approves or rejects it on the tracking page. Ready for pickup, shipped and delivered are blocked until a photo is approved.
+- Admin: `/admin/orders` list with filters, order detail (status, delivery fee, record payment received, photo, WhatsApp link). No online payment gateway yet: payment is recorded by staff.
+- Not done: photo file upload (addresses only), customer order list in `/account/orders`, notifications, rate limiting on tracking-code guesses (8 characters), automated tests for the order functions (checked by hand against the database).
+- `tests/db/catalog.test.ts` has 12 failing tests: they expect only 3 published test products but all 1,550 real products are published.
+
 ## Next actions
 1. Promote the owner account (set-role script), then Phase 4: product CRUD, categories/brands, SKU and OEM numbers, stock movements UI, search/filter/sort.
 2. Owner confirms WhatsApp number and photography plan.

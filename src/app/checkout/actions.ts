@@ -43,6 +43,7 @@ export async function placeOrder(_prev: CheckoutState, fd: FormData): Promise<Ch
   const me = await getCurrentProfile();
   let ref: string;
   let total: string;
+  let code: string;
   try {
     const res = await withDb({ kind: "customer", userId: me?.id }, (db) =>
       db.query("select * from place_order($1, $2, $3, $4::delivery_method, $5::jsonb, $6, $7::jsonb)", [
@@ -53,6 +54,7 @@ export async function placeOrder(_prev: CheckoutState, fd: FormData): Promise<Ch
     );
     ref = res.rows[0].reference;
     total = String(res.rows[0].total_tzs);
+    code = String(res.rows[0].tracking_code);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "";
     if (msg.startsWith("OUT OF STOCK")) return { error: `Sorry, not enough stock: ${msg.slice(14)}. Lower the quantity in your cart.` };
@@ -61,5 +63,5 @@ export async function placeOrder(_prev: CheckoutState, fd: FormData): Promise<Ch
     console.error("placeOrder failed", e);
     return { error: "We could not place your order. Please try again or order on WhatsApp." };
   }
-  redirect(`/checkout/done?ref=${encodeURIComponent(ref)}&total=${encodeURIComponent(total)}`);
+  redirect(`/checkout/done?ref=${encodeURIComponent(ref)}&total=${encodeURIComponent(total)}&code=${encodeURIComponent(code)}`);
 }
