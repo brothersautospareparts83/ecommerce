@@ -14,18 +14,18 @@ export function CartView() {
   if (!ready) return <p className="mt-6 text-muted">Loading your cart…</p>;
   if (lines.length === 0) {
     return (
-      <div className="mt-6 rounded-xl border border-border bg-surface p-8 text-center">
+      <div className="mt-6 rounded-3xl border border-border bg-surface p-8 text-center">
         <p className="text-muted"><TL k="Your cart is empty." /></p>
-        <LinkButton href="/shop" className="mt-4"><TL k="Browse parts" /></LinkButton>
+        <LinkButton href="/shop" className="mt-4 rounded-full"><TL k="Browse parts" /></LinkButton>
       </div>
     );
   }
   return (
     <div className="mt-6 space-y-4">
-      <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
+      <ul className="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-surface shadow-card">
         {lines.map((l) => (
-          <li key={l.productId} className="flex gap-4 p-4">
-            <Link href={`/products/${l.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border">
+          <li key={l.productId} className="flex gap-3 p-4">
+            <Link href={`/products/${l.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-border bg-white">
               <ProductImage src={l.imageUrl} alt={l.name} eager />
             </Link>
             <div className="min-w-0 flex-1">
@@ -39,14 +39,14 @@ export function CartView() {
                 <Button variant="ghost" size="icon" aria-label={`Remove ${l.name}`} onClick={() => remove(l.productId)}><Trash2 className="h-4 w-4" /></Button>
               </div>
             </div>
-            <p className="font-display font-extrabold">{formatTZS(l.priceTzs * l.quantity)}</p>
+            <p className="text-sm font-extrabold sm:text-base">{formatTZS(l.priceTzs * l.quantity)}</p>
           </li>
         ))}
       </ul>
-      <div className="rounded-xl border border-border bg-surface p-4">
+      <div className="rounded-3xl border border-border bg-surface p-5 shadow-card">
         <div className="flex justify-between text-lg font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>
         <p className="mt-1 text-sm text-muted"><TL k="Delivery is charged separately and confirmed with you. Prices are checked again when you place the order." /></p>
-        <LinkButton href="/checkout" size="lg" className="mt-4 w-full"><TL k="Checkout" /></LinkButton>
+        <LinkButton href="/checkout" size="lg" className="mt-4 w-full rounded-full"><TL k="Checkout" /></LinkButton>
       </div>
     </div>
   );

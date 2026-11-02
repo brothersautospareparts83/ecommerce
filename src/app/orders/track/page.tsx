@@ -8,7 +8,7 @@ import { respondToPhoto } from "./actions";
 
 export const metadata: Metadata = { title: "Track your order", robots: { index: false } };
 
-const input = "mt-1 h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm";
+const input = "mt-1.5 h-12 w-full rounded-xl border border-border bg-bg px-3.5 text-[15px] outline-none focus:border-accent focus:bg-surface";
 
 type Tracked = {
   reference: string; status: string; payment_status: string; delivery_method: string;
@@ -28,16 +28,16 @@ async function Result({ searchParams }: { searchParams: PageProps<"/orders/track
 
   return (
     <>
-      <form method="get" className="mt-6 grid gap-3 rounded-xl border border-border bg-surface p-5 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+      <form method="get" className="mt-6 grid gap-3 rounded-3xl border border-border bg-surface p-5 shadow-card sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <label className="text-sm font-semibold">Order number<input name="ref" defaultValue={ref} placeholder="BAS-261102-00001" required className={input} /></label>
         <label className="text-sm font-semibold">Tracking code<input name="code" defaultValue={code} placeholder="8 letters or numbers" required className={input} /></label>
-        <Button type="submit" size="lg">Track</Button>
+        <Button type="submit" size="lg" className="rounded-full">Track</Button>
       </form>
-      {lookup && !order && <p role="alert" className="mt-4 rounded-lg bg-red-500/10 p-3 text-sm text-red-600">We could not find that order. Check the order number and tracking code from your confirmation.</p>}
+      {lookup && !order && <p role="alert" className="mt-4 rounded-2xl bg-red-500/10 p-3 text-sm text-red-700">We could not find that order. Check the order number and tracking code from your confirmation.</p>}
       {order && (
         <div className="mt-6 space-y-6">
-          <section className="rounded-xl border border-border bg-surface p-5">
-            <h2 className="font-display text-lg font-extrabold">{order.reference}</h2>
+          <section className="rounded-3xl border border-border bg-surface p-5 shadow-card">
+            <h2 className="text-lg font-extrabold">{order.reference}</h2>
             <p className="text-sm text-muted">Placed {formatDate(order.created_at)} · {order.delivery_method === "pickup" ? "Collect from the shop" : "Delivery"}</p>
             <p className="mt-2"><span className="font-semibold">Status:</span> {orderStatusLabel[order.status] ?? order.status} · {order.payment_status === "paid" ? "Paid" : "Payment not yet received"}</p>
             <ul className="mt-3 space-y-1 text-sm">
@@ -51,13 +51,13 @@ async function Result({ searchParams }: { searchParams: PageProps<"/orders/track
           </section>
 
           {order.photos.length > 0 && (
-            <section className="space-y-4 rounded-xl border border-border bg-surface p-5">
-              <h2 className="font-display text-lg font-extrabold">Photo of your exact part</h2>
+            <section className="space-y-4 rounded-3xl border border-border bg-surface p-5 shadow-card">
+              <h2 className="text-lg font-extrabold">Photo of your exact part</h2>
               <p className="text-sm text-muted">This is a real photo of the part we will deliver. Please check it before we send it.</p>
               {order.photos.map((p) => (
                 <div key={p.id} className="space-y-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image_url} alt="Photo of your part" className="max-h-96 w-full rounded-lg border border-border object-contain" />
+                  <img src={p.image_url} alt="Photo of your part" className="max-h-96 w-full rounded-2xl border border-border bg-white object-contain" />
                   {p.note && <p className="text-sm">{p.note}</p>}
                   {p.status === "pending" ? (
                     <form action={respondToPhoto} className="space-y-2">
@@ -85,8 +85,8 @@ async function Result({ searchParams }: { searchParams: PageProps<"/orders/track
 
 export default function TrackPage(props: PageProps<"/orders/track">) {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-      <h1 className="font-display text-2xl font-extrabold">Track your order</h1>
+    <div className="mx-auto max-w-3xl px-4 pb-6 pt-5 sm:pt-8">
+      <h1 className="text-3xl font-extrabold">Track your order</h1>
       <Suspense fallback={<p className="mt-6 text-muted">Loading…</p>}>
         <Result searchParams={props.searchParams} />
       </Suspense>

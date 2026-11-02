@@ -41,14 +41,14 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
       {total !== null && <p className="text-muted">Items total: {formatTZS(total)} (delivery, if any, is confirmed with you)</p>}
       {ref && code && (
         <>
-          <div className="mt-6 rounded-xl border-2 border-accent bg-surface p-5">
+          <div className="mt-6 rounded-3xl border-2 border-accent bg-surface p-5 shadow-card">
             <p className="font-semibold">Last step: send your order to us on WhatsApp</p>
             <p className="mt-1 text-sm text-muted">We close every order with you on WhatsApp: we confirm the parts, the delivery fee and how you pay. Your order is not final until we reply there.</p>
-            <LinkButton href={whatsappUrl(orderMessage(ref, code, order))} variant="whatsapp" size="lg" className="mt-4 w-full" target="_blank" rel="noopener noreferrer">
+            <LinkButton href={whatsappUrl(orderMessage(ref, code, order))} variant="whatsapp" size="lg" className="mt-4 w-full rounded-full" target="_blank" rel="noopener noreferrer">
               Send order on WhatsApp
             </LinkButton>
           </div>
-          <div className="mt-4 rounded-xl border border-border bg-surface p-4 text-sm">
+          <div className="mt-4 rounded-3xl border border-border bg-surface p-5 text-sm">
             <p>Your tracking code: <span className="font-bold">{code}</span></p>
             <p className="mt-1 text-muted">Save it. You need the order number and this code to follow your order and approve the photo of your part.</p>
             <Link href={`/orders/track?ref=${ref}&code=${code}`} className="mt-2 inline-block font-semibold text-accent-text hover:underline">Track this order</Link>
@@ -61,14 +61,14 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
 
 export default function DonePage(props: PageProps<"/checkout/done">) {
   return (
-    <div className="mx-auto max-w-xl px-4 py-12 text-center sm:px-6">
+    <div className="mx-auto max-w-xl px-4 pb-8 pt-8 text-center sm:pt-12">
       <ClearCartOnce />
-      <h1 className="font-display text-2xl font-extrabold">Thank you, your order is saved</h1>
+      <h1 className="text-3xl font-extrabold">Thank you, your order is saved</h1>
       <Suspense fallback={null}>
         <Receipt searchParams={props.searchParams} />
       </Suspense>
       <p className="mt-4 text-muted">Before we deliver, we send you a photo of your exact part for you to approve.</p>
-      <LinkButton href="/shop" className="mt-6">Continue shopping</LinkButton>
+      <LinkButton href="/shop" variant="secondary" className="mt-6 rounded-full">Continue shopping</LinkButton>
     </div>
   );
 }
