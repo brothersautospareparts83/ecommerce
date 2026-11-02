@@ -6,7 +6,7 @@ import { Button, LinkButton } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { formatTZS } from "@/lib/utils";
 
-const field = "mt-1 h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm";
+const field = "mt-1 h-11 w-full min-w-0 rounded-lg border border-border bg-surface px-3 text-sm";
 
 export function CheckoutForm() {
   const { lines, ready, subtotalTzs } = useCart();
@@ -24,9 +24,9 @@ export function CheckoutForm() {
   }
   const items = JSON.stringify(lines.map((l) => ({ product_id: l.productId, quantity: l.quantity })));
   return (
-    <form action={action} className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
+    <form action={action} className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <input type="hidden" name="items" value={items} />
-      <div className="space-y-4 rounded-xl border border-border bg-surface p-5">
+      <div className="min-w-0 space-y-4 rounded-xl border border-border bg-surface p-4 sm:p-5">
         <label className="block text-sm font-semibold">Full name<input name="name" required autoComplete="name" className={field} /></label>
         <label className="block text-sm font-semibold">Phone (WhatsApp if possible)<input name="phone" required inputMode="tel" autoComplete="tel" placeholder="0712 345 678" className={field} /></label>
         <label className="block text-sm font-semibold">Email (optional)<input name="email" type="email" autoComplete="email" className={field} /></label>
@@ -43,7 +43,7 @@ export function CheckoutForm() {
         )}
         <label className="block text-sm font-semibold">Vehicle or notes (optional)<textarea name="notes" rows={2} placeholder="e.g. Toyota Hilux 2016, chassis number" className={`${field} h-auto py-2`} /></label>
       </div>
-      <aside className="space-y-3 self-start rounded-xl border border-border bg-surface p-5">
+      <aside className="min-w-0 space-y-3 self-start rounded-xl border border-border bg-surface p-4 sm:p-5">
         <h2 className="font-display text-lg font-extrabold">Order summary</h2>
         <ul className="space-y-1 text-sm">
           {lines.map((l) => <li key={l.productId} className="flex justify-between gap-3"><span className="truncate">{l.quantity} × {l.name}</span><span>{formatTZS(l.priceTzs * l.quantity)}</span></li>)}
