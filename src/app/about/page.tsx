@@ -30,7 +30,7 @@ const promises = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-hero text-hero-fg">
+      <section className="relative overflow-hidden bg-gradient-to-b from-surface-2 to-bg text-fg dark:bg-hero dark:from-hero dark:to-hero dark:text-hero-fg">
         <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-24 w-[70%] -skew-y-[12deg] bg-gradient-to-l from-accent/70 via-accent/25 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
@@ -38,7 +38,7 @@ export default function AboutPage() {
           <h1 className="anim-fade-up anim-d1 mt-3 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-5xl">
             Brothers Auto <span className="text-accent">Spare Parts</span>
           </h1>
-          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-[#c4c4c8] sm:text-base">
+          <p className="anim-fade-up anim-d2 mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
             <T en={`${site.motto}. A spare parts shop in Kariakoo, Dar es Salaam, for cars and motorcycles.`} sw={`${site.motto}. Duka la vipuri vya magari na pikipiki, Kariakoo, Dar es Salaam.`} />
           </p>
           <div className="anim-fade-up anim-d3 mt-6 flex flex-wrap gap-3">
@@ -76,7 +76,7 @@ export default function AboutPage() {
             <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {steps.map(({ icon: Icon, en, sw, enText, swText }, i) => (
                 <li key={en} className="rounded-xl border border-border bg-surface p-4">
-                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-hero text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+                  <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
                   <p className="text-xs font-bold text-accent-text">{i + 1}</p>
                   <h3 className="font-display text-sm font-bold"><T en={en} sw={sw} /></h3>
                   <p className="mt-1 text-xs leading-relaxed text-muted"><T en={enText} sw={swText} /></p>

@@ -53,7 +53,7 @@ export function NavBar() {
                 <ul className="invisible absolute left-0 top-full z-50 min-w-56 translate-y-1 rounded-xl border border-chrome-border bg-chrome p-2 opacity-0 shadow-card transition-all group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                   {i.children.map((c) => (
                     <li key={c.href + c.label}>
-                      <Link href={c.href} className="block rounded-lg px-3 py-2 text-sm text-chrome-fg/85 hover:bg-white/5 hover:text-accent">
+                      <Link href={c.href} className="block rounded-lg px-3 py-2 text-sm text-chrome-fg/85 hover:bg-black/5 dark:hover:bg-white/5 hover:text-accent">
                         <TL k={c.label} />
                       </Link>
                     </li>

@@ -21,7 +21,7 @@ export function Header() {
   return (
     <>
       <TopBar />
-      <header className="sticky top-0 z-50 bg-chrome text-chrome-fg shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-chrome-border bg-chrome/95 text-chrome-fg shadow-sm backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-[72px] lg:gap-8">
           <Logo />
           <SearchForm id="search-desktop" className="hidden max-w-xl flex-1 lg:block" />

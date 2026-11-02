@@ -32,7 +32,7 @@ export function Reveal({ children, className, delay = 0 }: { children: React.Rea
     <div
       ref={ref}
       style={{ transitionDelay: shown ? `${delay}ms` : undefined }}
-      className={cn("transition-all duration-700 ease-out", armed && !shown && "translate-y-5 opacity-0", className)}
+      className={cn("reveal-stagger transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]", armed && !shown && "translate-y-6 opacity-0", shown && "is-shown", className)}
     >
       {children}
     </div>

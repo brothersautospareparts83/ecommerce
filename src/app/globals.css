@@ -22,11 +22,11 @@
   --accent-text: #c2410c; /* orange readable as text on light (AA) */
   --hero-bg: #0a0a0b;
   --hero-fg: #ffffff;
-  /* Header, hero and footer stay black in both themes, matching the logo artwork */
-  --chrome-bg: #0a0a0b;
-  --chrome-fg: #f4f4f5;
-  --chrome-muted: #a8a8ae;
-  --chrome-border: #27272a;
+  /* Header, menus and footer: clean white in the light theme (the dark theme keeps them black) */
+  --chrome-bg: #ffffff;
+  --chrome-fg: #141414;
+  --chrome-muted: #5b5b61;
+  --chrome-border: #e6e6e3;
   --shadow: 0 1px 2px rgb(10 10 11 / 0.06), 0 8px 24px -8px rgb(10 10 11 / 0.16);
   --ring: #c2410c;
   color-scheme: light;
@@ -46,6 +46,8 @@
   --hero-bg: #050505;
   --hero-fg: #ffffff;
   --chrome-bg: #050505;
+  --chrome-fg: #f4f4f5;
+  --chrome-muted: #a8a8ae;
   --chrome-border: #222225;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -8px rgb(0 0 0 / 0.7);
   --ring: #f47b20;
@@ -126,3 +128,16 @@ body {
 .anim-d4 { animation-delay: 0.55s; }
 .hero-zoom { animation: hero-zoom 22s ease-in-out infinite alternate; transform-origin: 70% 60%; }
 .hero-sweep { animation: sweep 7s ease-in-out infinite; }
+
+/* Luxurious motion: slow, soft easing; content rises in one after another */
+:root { --ease-lux: cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -6px, 0) scale(1.012); } }
+.hero-drift { animation: drift 14s ease-in-out infinite alternate; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > * { animation: fade-up 0.9s var(--ease-lux) backwards; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(1) { animation-delay: 0.05s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(2) { animation-delay: 0.12s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(3) { animation-delay: 0.19s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(4) { animation-delay: 0.26s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(5) { animation-delay: 0.33s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(6) { animation-delay: 0.4s; }
+.reveal-stagger.is-shown :is(ul, ol, .grid) > :nth-child(n+7) { animation-delay: 0.46s; }

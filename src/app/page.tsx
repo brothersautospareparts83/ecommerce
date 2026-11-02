@@ -58,9 +58,9 @@ export default function HomePage() {
             The files are served as they are (already web-sized), so they appear straight away. */}
         <div className="absolute inset-x-0 bottom-12 aspect-[16/9] sm:inset-x-auto sm:bottom-0 sm:left-1/2 sm:top-0 sm:h-full sm:w-auto sm:-translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-car-light.webp" srcSet="/brand/hero-car-light-800.webp 800w, /brand/hero-car-light.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="eager" fetchPriority="high" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 h-full w-full object-cover dark:hidden" />
+          <img src="/brand/hero-car-light.webp" srcSet="/brand/hero-car-light-800.webp 800w, /brand/hero-car-light.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="eager" fetchPriority="high" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 hero-drift h-full w-full object-cover dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-car-dark.webp" srcSet="/brand/hero-car-dark-800.webp 800w, /brand/hero-car-dark.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="lazy" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 h-full w-full object-cover hidden dark:block" />
+          <img src="/brand/hero-car-dark.webp" srcSet="/brand/hero-car-dark-800.webp 800w, /brand/hero-car-dark.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="lazy" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 hero-drift h-full w-full object-cover hidden dark:block" />
         </div>
         <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
           <div className="max-w-xl sm:max-w-[44%]">
@@ -90,12 +90,12 @@ export default function HomePage() {
 
       {/* Trust bar, overlapping the bottom of the hero */}
       <section aria-label="Why shop with us" className="relative z-10 mx-auto -mt-12 max-w-7xl px-4 sm:px-6">
-        <ul className="grid grid-cols-4 rounded-2xl border border-white/10 bg-hero/95 py-4 text-hero-fg shadow-card backdrop-blur md:grid-cols-5 md:py-5">
+        <ul className="grid grid-cols-4 rounded-2xl border border-border bg-surface/95 py-4 text-fg shadow-xl backdrop-blur dark:border-white/10 dark:bg-hero/95 dark:text-hero-fg md:grid-cols-5 md:py-5">
           {trust.map(({ icon: Icon, title, sw, text, textSw }, i) => (
-            <li key={title} className={`flex flex-col items-center gap-1.5 border-white/10 px-1.5 text-center [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
+            <li key={title} className={`flex flex-col items-center gap-1.5 border-border px-1.5 text-center dark:border-white/10 [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
               <Icon className="h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
               <p className="text-[11px] font-bold leading-tight sm:text-sm"><T en={title} sw={sw} /></p>
-              <p className="hidden text-xs text-[#a8a8ae] md:block"><T en={text} sw={textSw} /></p>
+              <p className="hidden text-xs text-muted md:block"><T en={text} sw={textSw} /></p>
             </li>
           ))}
         </ul>
@@ -138,7 +138,7 @@ export default function HomePage() {
         <ol className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {steps.map(({ icon: Icon, title, sw, text, textSw }, i) => (
             <li key={title} className="rounded-xl border border-border bg-surface p-4 shadow-card">
-              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-hero text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-hero dark:text-accent"><Icon className="h-5 w-5" aria-hidden="true" /></span>
               <p className="text-xs font-bold text-accent-text">{i + 1}</p>
               <h3 className="font-display text-sm font-bold leading-snug"><T en={title} sw={sw} /></h3>
               <p className="mt-1 text-xs leading-relaxed text-muted"><T en={text} sw={textSw} /></p>
@@ -148,18 +148,18 @@ export default function HomePage() {
       </Section>
 
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6">
-        <div className="relative overflow-hidden rounded-2xl bg-hero p-6 text-hero-fg sm:p-8">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-surface to-surface-2 p-6 text-fg shadow-card sm:p-8 dark:border-white/10 dark:from-hero dark:to-hero dark:text-hero-fg">
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-20 w-[70%] -skew-y-[12deg] bg-gradient-to-l from-accent/60 via-accent/20 to-transparent" />
           <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="font-display text-xl font-extrabold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
-              <p className="mt-1 text-sm text-[#c4c4c8]"><T en="Call or message us. Send the part name, its number or a photo." sw="Tupigie au tuandikie. Tuma jina la kipuri, namba yake au picha." /></p>
+              <p className="mt-1 text-sm text-muted"><T en="Call or message us. Send the part name, its number or a photo." sw="Tupigie au tuandikie. Tuma jina la kipuri, namba yake au picha." /></p>
               <p className="mt-3 font-display text-lg font-extrabold">{site.phones.join("  ·  ")}</p>
-              <p className="text-xs text-[#a8a8ae]">{site.location}</p>
+              <p className="text-xs text-muted">{site.location}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <WhatsAppButton />
-              <LinkButton href="/about" variant="outline" size="lg"><T en="About us" sw="Kuhusu sisi" /></LinkButton>
+              <LinkButton href="/about" variant="outline" size="lg" className="border-zinc-300 text-zinc-900 hover:bg-zinc-100 dark:border-white/40 dark:text-white dark:hover:bg-white/10"><T en="About us" sw="Kuhusu sisi" /></LinkButton>
             </div>
           </div>
         </div>

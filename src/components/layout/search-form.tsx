@@ -17,7 +17,7 @@ export function SearchForm({ id, className, defaultValue }: { id: string; classN
         defaultValue={defaultValue}
         placeholder={tl("Search parts, part numbers, brands…")}
         autoComplete="off"
-        className="h-11 w-full rounded-lg border border-chrome-border bg-white/5 pl-4 pr-12 text-sm text-chrome-fg outline-none placeholder:text-chrome-muted focus:border-accent"
+        className="h-11 w-full rounded-lg border border-chrome-border bg-black/[0.04] dark:bg-white/5 pl-4 pr-12 text-sm text-chrome-fg outline-none placeholder:text-chrome-muted focus:border-accent"
       />
       <button
         type="submit"

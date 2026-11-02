@@ -80,7 +80,7 @@ export function Footer() {
             <p className="mb-2 text-sm font-semibold">Subscribe to our newsletter</p>
             <div className="flex">
               <label htmlFor="nl-email" className="sr-only">Email address</label>
-              <input id="nl-email" type="email" disabled placeholder="Your email address" className="h-10 min-w-0 flex-1 rounded-l-lg border border-chrome-border bg-white/5 px-3 text-sm disabled:opacity-60" />
+              <input id="nl-email" type="email" disabled placeholder="Your email address" className="h-10 min-w-0 flex-1 rounded-l-lg border border-chrome-border bg-black/[0.04] dark:bg-white/5 px-3 text-sm disabled:opacity-60" />
               <button disabled className="h-10 rounded-r-lg bg-accent px-4 text-sm font-semibold text-accent-fg opacity-60">Join</button>
             </div>
             <p id="nl-note" className="mt-1.5 text-xs text-chrome-muted">Sign-up opens once email delivery is set up.</p>
