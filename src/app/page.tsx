@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bike, Headset, LayoutGrid, MapPinned, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench } from "lucide-react";
+import { ArrowRight, ShoppingCart, Bike, Headset, LayoutGrid, MapPinned, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { Section } from "@/components/home/section";
 import { PartsFinder } from "@/components/home/parts-finder";
@@ -15,11 +15,11 @@ import { site } from "@/lib/site";
 const featuredSlugs = ["engine-components", "brake-systems", "suspension-steering", "oil-filters", "electrical-components"];
 
 const trust = [
-  { icon: ShieldCheck, title: "Honest about every part", text: "We tell you what you are buying" },
-  { icon: Truck, title: "Delivery or Pickup", text: "Across Tanzania or from Kariakoo" },
-  { icon: Headset, title: "Expert Support", text: site.phones[0] },
-  { icon: Bike, title: "Cars & Motorcycles", text: "Parts for both" },
+  { icon: Truck, title: "Delivery or pickup", text: "Across Tanzania or from Kariakoo" },
   { icon: MessageCircle, title: "Order on WhatsApp", text: "Send a part name or number" },
+  { icon: Headset, title: "Expert support", text: site.phones[0] },
+  { icon: Bike, title: "Cars & motorcycles", text: "Parts for both" },
+  { icon: ShieldCheck, title: "Honest advice", text: "We tell you what you are buying" },
 ];
 
 const why = [
@@ -81,8 +81,8 @@ export default function HomePage() {
             matching and reliable service from Brothers Auto Spare Parts.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-            <LinkButton href="/shop" size="lg" className="col-span-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00] shadow-[0_0_28px_rgba(245,124,32,0.5)]">
-              Explore Spare Parts <ArrowRight className="h-4 w-4" />
+            <LinkButton href="/shop" size="lg" className="col-span-2 gap-2 bg-gradient-to-b from-[#ff9a3c] to-[#f06a00] shadow-[0_0_28px_rgba(245,124,32,0.5)]">
+              <ShoppingCart className="h-4 w-4" aria-hidden="true" /> Explore Spare Parts <ArrowRight className="h-4 w-4" />
             </LinkButton>
             <LinkButton href="/finder?mode=vin" variant="outline" size="lg" className="gap-1.5 border-white/30 bg-black/40 px-2 text-sm sm:px-6 sm:text-base">
               <ScanSearch className="h-4 w-4 shrink-0" aria-hidden="true" /> Find Parts by Chassis
@@ -93,25 +93,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Parts finder + AI expert */}
-      <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-4 lg:grid-cols-[1.9fr_1fr]">
-          <PartsFinder />
-          <AiExpertCard />
-        </div>
-      </section>
-
-      {/* Trust strip */}
-      <section aria-label="Why shop with us" className="mx-auto mt-6 max-w-7xl px-4 sm:px-6">
-        <ul className="grid grid-cols-3 gap-y-5 rounded-2xl bg-hero px-3 py-5 text-hero-fg sm:px-6 md:grid-cols-5 md:divide-x md:divide-white/10">
+      {/* Trust bar, overlapping the bottom of the hero */}
+      <section aria-label="Why shop with us" className="relative z-10 mx-auto -mt-12 max-w-7xl px-4 sm:px-6">
+        <ul className="grid grid-cols-4 rounded-2xl border border-white/10 bg-hero/95 py-4 text-hero-fg shadow-card backdrop-blur md:grid-cols-5 md:py-5">
           {trust.map(({ icon: Icon, title, text }, i) => (
-            <li key={title} className={`flex flex-col items-center gap-2 px-2 text-center ${i > 2 ? "hidden md:flex" : ""}`}>
-              <Icon className="h-8 w-8 text-accent" aria-hidden="true" />
-              <p className="text-xs font-bold leading-tight sm:text-sm">{title}</p>
+            <li key={title} className={`flex flex-col items-center gap-1.5 border-white/10 px-1.5 text-center [&:not(:first-child)]:border-l ${i > 3 ? "hidden md:flex" : ""}`}>
+              <Icon className="h-7 w-7 text-accent sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
+              <p className="text-[11px] font-bold leading-tight sm:text-sm">{title}</p>
               <p className="hidden text-xs text-[#a8a8ae] md:block">{text}</p>
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Parts finder + AI expert */}
+      <section className="relative z-10 mx-auto mt-4 max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-4 lg:grid-cols-[1.9fr_1fr]">
+          <PartsFinder />
+          <AiExpertCard />
+        </div>
       </section>
 
       <Section eyebrow="Browse" title="Featured Categories" intro="Find parts for every vehicle system.">

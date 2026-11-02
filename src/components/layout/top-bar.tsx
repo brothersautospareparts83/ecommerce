@@ -15,6 +15,11 @@ export function TopBar() {
             </a>
           ))}
         </span>
+        <span className="flex items-center gap-3">
+          <a href={`https://wa.me/${site.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="hover:text-chrome-fg">WhatsApp</a>
+          <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" className="hover:text-chrome-fg">Instagram</a>
+          <a href={site.tiktok.url} target="_blank" rel="noopener noreferrer" className="hover:text-chrome-fg">TikTok</a>
+        </span>
       </div>
     </div>
   );

@@ -29,6 +29,13 @@ export function ChatWidget() {
     end.current?.scrollIntoView({ block: "end" });
   }, [msgs, open, pending]);
 
+  // Other buttons on the page (for example the "Start Chat" card) open the assistant with this event.
+  useEffect(() => {
+    const show = () => setOpen(true);
+    window.addEventListener("open-assistant", show);
+    return () => window.removeEventListener("open-assistant", show);
+  }, []);
+
   // Not on admin pages, and not on cart or checkout where the round button would cover prices and totals.
   if (pathname.startsWith("/admin") || pathname.startsWith("/cart") || pathname.startsWith("/checkout")) return null;
 
