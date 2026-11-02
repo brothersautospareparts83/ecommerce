@@ -88,7 +88,7 @@ export default function HomePage() {
           </div>
           </div>
           {/* Phones: the car gets its own space under the text, so nothing covers it */}
-          <div className="relative order-first -mx-4 aspect-[16/10] overflow-hidden sm:hidden">
+          <div className="relative order-first -mx-4 aspect-[16/10] overflow-hidden bg-gradient-to-b from-zinc-100 to-white sm:hidden dark:from-zinc-900 dark:to-black">
             <Image src="/brand/hero-car-light.webp" alt="" fill sizes="100vw" className="object-cover object-[75%_55%] dark:hidden" />
             <Image src="/brand/hero-car-dark.webp" alt="" fill sizes="100vw" className="hidden object-cover object-[75%_55%] dark:block" />
           </div>
