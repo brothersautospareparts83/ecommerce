@@ -58,8 +58,10 @@ export default function HomePage() {
         {/* The photo is shown whole, never cropped or zoomed: centred on large screens, along the bottom on phones.
             The files are served as they are (already web-sized), so they appear straight away. */}
         <div className="absolute inset-x-0 bottom-12 aspect-[16/9] sm:inset-x-auto sm:bottom-0 sm:left-1/2 sm:top-0 sm:h-full sm:w-auto sm:-translate-x-1/2">
-          <Image src="/brand/hero-car-light.webp" alt="" fill unoptimized className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] object-cover dark:hidden" />
-          <Image src="/brand/hero-car-dark.webp" alt="" fill unoptimized className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] hidden object-cover dark:block" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/hero-car-light.webp" srcSet="/brand/hero-car-light-800.webp 800w, /brand/hero-car-light.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="eager" fetchPriority="high" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 h-full w-full object-cover dark:hidden" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/hero-car-dark.webp" srcSet="/brand/hero-car-dark-800.webp 800w, /brand/hero-car-dark.webp 1672w" sizes="(max-width: 640px) 100vw, 1100px" alt="" width={1672} height={941} loading="lazy" decoding="async" className="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] absolute inset-0 h-full w-full object-cover hidden dark:block" />
         </div>
         <div className="relative mx-auto grid max-w-7xl items-center gap-5 px-4 pb-[calc(40vw+3rem)] pt-8 sm:min-h-[460px] sm:gap-8 sm:px-6 sm:pb-20 sm:pt-20 lg:min-h-[540px] lg:py-24">
           <div className="max-w-xl sm:max-w-[44%]">
