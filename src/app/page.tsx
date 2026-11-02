@@ -55,12 +55,18 @@ export default function HomePage() {
           }}
         />
         <div aria-hidden="true" className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        {/* Orange diagonal accents, top and bottom right */}
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-4 h-10 w-[60%] -skew-y-[14deg] bg-gradient-to-l from-accent/70 via-accent/25 to-transparent" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-16 h-3 w-[45%] -skew-y-[14deg] bg-gradient-to-l from-accent/50 to-transparent" />
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 -right-20 h-24 w-[75%] -skew-y-[14deg] bg-gradient-to-l from-accent/80 via-accent/30 to-transparent" />
-        <div aria-hidden="true" className="pointer-events-none absolute bottom-10 -right-16 h-3 w-[50%] -skew-y-[14deg] bg-gradient-to-l from-accent/50 to-transparent" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-8 sm:px-6 sm:py-16 lg:grid-cols-[1.2fr_1fr] lg:py-20">
+        <Image
+          src="/brand/hero-car.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[78%_70%] sm:object-[70%_60%]"
+        />
+        {/* Shading so the text stays readable over the car: heavier at the left and on phones */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent sm:from-black/85 sm:via-black/40" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-black/80 to-transparent sm:hidden" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-24 pt-8 sm:px-6 sm:py-20 lg:py-28">
           <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs font-semibold tracking-widest text-[#c4c4c8]">
             <Wrench className="h-3.5 w-3.5 text-accent" /> CARS · MOTORCYCLES · DELIVERY
@@ -83,17 +89,6 @@ export default function HomePage() {
             </LinkButton>
             <WhatsAppButton />
           </div>
-          </div>
-          <div className="mx-auto hidden w-full max-w-md md:block lg:max-w-none">
-            <Image
-              src="/brand/logo-full-800.webp"
-              alt="Brothers Auto Spare Parts logo: winged shield with crossed pistons"
-              width={800}
-              height={800}
-              priority
-              sizes="(min-width: 1024px) 480px, 80vw"
-              className="mx-auto h-auto w-full max-w-[460px] mix-blend-screen"
-            />
           </div>
         </div>
       </section>
