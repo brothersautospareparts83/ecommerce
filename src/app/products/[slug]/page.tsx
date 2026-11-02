@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { T } from "@/lib/i18n";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -57,7 +58,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
-        <Link href="/shop" className="hover:text-fg">Shop</Link> /{" "}
+        <Link href="/shop" className="hover:text-fg"><T en="Shop" sw="Duka" /></Link> /{" "}
         {p.categorySlug && (<><Link href={`/categories/${p.categorySlug}`} className="hover:text-fg">{p.categoryName}</Link> / </>)}
         <span className="text-fg">{p.name}</span>
       </nav>
@@ -87,7 +88,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
           {p.compatibility.length > 0 ? (
             <div className="mt-6 rounded-2xl bg-surface-2 p-4 text-sm">
-              <p className="mb-2 flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-accent-text" /> Verified to fit</p>
+              <p className="mb-2 flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-accent-text" /> <T en="Verified to fit" sw="Imethibitishwa kufaa" /></p>
               <ul className="space-y-1 text-muted">
                 {p.compatibility.map((c, i) => (
                   <li key={i}>
@@ -102,8 +103,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
             <div className="mt-6 flex items-start gap-3 rounded-2xl bg-surface-2 p-4 text-sm">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
               <p className="text-muted">
-                <span className="font-semibold text-fg">Check fitment before you buy.</span> We only list a vehicle as compatible once it is verified.
-                Send us your vehicle details or chassis number and we will confirm.
+                <span className="font-semibold text-fg"><T en="Check fitment before you buy." sw="Hakiki inafaa kabla ya kununua." /></span> <T en="We only list a vehicle as compatible once it is verified. Send us your vehicle details or chassis number and we will confirm." sw="Tunaorodhesha gari kama linafaa baada ya kuthibitishwa tu. Tutumie taarifa za gari lako au chassis number nasi tutathibitisha." />
               </p>
             </div>
           )}
@@ -132,7 +132,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
       {related.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 text-xl font-bold">More in {p.categoryName}</h2>
+          <h2 className="mb-4 text-xl font-bold"><T en="More in" sw="Zaidi katika" /> {p.categoryName}</h2>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {related.map((r) => (<ProductCard key={r.id} product={r} />))}
           </div>

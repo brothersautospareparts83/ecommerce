@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { T } from "@/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ImageOff } from "lucide-react";
@@ -67,11 +68,11 @@ async function Guide() {
                       {have ? (
                         <>
                           <Link href={`/shop?q=${encodeURIComponent(p.match)}`} className="font-semibold text-accent-text hover:underline">
-                            {f!.n} in our catalogue
+                            {f!.n} <T en="in our catalogue" sw="katika katalogi yetu" />
                           </Link>
                         </>
                       ) : (
-                        <span className="font-semibold text-muted">Not in our catalogue yet: ask us</span>
+                        <span className="font-semibold text-muted">Bado haipo kwenye katalogi: tuulize</span>
                       )}
                     </p>
                   </div>
@@ -88,11 +89,9 @@ async function Guide() {
 export default function PartsGuidePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
-      <h1 className="text-3xl font-extrabold">Car parts guide</h1>
+      <h1 className="text-3xl font-extrabold"><T en="Car parts guide" sw="Mwongozo wa vipuri vya gari" /></h1>
       <p className="mt-2 max-w-2xl text-sm text-muted">
-        The main parts of a car, grouped by system, and what each one does. This is general information about part types.
-        Whether a part fits your exact vehicle depends on the make, model, year and chassis number, so send us your chassis number
-        and we will confirm before you order.
+        <T en="The main parts of a car, grouped by system, and what each one does. This is general information about part types. Whether a part fits your exact vehicle depends on the make, model, year and chassis number, so send us your chassis number and we will confirm before you order." sw="Vipuri vikuu vya gari, vimepangwa kwa mfumo, na kila kimoja kinafanya nini. Hii ni taarifa ya jumla kuhusu aina za vipuri. Kama kipuri kinafaa gari lako inategemea aina, mfano, mwaka na chassis number, kwa hiyo tutumie chassis number yako nasi tutathibitisha kabla hujaagiza." />
       </p>
       <nav aria-label="Systems" className="mt-4 flex flex-wrap gap-2 text-sm">
         {partsGuide.map((s) => (
@@ -108,7 +107,7 @@ export default function PartsGuidePage() {
         <p className="text-sm">Can&apos;t find your part, or not sure which one you need? Send us the part name, a photo or your chassis number.</p>
         <div className="flex gap-3">
           <WhatsAppButton />
-          <LinkButton href="/finder?mode=vin" variant="secondary">Find by chassis</LinkButton>
+          <LinkButton href="/finder?mode=vin" variant="secondary"><T en="Find by chassis" sw="Tafuta kwa chassis" /></LinkButton>
         </div>
       </div>
     </div>

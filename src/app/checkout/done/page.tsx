@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { T } from "@/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LinkButton } from "@/components/ui/button";
@@ -37,21 +38,21 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
     ref && code ? await asPublic(async (db) => (await db.query("select track_order($1, $2) as t", [ref, code])).rows[0].t) : null;
   return (
     <>
-      {ref && <p className="mt-4 text-lg">Order number: <span className="font-bold">{ref}</span></p>}
+      {ref && <p className="mt-4 text-lg"><T en="Order number:" sw="Namba ya oda:" /> <span className="font-bold">{ref}</span></p>}
       {total !== null && <p className="text-muted">Items total: {formatTZS(total)} (delivery, if any, is confirmed with you)</p>}
       {ref && code && (
         <>
           <div className="mt-6 rounded-3xl border-2 border-accent bg-surface p-5 shadow-card">
-            <p className="font-semibold">Last step: send your order to us on WhatsApp</p>
+            <p className="font-semibold"><T en="Last step: send your order to us on WhatsApp" sw="Hatua ya mwisho: tutumie oda yako kwa WhatsApp" /></p>
             <p className="mt-1 text-sm text-muted">We close every order with you on WhatsApp: we confirm the parts, the delivery fee and how you pay. Your order is not final until we reply there.</p>
             <LinkButton href={whatsappUrl(orderMessage(ref, code, order))} variant="whatsapp" size="lg" className="mt-4 w-full rounded-full" target="_blank" rel="noopener noreferrer">
-              Send order on WhatsApp
+              <T en="Send order on WhatsApp" sw="Tuma oda kwa WhatsApp" />
             </LinkButton>
           </div>
           <div className="mt-4 rounded-3xl border border-border bg-surface p-5 text-sm">
-            <p>Your tracking code: <span className="font-bold">{code}</span></p>
+            <p><T en="Your tracking code:" sw="Code yako ya kufuatilia:" /> <span className="font-bold">{code}</span></p>
             <p className="mt-1 text-muted">Save it. You need the order number and this code to follow your order and approve the photo of your part.</p>
-            <Link href={`/orders/track?ref=${ref}&code=${code}`} className="mt-2 inline-block font-semibold text-accent-text hover:underline">Track this order</Link>
+            <Link href={`/orders/track?ref=${ref}&code=${code}`} className="mt-2 inline-block font-semibold text-accent-text hover:underline"><T en="Track this order" sw="Fuatilia oda hii" /></Link>
           </div>
         </>
       )}
@@ -63,12 +64,12 @@ export default function DonePage(props: PageProps<"/checkout/done">) {
   return (
     <div className="mx-auto max-w-xl px-4 pb-8 pt-8 text-center sm:pt-12">
       <ClearCartOnce />
-      <h1 className="text-3xl font-extrabold">Thank you, your order is saved</h1>
+      <h1 className="text-3xl font-extrabold"><T en="Thank you, your order is saved" sw="Asante, oda yako imehifadhiwa" /></h1>
       <Suspense fallback={null}>
         <Receipt searchParams={props.searchParams} />
       </Suspense>
-      <p className="mt-4 text-muted">Before we deliver, we send you a photo of your exact part for you to approve.</p>
-      <LinkButton href="/shop" variant="secondary" className="mt-6 rounded-full">Continue shopping</LinkButton>
+      <p className="mt-4 text-muted"><T en="Before we deliver, we send you a photo of your exact part for you to approve." sw="Kabla hatujakufikishia, tunakutumia picha ya kipuri chako halisi uidhinishe." /></p>
+      <LinkButton href="/shop" variant="secondary" className="mt-6 rounded-full"><T en="Continue shopping" sw="Endelea kununua" /></LinkButton>
     </div>
   );
 }

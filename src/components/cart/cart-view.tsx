@@ -1,6 +1,6 @@
 "use client";
 
-import { TL } from "@/lib/i18n";
+import { T, TL } from "@/lib/i18n";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { ProductImage } from "@/components/product/product-card";
@@ -11,7 +11,7 @@ import { formatTZS } from "@/lib/utils";
 
 export function CartView() {
   const { lines, ready, subtotalTzs, setQuantity, remove } = useCart();
-  if (!ready) return <p className="mt-6 text-muted">Loading your cart…</p>;
+  if (!ready) return <p className="mt-6 text-muted"><T en="Loading your cart…" sw="Kikapu kinapakia…" /></p>;
   if (lines.length === 0) {
     return (
       <div className="mt-6 rounded-3xl border border-border bg-surface p-8 text-center">
@@ -31,7 +31,7 @@ export function CartView() {
             <div className="min-w-0 flex-1">
               <Link href={`/products/${l.slug}`} className="font-semibold hover:underline">{l.name}</Link>
               <p className="text-xs text-muted">SKU {l.sku}</p>
-              <p className="mt-1 text-sm">{formatTZS(l.priceTzs)} each</p>
+              <p className="mt-1 text-sm">{formatTZS(l.priceTzs)} <T en="each" sw="kila moja" /></p>
               <div className="mt-2 flex items-center gap-2">
                 <Button variant="secondary" size="icon" aria-label="Decrease quantity" onClick={() => setQuantity(l.productId, l.quantity - 1)}><Minus className="h-4 w-4" /></Button>
                 <span className="w-8 text-center font-semibold" aria-live="polite">{l.quantity}</span>

@@ -88,17 +88,17 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
               </select>
             </div>
           )}
-          <Button type="submit" size="lg" className="col-span-2 rounded-xl lg:col-span-1 lg:self-end">Apply</Button>
+          <Button type="submit" size="lg" className="col-span-2 rounded-xl lg:col-span-1 lg:self-end"><T en="Apply" sw="Tumia" /></Button>
         </div>
         </CollapsibleFilters>
       </form>
 
       <div className="mt-5 flex items-center justify-between gap-3 text-sm">
         <p className="text-muted" aria-live="polite">
-          <span className="font-semibold text-fg">{result.total}</span> {result.total === 1 ? "product" : "products"}
+          <span className="font-semibold text-fg">{result.total}</span> {result.total === 1 ? <T en="product" sw="bidhaa" /> : <T en="products" sw="bidhaa" />}
           {q && <> for “{q}”</>}
         </p>
-        {filtered && <Link href="/shop" className="font-semibold text-accent-text hover:underline">Clear filters</Link>}
+        {filtered && <Link href="/shop" className="font-semibold text-accent-text hover:underline"><T en="Clear filters" sw="Futa vichujio" /></Link>}
       </div>
 
       {result.items.length === 0 ? (
@@ -120,9 +120,9 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
 
       {result.pages > 1 && (
         <nav aria-label="Pagination" className="mt-8 flex items-center justify-between gap-3">
-          {result.page > 1 ? <LinkButton href={pageHref(result.page - 1)} variant="secondary" size="sm">← Previous</LinkButton> : <span />}
+          {result.page > 1 ? <LinkButton href={pageHref(result.page - 1)} variant="secondary" size="sm"><T en="← Previous" sw="← Iliyopita" /></LinkButton> : <span />}
           <span className="text-sm text-muted">Page {result.page} of {result.pages}</span>
-          {result.page < result.pages ? <LinkButton href={pageHref(result.page + 1)} variant="secondary" size="sm">Next →</LinkButton> : <span />}
+          {result.page < result.pages ? <LinkButton href={pageHref(result.page + 1)} variant="secondary" size="sm"><T en="Next →" sw="Inayofuata →" /></LinkButton> : <span />}
         </nav>
       )}
     </>
