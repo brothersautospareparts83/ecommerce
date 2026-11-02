@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShoppingCart, Bike, Headset, LayoutGrid, MessageCircle, ScanSearch, ShieldCheck, Truck, Wrench, Search, Camera } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
