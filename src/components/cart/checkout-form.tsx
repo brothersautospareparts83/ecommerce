@@ -49,9 +49,9 @@ export function CheckoutForm() {
           {lines.map((l) => <li key={l.productId} className="flex justify-between gap-3"><span className="truncate">{l.quantity} × {l.name}</span><span>{formatTZS(l.priceTzs * l.quantity)}</span></li>)}
         </ul>
         <div className="flex justify-between border-t border-border pt-3 font-bold"><span>Subtotal</span><span>{formatTZS(subtotalTzs)}</span></div>
-        <p className="text-xs text-muted">Payment is arranged after we confirm your order: we will contact you. Before delivery we send you a photo of your exact part for you to approve. Prices are checked again when you place the order.</p>
+        <p className="text-xs text-muted">Next you send your order to us on WhatsApp. We close every order there: we confirm the parts, delivery fee and payment. Before delivery we send you a photo of your exact part for you to approve. Prices are checked again when you place the order.</p>
         {state.error && <p role="alert" className="rounded-lg bg-red-500/10 p-3 text-sm text-red-600">{state.error}</p>}
-        <Button type="submit" size="lg" className="w-full" disabled={pending}>{pending ? "Placing order…" : "Place order"}</Button>
+        <Button type="submit" size="lg" className="w-full" disabled={pending}>{pending ? "Saving your order…" : "Place order, then send on WhatsApp"}</Button>
       </aside>
     </form>
   );

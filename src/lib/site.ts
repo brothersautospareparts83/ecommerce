@@ -12,7 +12,10 @@ export const site = {
   tagline: "Quality parts. Trusted performance.",
   motto: "Quality Parts Keep You Moving",
   location: "Kariakoo, Dar es Salaam, Tanzania",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // On Vercel, VERCEL_PROJECT_PRODUCTION_URL is the live address, so links we send customers never say localhost.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
   phones,
   // WhatsApp defaults to the first phone number; confirm with the owner.
   whatsappNumber:
