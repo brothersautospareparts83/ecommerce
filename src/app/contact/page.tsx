@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
-import { AtSign, Mail, MapPin, Phone } from "lucide-react";
-import { LinkButton } from "@/components/ui/button";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { SocialLinks } from "@/components/layout/social-links";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { site, toIntl } from "@/lib/site";
 
@@ -33,11 +33,8 @@ export default function ContactPage() {
           <p className="text-muted">{site.location}</p>
         </div>
         <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
-          <h2 className="mb-3 flex items-center gap-2 font-display font-bold"><AtSign className="h-5 w-5 text-accent-text" /> Social media</h2>
-          <div className="flex flex-wrap gap-3">
-            <LinkButton href={site.instagram.url} variant="secondary" target="_blank" rel="noopener noreferrer">Instagram {site.instagram.handle}</LinkButton>
-            <LinkButton href={site.tiktok.url} variant="secondary" target="_blank" rel="noopener noreferrer">TikTok {site.tiktok.handle}</LinkButton>
-          </div>
+          <h2 className="mb-3 font-display font-bold">Social media</h2>
+          <SocialLinks className="text-fg" />
         </div>
       </div>
     </div>

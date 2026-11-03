@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { AtSign, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { SocialLinks } from "./social-links";
 import { site, toIntl, whatsappUrl } from "@/lib/site";
 
 /** Black footer bar as in the approved design: phones, WhatsApp, socials, tagline, location. */
@@ -20,10 +21,8 @@ export function Footer() {
               <a href={`mailto:${site.email}`} className="flex items-center gap-2"><Mail className="h-4 w-4" /> {site.email}</a>
             </li>
           )}
-          <li>
-            <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2"><AtSign className="h-4 w-4" /> @{site.instagram.handle.replace(/^@/, "")}</a>
-          </li>
         </ul>
+        <SocialLinks />
         <p className="tagline text-lg text-accent">Quality Parts Keep You Moving</p>
         <p className="flex items-center gap-2 text-chrome-muted"><MapPin className="h-4 w-4 text-white" /> {site.location}</p>
       </div>
