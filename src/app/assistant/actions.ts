@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 import { publicProducts } from "@/lib/catalog/public";
 import { vehicleBrands } from "@/lib/categories";
-import { site } from "@/lib/site";
+import { site, showPrices } from "@/lib/site";
 import { geminiReply, type AiTurn } from "@/lib/assistant-ai";
 
 export type AssistantItem = { name: string; slug: string; sku: string; partNumber: string | null; priceTzs: number; imageUrl: string | null };
@@ -88,7 +88,7 @@ export async function askAssistant(raw: string, history: AiTurn[] = [], lang: "e
       role: t.role === "assistant" ? ("assistant" as const) : ("user" as const),
       text: String(t.text ?? "").slice(0, 400),
     })),
-    products: found.map((p) => ({ name: p.name, partNumber: p.partNumber, priceTzs: p.priceTzs, sku: p.sku })),
+    products: found.map((p) => ({ name: p.name, partNumber: p.partNumber, priceTzs: showPrices ? p.priceTzs : 0, sku: p.sku })),
     vehicle,
     knownNumbers: site.phones,
   });

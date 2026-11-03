@@ -9,6 +9,7 @@ import { AddToCart } from "@/components/cart/add-to-cart";
 import { ClassificationBadge, ProductCard, ProductImage } from "@/components/product/product-card";
 import { conditionLabel, publicProduct, publicProducts } from "@/lib/catalog/public";
 import { formatPrice } from "@/lib/utils";
+import { showPrices } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   if (!p) return { title: "Product not found" };
   return {
     title: p.name,
-    description: `${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""} at Brothers Auto Spare Parts, Kariakoo. ${p.priceTzs > 0 ? `${formatPrice(p.priceTzs)}.` : ""}`,
+    description: `${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""} at Brothers Auto Spare Parts, Kariakoo. ${showPrices && p.priceTzs > 0 ? `${formatPrice(p.priceTzs)}.` : ""}`,
     openGraph: p.imageUrl ? { images: [p.imageUrl] } : undefined,
   };
 }
@@ -45,7 +46,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
     ...(p.partNumber ? { mpn: p.partNumber } : {}),
     ...(p.imageUrl ? { image: p.imageUrl } : {}),
     ...(p.brandName ? { brand: { "@type": "Brand", name: p.brandName } } : {}),
-    ...(p.priceTzs > 0 ? { offers: {
+    ...(showPrices && p.priceTzs > 0 ? { offers: {
       "@type": "Offer",
       priceCurrency: "TZS",
       price: p.priceTzs,
@@ -82,8 +83,8 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
         <div className="rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-7 lg:self-start">
           {p.classification !== "unverified" && <div className="mb-3"><ClassificationBadge value={p.classification} /></div>}
           <h1 className="text-2xl font-extrabold leading-tight sm:text-3xl">{p.name}</h1>
-          <p className="mt-3 text-3xl font-extrabold text-accent-text">{formatPrice(p.priceTzs)}</p>
-          {p.priceTzs > 0 && <p className="mt-1 text-xs text-muted"><T en="Indicative price: market prices change, so we confirm the final price on WhatsApp before you pay." sw="Bei elekezi: bei za soko hubadilika, kwa hiyo tunathibitisha bei ya mwisho kwa WhatsApp kabla hujalipa." /></p>}
+          {showPrices && <p className="mt-3 text-3xl font-extrabold text-accent-text">{formatPrice(p.priceTzs)}</p>}
+          {showPrices && p.priceTzs > 0 && <p className="mt-1 text-xs text-muted"><T en="Indicative price: market prices change, so we confirm the final price on WhatsApp before you pay." sw="Bei elekezi: bei za soko hubadilika, kwa hiyo tunathibitisha bei ya mwisho kwa WhatsApp kabla hujalipa." /></p>}
 
           {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}
 
@@ -111,7 +112,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
 
           <div className="mt-6 flex flex-col gap-3">
             <AddToCart product={{ productId: p.id, slug: p.slug, sku: p.sku, name: p.name, priceTzs: p.priceTzs, imageUrl: p.images[0]?.url ?? p.imageUrl }} />
-            <WhatsAppButton label="Order on WhatsApp" message={`Hello, I would like to order: ${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""}, SKU ${p.sku}.`} />
+            <WhatsAppButton label={showPrices ? "Order on WhatsApp" : "Ask on WhatsApp"} message={`Hello, I would like to ${showPrices ? "order" : "ask about"}: ${p.name}${p.partNumber ? ` (part no. ${p.partNumber})` : ""}, SKU ${p.sku}.`} />
           </div>
 
           <dl className="mt-6 divide-y divide-border rounded-2xl border border-border">

@@ -75,7 +75,7 @@ export async function geminiReply(opts: {
   const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
   const list = opts.products.length
     ? opts.products
-        .map((p, i) => `${i + 1}. ${p.name}${p.partNumber ? ` | part no. ${p.partNumber}` : ""} | ${p.priceTzs > 0 ? `TSh ${p.priceTzs.toLocaleString("en-US")}` : "price on request"}`)
+        .map((p, i) => `${i + 1}. ${p.name}${p.partNumber ? ` | part no. ${p.partNumber}` : ""} | ${p.priceTzs > 0 ? `TSh ${p.priceTzs.toLocaleString("en-US")}` : "price confirmed by our team on WhatsApp"}`)
         .join("\n")
     : "(none)";
   const context = `Customer message: ${opts.message}\nVehicle mentioned: ${opts.vehicle ?? "none"}\nCatalogue matches (the only products you may mention):\n${list}`;

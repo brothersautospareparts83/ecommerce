@@ -29,6 +29,7 @@ export interface ProductSummary {
   categorySlug: string | null;
   categoryName: string | null;
   imageUrl: string | null;
+  description: string | null;
   /** Availability only. Exact quantities are admin-only and never sent to customers. */
   inStock: boolean;
 }
@@ -102,12 +103,13 @@ function toSummary(r: Record<string, unknown>): ProductSummary {
     categorySlug: (r.category_slug as string) ?? null,
     categoryName: (r.category_name as string) ?? null,
     imageUrl: (r.image_url as string) ?? null,
+    description: (r.description as string) ?? null,
     inStock: r.in_stock === true,
   };
 }
 
 const SELECT = `
-  select p.id, p.slug, p.sku::text as sku, p.name, p.price_tzs, p.classification, p.condition, p.published_at,
+  select p.id, p.slug, p.sku::text as sku, p.name, p.description, p.price_tzs, p.classification, p.condition, p.published_at,
          b.name::text as brand_name, c.slug as category_slug, c.name_en as category_name,
          (select o.part_number from oem_part_numbers o where o.product_id = p.id order by o.is_primary desc, o.part_number limit 1) as part_number,
          img.url as image_url, product_in_stock(p.id) as in_stock`;

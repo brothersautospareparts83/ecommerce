@@ -4,6 +4,7 @@ import { useActionState, useState } from "react";
 import { placeOrder, type CheckoutState } from "@/app/checkout/actions";
 import { Button, LinkButton } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { showPrices } from "@/lib/site";
 import { T, TL } from "@/lib/i18n";
 import { formatTZS } from "@/lib/utils";
 
@@ -47,9 +48,9 @@ export function CheckoutForm() {
       <aside className="min-w-0 space-y-3 self-start rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-6">
         <h2 className="text-lg font-extrabold"><TL k="Order summary" /></h2>
         <ul className="space-y-1 text-sm">
-          {lines.map((l) => <li key={l.productId} className="flex justify-between gap-3"><span className="truncate">{l.quantity} × {l.name}</span><span>{formatTZS(l.priceTzs * l.quantity)}</span></li>)}
+          {lines.map((l) => <li key={l.productId} className="flex justify-between gap-3"><span className="truncate">{l.quantity} × {l.name}</span>{showPrices && <span>{formatTZS(l.priceTzs * l.quantity)}</span>}</li>)}
         </ul>
-        <div className="flex justify-between border-t border-border pt-3 font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>
+        {showPrices && <div className="flex justify-between border-t border-border pt-3 font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>}
         <p className="text-xs text-muted"><T en="Next you send your order to us on WhatsApp. We close every order there: we confirm the parts, delivery fee and payment. Before delivery we send you a photo of your exact part for you to approve. Prices are checked again when you place the order." sw="Kisha unatutumia oda yako kwa WhatsApp. Tunakamilisha kila oda huko: tunathibitisha vipuri, gharama ya usafirishaji na malipo. Kabla ya kukufikishia tunakutumia picha ya kipuri chako halisi uidhinishe. Bei hukaguliwa tena unapoweka oda." /></p>
         {state.error && <p role="alert" className="rounded-2xl bg-red-500/10 p-3 text-sm text-red-700">{state.error}</p>}
         <Button type="submit" size="lg" className="w-full rounded-full" disabled={pending}><TL k={pending ? "Saving your order…" : "Place order, then send on WhatsApp"} /></Button>

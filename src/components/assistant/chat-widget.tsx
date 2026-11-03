@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Plus, Send, X } from "lucide-react";
 import { askAssistant, type AssistantItem } from "@/app/assistant/actions";
 import { useLang } from "@/lib/i18n";
-import { whatsappUrl } from "@/lib/site";
+import { showPrices, whatsappUrl } from "@/lib/site";
 import { cn, formatPrice, formatTZS } from "@/lib/utils";
 
 type Msg = { from: "bot" | "me"; text: string; items?: AssistantItem[]; handoff?: string };
@@ -75,11 +75,11 @@ export function ChatWidget() {
 
   /** The closing step: the whole order goes to our WhatsApp inbox. */
   const finishUrl = () => {
-    const lines = order.map((i) => `- 1 x ${i.name}${i.partNumber ? ` (${i.partNumber})` : ` (${i.sku})`}: ${formatPrice(i.priceTzs)}`);
+    const lines = order.map((i) => `- 1 x ${i.name}${i.partNumber ? ` (${i.partNumber})` : ` (${i.sku})`}${showPrices ? `: ${formatPrice(i.priceTzs)}` : ""}`);
     const msg = [
       "Hello Brothers Auto, I would like to order:",
       ...lines,
-      `Total: ${formatTZS(total)}`,
+      showPrices ? `Total: ${formatTZS(total)}` : "",
       name.trim() ? `Name: ${name.trim()}` : "",
       "Please confirm availability, delivery fee and how to pay.",
     ]
@@ -140,7 +140,7 @@ export function ChatWidget() {
                             <span className="min-w-0">
                               <span className="block truncate text-xs font-bold">{it.name}</span>
                               <span className="block truncate text-[11px] text-zinc-500">{it.partNumber ? `Part no. ${it.partNumber}` : `SKU ${it.sku}`}</span>
-                              <span className="block text-xs font-extrabold">{formatPrice(it.priceTzs)}</span>
+                              {showPrices && <span className="block text-xs font-extrabold">{formatPrice(it.priceTzs)}</span>}
                             </span>
                           </Link>
                           {it.priceTzs > 0 && (
@@ -181,7 +181,7 @@ export function ChatWidget() {
           {order.length > 0 && (
             <div className="space-y-2 border-t border-border bg-surface-2 p-3 text-xs">
               <p className="font-bold">
-                {t("Your order", "Oda yako")} ({order.length}): {formatTZS(total)}
+                {t("Your order", "Oda yako")} ({order.length}){showPrices ? `: ${formatTZS(total)}` : ""}
               </p>
               <ul className="space-y-0.5 text-muted">
                 {order.map((i) => (

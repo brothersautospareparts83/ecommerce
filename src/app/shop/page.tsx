@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { showPrices } from "@/lib/site";
 import Link from "next/link";
 import { Suspense } from "react";
 import { PackageSearch, SearchX } from "lucide-react";
@@ -69,7 +70,7 @@ async function Results({ searchParams }: Pick<PageProps<"/shop">, "searchParams"
           <div>
             <label htmlFor="shop-sort" className="mb-1 block text-xs font-semibold text-muted">Sort by</label>
             <select id="shop-sort" name="sort" defaultValue={sort} className={field}>
-              {sorts.map((s) => (<option key={s.value} value={s.value}>{s.label}</option>))}
+              {sorts.filter((s) => showPrices || !s.value.startsWith("price")).map((s) => (<option key={s.value} value={s.value}>{s.label}</option>))}
             </select>
           </div>
           <div>
@@ -138,7 +139,7 @@ export default function ShopPage(props: PageProps<"/shop">) {
         <p className="tagline relative mt-1 text-sm text-white/80"><T en="For Every Drive" sw="Kwa Kila Safari" /></p>
       </section>
       <p className="mb-4 mt-1 text-sm text-muted">
-        <T en="Spare parts for cars and motorcycles. Prices in TSh are indicative and confirmed on WhatsApp. Ask us if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh ni elekezi na zinathibitishwa kwa WhatsApp. Tuulize ukiwa huna uhakika kinachofaa." />
+        {showPrices ? <T en="Spare parts for cars and motorcycles. Prices in TSh are indicative and confirmed on WhatsApp. Ask us if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh ni elekezi na zinathibitishwa kwa WhatsApp. Tuulize ukiwa huna uhakika kinachofaa." /> : <T en="Spare parts for cars and motorcycles. Tap Ask or Order now and we confirm the price and fit with you on WhatsApp." sw="Vipuri vya magari na pikipiki. Bonyeza Uliza au Agiza sasa nasi tunakuthibitishia bei na inafaa kwa WhatsApp." />}
       </p>
       <Suspense fallback={<div className="h-40 rounded-2xl bg-surface-2" />}>
         <Results searchParams={props.searchParams} />

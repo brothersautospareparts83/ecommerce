@@ -10,6 +10,7 @@ export type Lang = "en" | "sw";
 
 /** Swahili for the shop's fixed interface words. Anything not listed stays as written (product names always stay in English). */
 export const SW: Record<string, string> = {
+  Ask: "Uliza", "Ask on WhatsApp": "Uliza kwa WhatsApp",
   "Search parts…": "Tafuta vipuri…", "Order received": "Oda imepokelewa", "Track order": "Fuatilia oda", Product: "Bidhaa",
   Home: "Mwanzo", Shop: "Duka", Cart: "Kikapu", Account: "Akaunti", More: "Zaidi", Categories: "Makundi",
   "All Products": "Bidhaa Zote", "All Categories": "Makundi Yote", "Vehicle Catalog": "Katalogi ya Magari", "AI Assistant": "Msaidizi",

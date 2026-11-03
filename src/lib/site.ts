@@ -25,6 +25,9 @@ export const site = {
   tiktok: { handle: "@brothersautospareparts83", url: "https://www.tiktok.com/@brothersautospareparts83" },
 };
 
+/** Prices are hidden from customers for now (market prices change; the price is confirmed on WhatsApp). Set NEXT_PUBLIC_SHOW_PRICES=true to show them again. */
+export const showPrices = process.env.NEXT_PUBLIC_SHOW_PRICES === "true";
+
 /** Returns a wa.me link. */
 export function whatsappUrl(message?: string): string {
   const text = message ? `?text=${encodeURIComponent(message)}` : "";

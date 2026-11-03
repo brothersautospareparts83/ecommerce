@@ -6,7 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { ClearCartOnce } from "@/components/cart/order-done";
 import { asPublic } from "@/lib/db";
-import { site, whatsappUrl } from "@/lib/site";
+import { showPrices, site, whatsappUrl } from "@/lib/site";
 import { formatTZS } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Order received", robots: { index: false } };
@@ -19,10 +19,10 @@ type Tracked = {
 
 /** Every order is closed with the customer on WhatsApp: this builds the message they send us. */
 function orderMessage(ref: string, code: string, o: Tracked | null): string {
-  const lines = o?.items.map((i) => `- ${i.quantity} x ${i.name} (${formatTZS(Number(i.line_total_tzs))})`) ?? [];
+  const lines = o?.items.map((i) => `- ${i.quantity} x ${i.name}${showPrices ? ` (${formatTZS(Number(i.line_total_tzs))})` : ""}`) ?? [];
   return [
     `Hello ${site.shortName}, I placed order ${ref} on your website.`,
-    ...(lines.length ? ["", ...lines, "", `Items total: ${formatTZS(Number(o!.subtotal_tzs))}`] : []),
+    ...(lines.length ? ["", ...lines, ...(showPrices ? ["", `Items total: ${formatTZS(Number(o!.subtotal_tzs))}`] : [])] : []),
     o ? (o.delivery_method === "pickup" ? "I will collect from the shop." : "Please deliver to me.") : "",
     "",
     `Track: ${site.url}/orders/track?ref=${ref}&code=${code}`,
@@ -40,7 +40,7 @@ async function Receipt({ searchParams }: { searchParams: PageProps<"/checkout/do
   return (
     <>
       {ref && <p className="mt-4 text-lg"><T en="Order number:" sw="Namba ya oda:" /> <span className="font-bold">{ref}</span></p>}
-      {total !== null && <p className="text-muted">Items total: {formatTZS(total)} (delivery, if any, is confirmed with you)</p>}
+      {showPrices && total !== null && <p className="text-muted">Items total: {formatTZS(total)} (delivery, if any, is confirmed with you)</p>}
       {ref && code && (
         <>
           <div className="mt-6 rounded-3xl border-2 border-accent bg-surface p-5 shadow-card">

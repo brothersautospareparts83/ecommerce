@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { showPrices } from "@/lib/site";
 import { T } from "@/lib/i18n";
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
@@ -42,13 +43,13 @@ async function Result({ searchParams }: { searchParams: PageProps<"/orders/track
             <p className="text-sm text-muted">Placed {formatDate(order.created_at)} · {order.delivery_method === "pickup" ? "Collect from the shop" : "Delivery"}</p>
             <p className="mt-2"><span className="font-semibold">Status:</span> {orderStatusLabel[order.status] ?? order.status} · {order.payment_status === "paid" ? "Paid" : "Payment not yet received"}</p>
             <ul className="mt-3 space-y-1 text-sm">
-              {order.items.map((i) => <li key={i.name} className="flex justify-between gap-3"><span>{i.quantity} × {i.name}</span><span>{formatTZS(Number(i.line_total_tzs))}</span></li>)}
+              {order.items.map((i) => <li key={i.name} className="flex justify-between gap-3"><span>{i.quantity} × {i.name}</span>{showPrices && <span>{formatTZS(Number(i.line_total_tzs))}</span>}</li>)}
             </ul>
-            <div className="mt-3 space-y-1 border-t border-border pt-3 text-sm">
+            {showPrices && (<div className="mt-3 space-y-1 border-t border-border pt-3 text-sm">
               <p className="flex justify-between"><span><T en="Items" sw="Bidhaa" /></span><span>{formatTZS(Number(order.subtotal_tzs))}</span></p>
               <p className="flex justify-between"><span><T en="Delivery" sw="Usafirishaji" /></span><span>{formatTZS(Number(order.delivery_fee_tzs))}</span></p>
               <p className="flex justify-between font-bold"><span><T en="Total" sw="Jumla" /></span><span>{formatTZS(Number(order.total_tzs))}</span></p>
-            </div>
+            </div>)}
           </section>
 
           {order.photos.length > 0 && (

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ImageOff } from "lucide-react";
 import { cn, formatPrice } from "@/lib/utils";
 import { QuickAdd } from "@/components/cart/quick-add";
+import { TL } from "@/lib/i18n";
+import { showPrices, whatsappUrl } from "@/lib/site";
 import { classificationLabel, type Classification, type ProductSummary } from "@/lib/catalog/queries";
 
 export function ImagePlaceholder({ className, label = "No photo yet" }: { className?: string; label?: string }) {
@@ -44,6 +46,11 @@ export function StockStatus({ inStock }: { inStock: boolean }) {
   );
 }
 
+/** Short product note for the card: the listing note without its prefix. */
+function note(d: string | null): string {
+  return (d ?? "").replace(/^listing note:s*/i, "").trim();
+}
+
 export function ProductCard({ product }: { product: ProductSummary }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface text-fg shadow-card">
@@ -55,10 +62,22 @@ export function ProductCard({ product }: { product: ProductSummary }) {
           {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
           <h3 className="font-display text-sm font-semibold leading-snug group-hover:text-accent-text">{product.name}</h3>
           <p className="text-xs text-muted">{product.partNumber ? `Part no. ${product.partNumber}` : `SKU ${product.sku}`}</p>
+          {!showPrices && note(product.description) && <p className="line-clamp-2 text-xs text-muted">{note(product.description)}</p>}
         </div>
       </Link>
       <div className="flex flex-col gap-2 px-3 pb-3 pt-2 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:pb-4">
-        <span className="font-display text-[15px] font-bold sm:text-base">{formatPrice(product.priceTzs)}</span>
+        {showPrices ? (
+          <span className="font-display text-[15px] font-bold sm:text-base">{formatPrice(product.priceTzs)}</span>
+        ) : (
+          <a
+            href={whatsappUrl(`Hello Brothers Auto, I would like to ask about: ${product.name} (${product.partNumber ? `part no. ${product.partNumber}` : `SKU ${product.sku}`}).`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-8 w-full items-center justify-center rounded-full border border-border px-3 text-xs font-bold sm:w-auto"
+          >
+            <TL k="Ask" />
+          </a>
+        )}
         {product.priceTzs > 0 && (
           <QuickAdd
             product={{ productId: product.id, slug: product.slug, sku: product.sku, name: product.name, priceTzs: product.priceTzs, imageUrl: product.imageUrl }}

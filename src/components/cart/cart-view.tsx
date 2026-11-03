@@ -7,6 +7,7 @@ import { ProductImage } from "@/components/product/product-card";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { showPrices } from "@/lib/site";
 import { formatTZS } from "@/lib/utils";
 
 export function CartView() {
@@ -31,7 +32,7 @@ export function CartView() {
             <div className="min-w-0 flex-1">
               <Link href={`/products/${l.slug}`} className="font-semibold hover:underline">{l.name}</Link>
               <p className="text-xs text-muted">SKU {l.sku}</p>
-              <p className="mt-1 text-sm">{formatTZS(l.priceTzs)} <T en="each" sw="kila moja" /></p>
+              {showPrices && <p className="mt-1 text-sm">{formatTZS(l.priceTzs)} <T en="each" sw="kila moja" /></p>}
               <div className="mt-2 flex items-center gap-2">
                 <Button variant="secondary" size="icon" aria-label="Decrease quantity" onClick={() => setQuantity(l.productId, l.quantity - 1)}><Minus className="h-4 w-4" /></Button>
                 <span className="w-8 text-center font-semibold" aria-live="polite">{l.quantity}</span>
@@ -39,12 +40,12 @@ export function CartView() {
                 <Button variant="ghost" size="icon" aria-label={`Remove ${l.name}`} onClick={() => remove(l.productId)}><Trash2 className="h-4 w-4" /></Button>
               </div>
             </div>
-            <p className="text-sm font-extrabold sm:text-base">{formatTZS(l.priceTzs * l.quantity)}</p>
+            {showPrices && <p className="text-sm font-extrabold sm:text-base">{formatTZS(l.priceTzs * l.quantity)}</p>}
           </li>
         ))}
       </ul>
       <div className="rounded-3xl border border-border bg-surface p-5 shadow-card">
-        <div className="flex justify-between text-lg font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>
+        {showPrices ? <div className="flex justify-between text-lg font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div> : <p className="text-lg font-bold"><T en="We confirm the price with you on WhatsApp" sw="Tunakuthibitishia bei kwa WhatsApp" /></p>}
         <p className="mt-1 text-sm text-muted"><TL k="Delivery is charged separately and confirmed with you. Prices are checked again when you place the order." /> <T en="Market prices change, so the final price is confirmed on WhatsApp." sw="Bei za soko hubadilika, kwa hiyo bei ya mwisho inathibitishwa kwa WhatsApp." /></p>
         <LinkButton href="/checkout" size="lg" className="mt-4 w-full rounded-full"><TL k="Checkout" /></LinkButton>
       </div>
