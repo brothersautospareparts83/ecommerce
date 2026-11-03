@@ -8,6 +8,7 @@ import { roleLabel } from "@/lib/format";
 const built = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/orders", label: "Orders" },
+  { href: "/admin/inquiries", label: "Inquiries" },
   { href: "/admin/products", label: "Products" },
   { href: "/admin/inventory", label: "Inventory" },
   { href: "/admin/catalog", label: "Categories & brands" },

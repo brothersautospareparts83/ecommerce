@@ -1,5 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { InquiryForm } from "@/components/contact/inquiry-form";
+import { T } from "@/lib/i18n";
 import { SocialLinks } from "@/components/layout/social-links";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { site, toIntl } from "@/lib/site";
@@ -13,6 +15,11 @@ export default function ContactPage() {
       <p className="mt-2 text-muted">Tupigie au WhatsApp. Call or message us for parts, prices and delivery.</p>
 
       <div className="mt-8 space-y-4">
+        <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
+          <h2 className="mb-1 font-display font-bold"><T en="Ask us a question" sw="Tuulize swali" /></h2>
+          <p className="mb-4 text-sm text-muted"><T en="Part, price or fit? Write it here and we reply on your phone." sw="Kipuri, bei au kinafaa? Andika hapa nasi tunakujibu kwa simu yako." /></p>
+          <InquiryForm />
+        </div>
         <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
           <h2 className="mb-3 flex items-center gap-2 font-display font-bold"><Phone className="h-5 w-5 text-accent-text" /> Phone / WhatsApp</h2>
           <ul className="space-y-1">
