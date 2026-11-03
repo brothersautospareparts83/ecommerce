@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Fraunces, Inter, Montserrat, Poppins } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -11,8 +11,6 @@ import { LanguageProvider } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], style: ["italic"], display: "swap" });
-const poppins = Poppins({ variable: "--font-poppins", weight: ["400", "500", "600", "700", "800"], subsets: ["latin"], display: "swap", preload: false });
-const montserrat = Montserrat({ variable: "--font-montserrat", subsets: ["latin"], display: "swap", preload: false });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -24,11 +22,11 @@ export const metadata: Metadata = {
 };
 
 // Runs before first paint: the saved colour theme (orange by default). Prevents a flash of the wrong theme.
-const themeInit = `(function(){try{var d=document.documentElement,a=JSON.parse(localStorage.getItem('ba-appearance')||'{}'),o=localStorage.getItem('ba-theme');d.dataset.theme=a.theme||(o==='gold'?'gold':'orange');['font','size','lh','round','motion'].forEach(function(k){if(a[k])d.dataset[k]=a[k]})}catch(e){}})()`;
+const themeInit = `(function(){try{document.documentElement.dataset.theme=localStorage.getItem('ba-theme')==='gold'?'gold':'orange'}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${poppins.variable} ${montserrat.variable}`} data-theme="orange" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} data-theme="orange" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
