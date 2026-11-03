@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowRight, Camera, MessageCircle, Search, ShieldCheck, Truck } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { ProductCard } from "@/components/product/product-card";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { publicProducts } from "@/lib/catalog/public";
@@ -59,29 +60,44 @@ export default function HomePage() {
     <>
       {/* Hero: light panel with orange slashes and the car, as in the approved design */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[var(--hero-from)] to-[var(--hero-to)] text-[var(--hero-text)]">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-0 h-full w-28 -skew-x-[22deg] bg-accent/90 lg:w-48" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-2 top-0 h-full w-6 -skew-x-[22deg] bg-[var(--stripe-dark)] lg:w-10" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 top-0 h-full w-28 -skew-x-[22deg] bg-accent/90 m-stripe lg:w-48" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-2 top-0 h-full w-6 -skew-x-[22deg] bg-[var(--stripe-dark)] m-stripe lg:w-10" style={{ ["--d" as string]: "0.15s" }} />
         <div className="relative mx-auto grid max-w-6xl items-center gap-2 px-4 pt-6 lg:grid-cols-2 lg:pt-12">
           <div className="pb-2 lg:pb-12">
-            <h1 className="max-w-[16rem] text-[1.7rem] font-extrabold leading-[1.12] sm:max-w-md sm:text-4xl lg:max-w-lg lg:text-5xl">
+            <h1 className="m-rise max-w-[16rem] text-[1.7rem] font-extrabold leading-[1.12] sm:max-w-md sm:text-4xl lg:max-w-lg lg:text-5xl">
               <T en="The right spare part for your car or motorcycle." sw="Kipuri sahihi cha gari au pikipiki yako." />
             </h1>
-            <p className="tagline mt-2 text-sm text-[var(--hero-sub)] sm:text-base">Quality Parts Keep You Moving</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <LinkButton href="/shop" size="sm" className="px-4"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+            <p className="tagline m-rise mt-2 text-sm text-[var(--hero-sub)] sm:text-base" style={{ ["--d" as string]: "0.15s" }}>Quality Parts Keep You Moving</p>
+            <div className="m-rise mt-4 flex flex-wrap gap-2" style={{ ["--d" as string]: "0.3s" }}>
+              <LinkButton href="/shop" size="sm" className="relative overflow-hidden px-4 m-shine"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
               <WhatsAppButton size="sm" />
             </div>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply gold:hidden lg:w-full" />
+          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="m-drive relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply gold:hidden lg:w-full" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-prado-cutout.webp" alt="" width={1536} height={1024} loading="eager" decoding="async" className="relative mx-auto -mb-1 hidden w-[88%] max-w-xl gold:block lg:w-full" />
+          <img src="/brand/hero-prado-cutout.webp" alt="" width={1536} height={1024} loading="eager" decoding="async" className="m-drive relative mx-auto -mb-1 hidden w-[88%] max-w-xl gold:block lg:w-full" />
         </div>
       </section>
 
+      {/* Slow ticker of what we sell */}
+      <div aria-hidden="true" className="m-ticker-wrap overflow-hidden bg-hero py-2.5 text-hero-fg">
+        <div className="m-ticker flex w-max whitespace-nowrap text-xs font-bold uppercase tracking-[0.2em]">
+          {[0, 1].map((k) => (
+            <span key={k} className="flex shrink-0 items-center">
+              {categories.map((c) => (
+                <span key={c.slug} className="flex items-center">
+                  <span className="px-5">{c.name}</span><span className="text-accent">◆</span>
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="mx-auto max-w-6xl space-y-9 px-4 pb-6 sm:space-y-12">
         {/* Three promises on a white card that overlaps the hero */}
-        <ul className="relative z-10 -mt-3 grid grid-cols-3 gap-1 rounded-2xl bg-surface p-3 shadow-card">
+        <ul className="m-rise relative z-10 -mt-3 grid grid-cols-3 gap-1 rounded-2xl bg-surface p-3 shadow-card" style={{ ["--d" as string]: "0.7s" }}>
           {trust.map(({ icon: Icon, en, sw }) => (
             <li key={en} className="flex flex-col items-center gap-1.5 px-1 py-1 text-center text-[11px] font-semibold leading-tight sm:flex-row sm:justify-center sm:gap-3 sm:text-sm">
               <Icon className="h-7 w-7 text-accent" strokeWidth={1.6} aria-hidden="true" />
@@ -90,12 +106,13 @@ export default function HomePage() {
           ))}
         </ul>
 
+        <Reveal stagger>
         <section>
           <SectionTitle href="/categories" link={<T en="See all" sw="Tazama zote" />}><T en="Shop by category" sw="Nunua kwa kundi" /></SectionTitle>
           <ul className="grid grid-cols-3 gap-2.5 lg:grid-cols-6">
             {featuredSlugs.map((s) => categories.find((c) => c.slug === s)!).map(({ slug, name, icon: Icon }) => (
               <li key={slug}>
-                <Link href={`/categories/${slug}`} className="flex h-full flex-col items-center gap-2 rounded-2xl border border-border bg-surface px-2 py-4 text-center shadow-card">
+                <Link href={`/categories/${slug}`} className="lift press flex h-full flex-col items-center gap-2 rounded-2xl border border-border bg-surface px-2 py-4 text-center shadow-card">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent"><Icon className="h-6 w-6" aria-hidden="true" /></span>
                   <span className="text-xs font-semibold leading-snug sm:text-sm">{name.replace(" Components", "").replace(" Systems", "")}</span>
                 </Link>
@@ -103,19 +120,23 @@ export default function HomePage() {
             ))}
           </ul>
         </section>
+        </Reveal>
 
+        <Reveal stagger>
         <section>
           <SectionTitle href="/shop" link={<T en="View all" sw="Tazama zote" />}><T en="Popular parts" sw="Vipuri maarufu" /></SectionTitle>
           <Suspense fallback={null}>
             <PopularParts />
           </Suspense>
         </section>
+        </Reveal>
 
+        <Reveal stagger>
         <section>
           <SectionTitle><T en="How ordering works" sw="Jinsi ya kuagiza" /></SectionTitle>
           <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map(({ icon: Icon, en, sw, textEn, textSw }, i) => (
-              <li key={en} className="flex gap-4 rounded-2xl border border-border bg-surface p-4 sm:flex-col">
+              <li key={en} className="lift flex gap-4 rounded-2xl border border-border bg-surface p-4 sm:flex-col">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-fg">{i + 1}</span>
                 <div>
                   <h3 className="flex items-center gap-2 font-bold"><Icon className="hidden h-4 w-4 text-accent sm:block" aria-hidden="true" /><T en={en} sw={sw} /></h3>
@@ -125,13 +146,16 @@ export default function HomePage() {
             ))}
           </ol>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8">
           <h2 className="text-xl font-bold"><T en="Need help finding a part?" sw="Unahitaji msaada kupata kipuri?" /></h2>
           <p className="mt-1 text-sm text-muted"><T en="Send the part name, its number or a photo. We reply on WhatsApp." sw="Tuma jina la kipuri, namba yake au picha. Tunajibu kwa WhatsApp." /></p>
           <p className="mt-3 font-semibold">{site.phones.join("  ·  ")}</p>
           <div className="mt-4"><WhatsAppButton size="sm" /></div>
         </section>
+        </Reveal>
       </div>
     </>
   );

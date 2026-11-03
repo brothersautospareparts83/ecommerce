@@ -53,10 +53,10 @@ function note(d: string | null): string {
 
 export function ProductCard({ product }: { product: ProductSummary }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface text-fg shadow-card">
+    <div className="lift group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface text-fg shadow-card">
       <Link href={`/products/${product.slug}`} className="flex flex-1 flex-col">
         <div className="aspect-[4/3] overflow-hidden bg-white sm:aspect-square">
-          <ProductImage src={product.imageUrl} alt={product.name} className="" />
+          <ProductImage src={product.imageUrl} alt={product.name} className="lift-img" />
         </div>
         <div className="flex flex-1 flex-col gap-1 px-3 pt-3 sm:px-4">
           {product.classification !== "unverified" && <ClassificationBadge value={product.classification} />}
