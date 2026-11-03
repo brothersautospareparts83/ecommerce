@@ -83,6 +83,7 @@ async function Product({ params }: Pick<PageProps<"/products/[slug]">, "params">
           {p.classification !== "unverified" && <div className="mb-3"><ClassificationBadge value={p.classification} /></div>}
           <h1 className="text-2xl font-extrabold leading-tight sm:text-3xl">{p.name}</h1>
           <p className="mt-3 text-3xl font-extrabold text-accent-text">{formatPrice(p.priceTzs)}</p>
+          {p.priceTzs > 0 && <p className="mt-1 text-xs text-muted"><T en="Indicative price: market prices change, so we confirm the final price on WhatsApp before you pay." sw="Bei elekezi: bei za soko hubadilika, kwa hiyo tunathibitisha bei ya mwisho kwa WhatsApp kabla hujalipa." /></p>}
 
           {p.description && <p className="mt-5 text-sm leading-relaxed text-muted">{p.description}</p>}
 

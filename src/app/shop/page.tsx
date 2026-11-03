@@ -138,7 +138,7 @@ export default function ShopPage(props: PageProps<"/shop">) {
         <p className="tagline relative mt-1 text-sm text-white/80"><T en="For Every Drive" sw="Kwa Kila Safari" /></p>
       </section>
       <p className="mb-4 mt-1 text-sm text-muted">
-        <T en="Spare parts for cars and motorcycles. Prices in TSh. Ask us on WhatsApp if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh. Tuulize WhatsApp ukiwa huna uhakika kinachofaa." />
+        <T en="Spare parts for cars and motorcycles. Prices in TSh are indicative and confirmed on WhatsApp. Ask us if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh ni elekezi na zinathibitishwa kwa WhatsApp. Tuulize ukiwa huna uhakika kinachofaa." />
       </p>
       <Suspense fallback={<div className="h-40 rounded-2xl bg-surface-2" />}>
         <Results searchParams={props.searchParams} />

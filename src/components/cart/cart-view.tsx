@@ -45,7 +45,7 @@ export function CartView() {
       </ul>
       <div className="rounded-3xl border border-border bg-surface p-5 shadow-card">
         <div className="flex justify-between text-lg font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>
-        <p className="mt-1 text-sm text-muted"><TL k="Delivery is charged separately and confirmed with you. Prices are checked again when you place the order." /></p>
+        <p className="mt-1 text-sm text-muted"><TL k="Delivery is charged separately and confirmed with you. Prices are checked again when you place the order." /> <T en="Market prices change, so the final price is confirmed on WhatsApp." sw="Bei za soko hubadilika, kwa hiyo bei ya mwisho inathibitishwa kwa WhatsApp." /></p>
         <LinkButton href="/checkout" size="lg" className="mt-4 w-full rounded-full"><TL k="Checkout" /></LinkButton>
       </div>
     </div>
