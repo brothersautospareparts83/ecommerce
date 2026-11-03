@@ -20,7 +20,7 @@ export const site = {
   // WhatsApp is the Vodacom number (0741 939 264), confirmed by the owner. The Halotel number is for calls.
   whatsappNumber:
     fromEnv(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER)?.replace(/\D/g, "") ?? toIntl(phones[1]),
-  email: fromEnv(process.env.NEXT_PUBLIC_BUSINESS_EMAIL),
+  email: fromEnv(process.env.NEXT_PUBLIC_BUSINESS_EMAIL) || "info@brothersautospare.com",
   instagram: { handle: "@brothersautospareparts83", url: "https://www.instagram.com/brothersautospareparts83" },
   tiktok: { handle: "@brothersautospareparts83", url: "https://www.tiktok.com/@brothersautospareparts83" },
 };

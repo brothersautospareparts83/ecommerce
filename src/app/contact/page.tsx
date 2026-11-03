@@ -1,5 +1,5 @@
 ﻿import type { Metadata } from "next";
-import { AtSign, MapPin, Phone } from "lucide-react";
+import { AtSign, Mail, MapPin, Phone } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/home/whatsapp-button";
 import { site, toIntl } from "@/lib/site";
@@ -22,6 +22,12 @@ export default function ContactPage() {
           </ul>
           <div className="mt-4"><WhatsAppButton /></div>
         </div>
+        {site.email && (
+          <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
+            <h2 className="mb-2 flex items-center gap-2 font-display font-bold"><Mail className="h-5 w-5 text-accent-text" /> Email</h2>
+            <a className="font-semibold hover:text-accent-text" href={`mailto:${site.email}`}>{site.email}</a>
+          </div>
+        )}
         <div className="rounded-2xl border border-border bg-surface shadow-card p-5">
           <h2 className="mb-2 flex items-center gap-2 font-display font-bold"><MapPin className="h-5 w-5 text-accent-text" /> Visit us</h2>
           <p className="text-muted">{site.location}</p>
