@@ -39,7 +39,7 @@ export const navLinks = [
   { href: "/shop", label: "Shop" },
   { href: "/categories", label: "Categories" },
   { href: "/finder", label: "Parts Finder" },
-  { href: "/parts-guide", label: "Parts Guide" },
+  { href: "/orders/track", label: "Track Order" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];

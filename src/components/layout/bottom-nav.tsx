@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Home, LayoutGrid, Phone, ShoppingBag } from "lucide-react";
+import { Home, LayoutGrid, PackageSearch, Phone, ShoppingBag } from "lucide-react";
 import { TL } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const items = [
   { href: "/", label: "Home", icon: Home },
   { href: "/shop", label: "Shop", icon: LayoutGrid },
-  { href: "/parts-guide", label: "Guide", icon: BookOpen },
+  { href: "/orders/track", label: "Track", icon: PackageSearch },
   { href: "/cart", label: "Cart", icon: ShoppingBag },
   { href: "/contact", label: "Contact", icon: Phone },
 ];

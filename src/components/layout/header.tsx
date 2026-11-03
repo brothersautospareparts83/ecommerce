@@ -13,14 +13,14 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
-  { href: "/parts-guide", label: "Parts Guide" },
+  { href: "/orders/track", label: "Track Order" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
 
 const titles: [string, string][] = [
   ["/shop", "Shop"], ["/products", "Product"], ["/cart", "Cart"], ["/checkout/done", "Order received"], ["/checkout", "Checkout"],
-  ["/categories", "Categories"], ["/parts-guide", "Parts Guide"], ["/about", "About Us"], ["/contact", "Contact"], ["/orders", "Track order"],
+  ["/categories", "Categories"], ["/about", "About Us"], ["/contact", "Contact"], ["/orders", "Track order"],
 ];
 
 function Logo() {

@@ -19,7 +19,7 @@ const trust = [
 ];
 
 const steps = [
-  { icon: Search, en: "Choose your part", sw: "Chagua kipuri chako", textEn: "Search by name or part number, or open the parts guide.", textSw: "Tafuta kwa jina au namba ya kipuri, au fungua mwongozo wa vipuri." },
+  { icon: Search, en: "Choose your part", sw: "Chagua kipuri chako", textEn: "Search by name or part number, or browse the categories.", textSw: "Tafuta kwa jina au namba ya kipuri, au tazama makundi." },
   { icon: MessageCircle, en: "Send your order on WhatsApp", sw: "Tuma oda kwa WhatsApp", textEn: "We confirm the price, delivery fee and how to pay.", textSw: "Tunakuthibitishia bei, gharama ya usafirishaji na jinsi ya kulipa." },
   { icon: Camera, en: "Approve a real photo", sw: "Idhinisha picha halisi", textEn: "We check it fits your car and send a photo of your exact part.", textSw: "Tunakagua inafaa gari lako na kukutumia picha ya kipuri chako halisi." },
   { icon: Truck, en: "Delivery or pickup", sw: "Kufikishiwa au kuchukua", textEn: "We deliver, or you collect from the shop in Kariakoo.", textSw: "Tunakufikishia, au unachukua dukani Kariakoo." },

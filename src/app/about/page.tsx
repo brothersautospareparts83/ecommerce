@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { icon: Search, en: "Find your part", sw: "Tafuta kipuri chako", enText: "Search by name or part number, or browse the parts guide.", swText: "Tafuta kwa jina au namba ya kipuri, au tazama mwongozo wa vipuri." },
+  { icon: Search, en: "Find your part", sw: "Tafuta kipuri chako", enText: "Search by name or part number, or browse the categories.", swText: "Tafuta kwa jina au namba ya kipuri, au tazama makundi." },
   { icon: MessageCircle, en: "Send your order on WhatsApp", sw: "Tuma oda yako kwa WhatsApp", enText: "We confirm the price, the delivery fee and how to pay.", swText: "Tunakuthibitishia bei, gharama ya usafirishaji na jinsi ya kulipa." },
   { icon: Car, en: "We confirm it fits", sw: "Tunathibitisha inafaa", enText: "Send your chassis number and our team checks the part fits your vehicle.", swText: "Tuma chassis number yako na timu yetu inakagua kipuri kinafaa gari lako." },
   { icon: Camera, en: "Approve a photo of your part", sw: "Idhinisha picha ya kipuri chako", enText: "Before we deliver, we send you a real photo of your exact part.", swText: "Kabla hatujakupelekea, tunakutumia picha halisi ya kipuri chako." },
