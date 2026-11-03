@@ -28,8 +28,8 @@ function Logo() {
     <Link href="/" aria-label="Brothers Auto Spare Parts, home" className="flex shrink-0 items-center gap-2.5 text-white">
       <Image src="/brand/logo-emblem-v2.webp" alt="" width={480} height={327} priority className="h-9 w-auto" />
       <span className="leading-none">
-        <span className="block text-[17px] font-black italic tracking-wide">BROTHERS</span>
-        <span className="block text-[8.5px] font-bold tracking-[0.2em] text-accent">AUTO SPARE PARTS</span>
+        <span className="logo-weight block text-[17px] font-black italic tracking-wide">BROTHERS</span>
+        <span className="logo-weight block text-[8.5px] font-bold tracking-[0.2em] text-accent">AUTO SPARE PARTS</span>
       </span>
     </Link>
   );

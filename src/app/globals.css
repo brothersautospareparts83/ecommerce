@@ -83,14 +83,14 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 h1,
 h2,
 h3 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* Italic serif used for the tagline, as in the approved mockups */
@@ -186,3 +186,8 @@ h3 {
 .m-tab { position: relative; }
 .m-tab[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 28%; right: 28%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); animation: grow-x 0.5s var(--ease-out) both; transform-origin: center; }
 
+
+/* Lighter, less dense type: every heavy weight steps down one level (the logo wordmark keeps its weight). */
+.font-black:not(.logo-weight), .font-extrabold:not(.logo-weight) { font-weight: 700; }
+.font-bold:not(.logo-weight) { font-weight: 600; }
+.font-semibold:not(.logo-weight) { font-weight: 500; }
