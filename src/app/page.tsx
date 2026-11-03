@@ -45,7 +45,7 @@ async function PopularParts() {
 function SectionTitle({ children, href, link }: { children: React.ReactNode; href?: string; link?: React.ReactNode }) {
   return (
     <div className="mb-4 flex items-end justify-between gap-4">
-      <h2 className="text-xl font-bold sm:text-2xl">{children}</h2>
+      <div><h2 className="text-xl font-bold sm:text-2xl">{children}</h2><span className="m-bar" aria-hidden="true" /></div>
       {href && (
         <Link href={href} className="shrink-0 text-sm font-semibold text-accent-text">
           {link} <ArrowRight className="inline h-4 w-4" aria-hidden="true" />
@@ -73,10 +73,12 @@ export default function HomePage() {
               <WhatsAppButton size="sm" />
             </div>
           </div>
+          <div className="m-parallax relative mx-auto -mb-1 w-[88%] max-w-xl lg:w-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="m-drive relative mx-auto -mb-1 w-[88%] max-w-xl mix-blend-multiply gold:hidden lg:w-full" />
+          <img src="/brand/hero-prado.webp" alt="" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" className="m-drive relative w-full mix-blend-multiply gold:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/hero-prado-cutout.webp" alt="" width={1536} height={1024} loading="eager" decoding="async" className="m-drive relative mx-auto -mb-1 hidden w-[88%] max-w-xl gold:block lg:w-full" />
+          <img src="/brand/hero-prado-cutout.webp" alt="" width={1536} height={1024} loading="eager" decoding="async" className="m-drive relative hidden w-full gold:block" />
+          </div>
         </div>
       </section>
 

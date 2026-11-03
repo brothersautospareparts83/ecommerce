@@ -160,3 +160,28 @@ h3 {
 .lift-img { transition: scale 0.9s var(--ease-out); }
 .press { transition: scale 0.2s var(--ease-out), filter 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s; }
 .press:active { scale: 0.96; }
+
+/* More motion: route fade, hero parallax, icon tilt, badge pop, drawn title bars, active tab marker */
+@keyframes page-in { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+.m-page { animation: page-in 0.55s var(--ease-out) both; }
+
+@keyframes parallax { from { translate: 0 0; } to { translate: 0 46px; } }
+@keyframes parallax-slow { from { translate: 0 0; } to { translate: 0 -30px; } }
+@supports (animation-timeline: scroll()) {
+  .m-parallax { animation: parallax linear both; animation-timeline: scroll(root); animation-range: 0 520px; }
+  .m-parallax-slow { animation: parallax-slow linear both; animation-timeline: scroll(root); animation-range: 0 520px; }
+}
+
+.lift svg { transition: rotate 0.6s var(--ease-out), scale 0.6s var(--ease-out); }
+@media (hover: hover) { .lift:hover svg { rotate: 10deg; scale: 1.12; } }
+
+@keyframes pop { 0% { scale: 1; } 40% { scale: 1.5; } 100% { scale: 1; } }
+.m-pop { animation: pop 0.5s var(--ease-out); }
+
+@keyframes grow-x { from { scale: 0 1; } to { scale: 1 1; } }
+.m-bar { display: block; height: 3px; width: 2.5rem; margin-top: 0.4rem; border-radius: 3px; background: var(--accent); transform-origin: left; }
+.reveal-armed:not(.reveal-in) .m-bar { scale: 0 1; }
+.reveal-in .m-bar { animation: grow-x 0.9s var(--ease-out) 0.25s both; }
+
+.m-tab { position: relative; }
+.m-tab[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 28%; right: 28%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); animation: grow-x 0.5s var(--ease-out) both; transform-origin: center; }

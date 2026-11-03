@@ -27,7 +27,7 @@ export function BottomNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={cn("flex h-14 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold", active ? "text-accent-text" : "text-muted")}
+                className={cn("m-tab flex h-14 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold", active ? "text-accent-text" : "text-muted")}
               >
                 <Icon className="h-5 w-5" aria-hidden="true" />
                 <TL k={label} />
