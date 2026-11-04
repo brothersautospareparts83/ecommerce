@@ -34,10 +34,10 @@ export default function AboutPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent-text"><T en="About us" sw="Kuhusu sisi" /></p>
         <h1 className="mt-2 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">Brothers Auto Spare Parts</h1>
         <p className="mt-3 max-w-2xl text-[15px] text-muted sm:text-base">
-          <T en={`${site.motto}. A spare parts shop in Kariakoo, Dar es Salaam, for cars and motorcycles.`} sw={`${site.motto}. Duka la vipuri vya magari na pikipiki, Kariakoo, Dar es Salaam.`} />
+          <T en={`${site.motto}. A spare parts shop in Kariakoo, Dar es Salaam, for cars and motorcycles.`} sw={`${site.motto}. Duka la spare za magari na pikipiki, Kariakoo, Dar es Salaam.`} />
         </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <LinkButton href="/shop" size="lg" className="rounded-full"><T en="Browse the parts" sw="Tazama vipuri" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+          <LinkButton href="/shop" size="lg" className="rounded-full"><T en="Browse the parts" sw="Tazama spare" /> <ArrowRight className="h-4 w-4" /></LinkButton>
           <WhatsAppButton />
         </div>
       </section>
@@ -50,13 +50,13 @@ export default function AboutPage() {
               <p className="text-sm leading-relaxed text-muted sm:text-base">
                 <T
                   en="Brothers Auto Spare Parts sells spare parts for cars and motorcycles from our shop in Kariakoo, Dar es Salaam. You can visit us, call us, or order through this website and finish your order with our team on WhatsApp."
-                  sw="Brothers Auto Spare Parts tunauza vipuri vya magari na pikipiki kutoka dukani kwetu Kariakoo, Dar es Salaam. Unaweza kututembelea, kutupigia simu, au kuagiza kupitia tovuti hii na kukamilisha oda yako na timu yetu kwa WhatsApp."
+                  sw="Brothers Auto Spare Parts tunauza spare za magari na pikipiki kutoka dukani kwetu Kariakoo, Dar es Salaam. Unaweza kututembelea, kutupigia simu, au kuagiza kupitia tovuti hii na kukamilisha oda yako na timu yetu kwa WhatsApp."
                 />
               </p>
               <p className="text-sm leading-relaxed text-muted sm:text-base">
                 <T
                   en="More than 1,500 parts are listed on this website, from engine and brake parts to suspension, electrical, cooling and body parts. If you cannot find a part, send us its name, a photo or your chassis number and we will check for you."
-                  sw="Zaidi ya vipuri 1,500 vimeorodheshwa kwenye tovuti hii, kuanzia vya injini na breki hadi suspension, umeme, upoozaji na mwili wa gari. Usipopata kipuri, tutumie jina lake, picha au chassis number yako na tutakuangalia."
+                  sw="Zaidi ya spare 1,500 vimeorodheshwa kwenye tovuti hii, kuanzia vya injini na breki hadi suspension, umeme, upoozaji na mwili wa gari. Usipopata kipuri, tutumie jina lake, picha au chassis number yako na tutakuangalia."
                 />
               </p>
             </div>

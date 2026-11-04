@@ -37,7 +37,7 @@ export function ChatWidget() {
 
   const hello = t(
     "Hello! I am the Brothers Auto parts assistant. Ask me for a part, its price, or a part number. You can add your car too, for example \"brake pad Toyota Hilux\".",
-    "Habari! Mimi ni msaidizi wa vipuri wa Brothers Auto. Niulize kipuri, bei yake, au namba ya kipuri. Unaweza kuongeza gari lako, kwa mfano \"brake pad Toyota Hilux\".",
+    "Habari! Mimi ni msaidizi wa spare wa Brothers Auto. Niulize kipuri, bei yake, au namba ya kipuri. Unaweza kuongeza gari lako, kwa mfano \"brake pad Toyota Hilux\".",
   );
 
   useEffect(() => {
@@ -104,13 +104,13 @@ export function ChatWidget() {
       {open && (
         <div
           role="dialog"
-          aria-label={t("Parts assistant", "Msaidizi wa vipuri")}
+          aria-label={t("Parts assistant", "Msaidizi wa spare")}
           className="fixed inset-x-3 bottom-[4.75rem] z-50 flex max-h-[78vh] flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl sm:inset-x-auto sm:right-4 sm:w-[390px] lg:bottom-6"
         >
           <div className="flex items-center justify-between bg-[#1fa855] px-4 py-3 text-white">
             <div>
               <p className="font-display text-sm font-extrabold">Brothers Auto</p>
-              <p className="text-[11px] text-white/85">{t("Parts assistant: answers from our catalogue", "Msaidizi wa vipuri: majibu kutoka kwenye orodha yetu")}</p>
+              <p className="text-[11px] text-white/85">{t("Parts assistant: answers from our catalogue", "Msaidizi wa spare: majibu kutoka kwenye orodha yetu")}</p>
             </div>
             <button type="button" onClick={() => setOpen(false)} aria-label={t("Close", "Funga")} className="rounded-lg p-1.5 hover:bg-white/15">
               <X className="h-5 w-5" />

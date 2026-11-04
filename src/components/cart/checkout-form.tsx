@@ -20,7 +20,7 @@ export function CheckoutForm() {
     return (
       <div className="mt-6 rounded-3xl border border-border bg-surface p-8 text-center">
         <p className="text-muted"><T en="Your cart is empty." sw="Kikapu chako ni tupu." /></p>
-        <LinkButton href="/shop" className="mt-4 rounded-full"><T en="Browse parts" sw="Tazama vipuri" /></LinkButton>
+        <LinkButton href="/shop" className="mt-4 rounded-full"><T en="Browse parts" sw="Tazama spare" /></LinkButton>
       </div>
     );
   }
@@ -51,7 +51,7 @@ export function CheckoutForm() {
           {lines.map((l) => <li key={l.productId} className="flex justify-between gap-3"><span className="truncate">{l.quantity} × {l.name}</span>{showPrices && <span>{formatTZS(l.priceTzs * l.quantity)}</span>}</li>)}
         </ul>
         {showPrices && <div className="flex justify-between border-t border-border pt-3 font-bold"><span><TL k="Subtotal" /></span><span>{formatTZS(subtotalTzs)}</span></div>}
-        <p className="text-xs text-muted"><T en="Next you send your order to us on WhatsApp. We close every order there: we confirm the parts, delivery fee and payment. Before delivery we send you a photo of your exact part for you to approve. Prices are checked again when you place the order." sw="Kisha unatutumia oda yako kwa WhatsApp. Tunakamilisha kila oda huko: tunathibitisha vipuri, gharama ya usafirishaji na malipo. Kabla ya kukufikishia tunakutumia picha ya kipuri chako halisi uidhinishe. Bei hukaguliwa tena unapoweka oda." /></p>
+        <p className="text-xs text-muted"><T en="Next you send your order to us on WhatsApp. We close every order there: we confirm the parts, delivery fee and payment. Before delivery we send you a photo of your exact part for you to approve. Prices are checked again when you place the order." sw="Kisha unatutumia oda yako kwa WhatsApp. Tunakamilisha kila oda huko: tunathibitisha spare, gharama ya usafirishaji na malipo. Kabla ya kukufikishia tunakutumia picha ya kipuri chako halisi uidhinishe. Bei hukaguliwa tena unapoweka oda." /></p>
         {state.error && <p role="alert" className="rounded-2xl bg-red-500/10 p-3 text-sm text-red-700">{state.error}</p>}
         <Button type="submit" size="lg" className="w-full rounded-full" disabled={pending}><TL k={pending ? "Saving your order…" : "Place order, then send on WhatsApp"} /></Button>
       </aside>

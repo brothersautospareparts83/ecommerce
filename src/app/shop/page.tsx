@@ -135,11 +135,11 @@ export default function ShopPage(props: PageProps<"/shop">) {
     <div className="mx-auto max-w-6xl px-4 pb-6 pt-5 sm:pt-8">
       <section className="relative mb-4 overflow-hidden rounded-2xl bg-hero px-5 py-6 text-hero-fg">
         <div aria-hidden="true" className="pointer-events-none absolute -right-10 top-0 h-full w-24 -skew-x-[22deg] bg-accent/90" />
-        <h1 className="relative text-2xl font-extrabold leading-tight sm:text-4xl"><T en="Premium" sw="Vipuri" /><br /><T en="Spare Parts" sw="Bora" /></h1>
+        <h1 className="relative text-2xl font-extrabold leading-tight sm:text-4xl"><T en="Premium" sw="Spare" /><br /><T en="Spare Parts" sw="Bora" /></h1>
         <p className="tagline relative mt-1 text-sm text-white/80"><T en="For Every Drive" sw="Kwa Kila Safari" /></p>
       </section>
       <p className="mb-4 mt-1 text-sm text-muted">
-        {showPrices ? <T en="Spare parts for cars and motorcycles. Prices in TSh are indicative and confirmed on WhatsApp. Ask us if you are not sure what fits." sw="Vipuri vya magari na pikipiki. Bei kwa TSh ni elekezi na zinathibitishwa kwa WhatsApp. Tuulize ukiwa huna uhakika kinachofaa." /> : <T en="Spare parts for cars and motorcycles. Tap Ask or Order now and we confirm the price and fit with you on WhatsApp." sw="Vipuri vya magari na pikipiki. Bonyeza Uliza au Agiza sasa nasi tunakuthibitishia bei na inafaa kwa WhatsApp." />}
+        {showPrices ? <T en="Spare parts for cars and motorcycles. Prices in TSh are indicative and confirmed on WhatsApp. Ask us if you are not sure what fits." sw="Spare za magari na pikipiki. Bei kwa TSh ni elekezi na zinathibitishwa kwa WhatsApp. Tuulize ukiwa huna uhakika kinachofaa." /> : <T en="Spare parts for cars and motorcycles. Tap Ask or Order now and we confirm the price and fit with you on WhatsApp." sw="Spare za magari na pikipiki. Bonyeza Uliza au Agiza sasa nasi tunakuthibitishia bei na inafaa kwa WhatsApp." />}
       </p>
       <Suspense fallback={<div className="h-40 rounded-2xl bg-surface-2" />}>
         <Results searchParams={props.searchParams} />

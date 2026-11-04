@@ -69,7 +69,7 @@ export default function HomePage() {
             </h1>
             <p className="tagline m-rise mt-2 text-sm text-[var(--hero-sub)] sm:text-base" style={{ ["--d" as string]: "0.15s" }}>Quality Parts Keep You Moving</p>
             <div className="m-rise mt-4 flex flex-wrap gap-2" style={{ ["--d" as string]: "0.3s" }}>
-              <LinkButton href="/shop" size="sm" className="relative overflow-hidden px-4 m-shine"><T en="Shop all parts" sw="Tazama vipuri vyote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
+              <LinkButton href="/shop" size="sm" className="relative overflow-hidden px-4 m-shine"><T en="Shop all parts" sw="Tazama spare zote" /> <ArrowRight className="h-4 w-4" /></LinkButton>
               <WhatsAppButton size="sm" />
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function HomePage() {
 
         <Reveal stagger>
         <section>
-          <SectionTitle href="/shop" link={<T en="View all" sw="Tazama zote" />}><T en="Popular parts" sw="Vipuri maarufu" /></SectionTitle>
+          <SectionTitle href="/shop" link={<T en="View all" sw="Tazama zote" />}><T en="Popular parts" sw="Spare maarufu" /></SectionTitle>
           <Suspense fallback={null}>
             <PopularParts />
           </Suspense>

@@ -32,7 +32,7 @@ export async function askAssistant(raw: string, history: AiTurn[] = [], lang: "e
   if (/^(hi|hello|hey|mambo|habari|hujambo|salaam|salama|niaje|vipi)\b[\s!.?]*$/.test(lower)) {
     return { text: tr("Hello! Tell me the part you need (for example \"brake pad\", \"shock absorber\" or a part number) and your car if you like.", "Habari! Niambie kipuri unachohitaji (kwa mfano \"brake pad\", \"shock absorber\" au namba ya kipuri) na gari lako ukipenda."), ...base };
   }
-  if (/^(thanks|thank you|asante|shukrani)\b/.test(lower)) return { text: tr("You are welcome. Add the parts you want to your order and finish on WhatsApp whenever you are ready.", "Karibu. Weka vipuri unavyotaka kwenye oda yako, kisha ukamilishe kwa WhatsApp ukiwa tayari."), ...base };
+  if (/^(thanks|thank you|asante|shukrani)\b/.test(lower)) return { text: tr("You are welcome. Add the parts you want to your order and finish on WhatsApp whenever you are ready.", "Karibu. Weka spare unazotaka kwenye oda yako, kisha ukamilishe kwa WhatsApp ukiwa tayari."), ...base };
   if (/\b(deliver|delivery|usafirish|peleka|leta|shipping)\b/.test(lower)) {
     return { text: tr("We deliver, or you can collect from the shop in Kariakoo. The delivery fee depends on where you are and is confirmed with you on WhatsApp when you order.", "Tunafikisha, au unaweza kuchukua dukani Kariakoo. Gharama ya usafirishaji inategemea ulipo na tunakuthibitishia kwenye WhatsApp unapoagiza."), ...base };
   }
@@ -53,7 +53,7 @@ export async function askAssistant(raw: string, history: AiTurn[] = [], lang: "e
   if (!part) {
     return {
       text: order
-        ? tr("Great. Press \"Add to order\" on the parts you want, then tap \"Finish on WhatsApp\". Or tell me which part you need.", "Vizuri. Bonyeza \"Weka kwenye oda\" kwenye vipuri unavyotaka, kisha \"Maliza kwa WhatsApp\". Au niambie kipuri unachohitaji.")
+        ? tr("Great. Press \"Add to order\" on the parts you want, then tap \"Finish on WhatsApp\". Or tell me which part you need.", "Vizuri. Bonyeza \"Weka kwenye oda\" kwenye spare unazotaka, kisha \"Maliza kwa WhatsApp\". Au niambie kipuri unachohitaji.")
         : tr("Which part do you need? Type its name (for example \"clutch plate\") or its part number.", "Unahitaji kipuri gani? Andika jina lake (kwa mfano \"clutch plate\") au namba yake."),
       items: [], vehicle, part: null, order, handoff: false,
     };
@@ -75,9 +75,9 @@ export async function askAssistant(raw: string, history: AiTurn[] = [], lang: "e
     lines.push(tr(`I could not find "${part}" in our catalogue. A person on WhatsApp can check for you: send the name, a photo or your chassis number.`, `Sijapata "${part}" kwenye orodha yetu. Mtu wa WhatsApp anaweza kukusaidia: tuma jina, picha au chassis number yako.`));
   }
   if (vehicle) {
-    lines.push(tr(`For your ${vehicle}: I can only show parts by name here. Our team confirms the part fits your exact vehicle, using your chassis number, before you order.`, `Kwa ${vehicle} yako: naweza kukuonyesha vipuri kwa jina tu hapa. Timu yetu inathibitisha kipuri kinafaa gari lako kwa chassis number kabla ya kuagiza.`));
+    lines.push(tr(`For your ${vehicle}: I can only show parts by name here. Our team confirms the part fits your exact vehicle, using your chassis number, before you order.`, `Kwa ${vehicle} yako: naweza kukuonyesha spare kwa jina tu hapa. Timu yetu inathibitisha kipuri kinafaa gari lako kwa chassis number kabla ya kuagiza.`));
   }
-  if (order && found.length) lines.push(tr("Press \"Add to order\" on the parts you want, then \"Finish on WhatsApp\".", "Bonyeza \"Weka kwenye oda\" kwenye vipuri unavyotaka, kisha \"Maliza kwa WhatsApp\"."));
+  if (order && found.length) lines.push(tr("Press \"Add to order\" on the parts you want, then \"Finish on WhatsApp\".", "Bonyeza \"Weka kwenye oda\" kwenye spare unazotaka, kisha \"Maliza kwa WhatsApp\"."));
 
   // With a GEMINI_API_KEY the answer is phrased by the model from these same matches; otherwise (or on any problem) the plain reply is used.
   const visitor = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
